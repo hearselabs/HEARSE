@@ -419,6 +419,11 @@
   .link-sub { font-family: var(--mono); font-size: 0.75rem; color: var(--faint); display: block; margin-top: 0.2rem; }
   .link-arrow { color: var(--red); font-family: var(--mono); transition: transform 200ms ease; }
   .link-card:hover .link-arrow { transform: translateX(4px); }
+  /* Kartu untuk sesuatu yang belum ada — tampak mati, tidak bisa diklik */
+  .link-card.pending { cursor: default; opacity: 0.55; }
+  .link-card.pending:hover { border-color: var(--line); transform: none; }
+  .link-card.pending .link-arrow { color: var(--faint); }
+  .link-card.pending:hover .link-arrow { transform: none; }
 
   /* Akhir sinyal — garis vertikal berbelok jadi flatline */
   .signal-end {
@@ -502,7 +507,7 @@
     </p>
     <div class="hero-ctas">
       <a class="btn primary" href="#register">Read the register ↓</a>
-      <a class="btn" href="#" rel="noopener">$HEARSE on pump.fun</a>
+      <a class="btn" href="https://t.me/hearsefun" target="_blank" rel="noopener">Follow the parlour</a>
     </div>
   </div>
   <div class="ekg-wrap">
@@ -642,18 +647,20 @@
       <h2>Where the undertaker keeps hours</h2>
     </div>
     <div class="links rv">
-      <a class="link-card" href="#" rel="noopener">
+      <a class="link-card" href="https://x.com/hearsefun" target="_blank" rel="noopener">
         <span><span class="link-name">The daily notices</span><span class="link-sub">X — one obituary a day</span></span>
         <span class="link-arrow">→</span>
       </a>
-      <a class="link-card" href="#" rel="noopener">
+      <a class="link-card" href="https://t.me/hearsefun" target="_blank" rel="noopener">
         <span><span class="link-name">The parlour</span><span class="link-sub">Telegram — every death, live</span></span>
         <span class="link-arrow">→</span>
       </a>
-      <a class="link-card" href="#" rel="noopener">
-        <span><span class="link-name">Acquire a share</span><span class="link-sub">pump.fun — $HEARSE</span></span>
-        <span class="link-arrow">→</span>
-      </a>
+      <!-- Token belum terbit. Saat sudah, ganti href ke tautan pump.fun-nya
+           dan hapus class "pending" di bawah ini. -->
+      <span class="link-card pending">
+        <span><span class="link-name">Acquire a share</span><span class="link-sub">$HEARSE — not yet issued</span></span>
+        <span class="link-arrow">◷</span>
+      </span>
     </div>
   </section>
 
