@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon HEARSE: garis EKG flatline di atas gelap -->
+  <rect width="64" height="64" rx="13" fill="#08090D"/>
+  <path d="M6 34 L22 34 L27 20 L34 46 L39 29 L43 34 L54 34"
+        stroke="#E5484D" stroke-width="4.5" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="56" cy="34" r="3.6" fill="#FF6B6F"/>
+</svg>

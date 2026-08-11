@@ -5,8 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>HEARSE — Death monitoring for pump.fun</title>
 <meta name="description" content="An autonomous undertaker for dead Solana tokens. Every death recorded. Every obituary written." />
-<meta property="og:title" content="HEARSE" />
-<meta property="og:description" content="Someone should say a few words." />
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://hearsefun.xyz/" />
+<meta property="og:title" content="HEARSE — Every token dies. We take the notes." />
+<meta property="og:description" content="An autonomous undertaker for dead pump.fun tokens. Someone should say a few words." />
+<meta property="og:image" content="https://hearsefun.xyz/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@hearsefun" />
+<meta name="twitter:image" content="https://hearsefun.xyz/og.png" />
 <style>
   :root {
     --bg:        #08090D;
@@ -140,6 +152,157 @@
   .btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
   .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
   .btn.primary:hover { background: #F05B60; }
+
+  /* ── Hitung mundur: papan monitor ruang jaga ── */
+  .countdown {
+    position: relative; overflow: hidden;
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    background: var(--bg-raised);
+  }
+  /* cahaya merah samar dari bawah, seperti pantulan lampu monitor */
+  .countdown::before {
+    content: ""; position: absolute; left: 50%; bottom: -140px;
+    width: 620px; height: 220px; transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(229,72,77,0.13), transparent 70%);
+    pointer-events: none;
+  }
+  .cd-inner {
+    max-width: var(--w); margin: 0 auto;
+    padding: 2.9rem 1.5rem 3.1rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.9rem; text-align: center; position: relative;
+  }
+  .cd-label {
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--red);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .cd-label::before {
+    content: ""; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--red); animation: blink 1.6s ease-in-out infinite;
+  }
+  /* suara si pengurus jenazah — serif miring, seperti di obituari */
+  .cd-title {
+    font-family: var(--serif); font-style: italic; font-weight: 400;
+    font-size: clamp(1.2rem, 2.6vw, 1.55rem); color: var(--dim);
+    margin: 0;
+  }
+
+  .cd-clock {
+    display: flex; align-items: flex-start; gap: clamp(0.4rem, 1.6vw, 1.1rem);
+    font-variant-numeric: tabular-nums;
+    margin-top: 0.35rem;
+  }
+  .cd-group { display: flex; flex-direction: column; align-items: center; gap: 0.55rem; }
+  .cd-num {
+    font-family: var(--mono); font-weight: 800;
+    font-size: clamp(2.7rem, 8.5vw, 5rem); line-height: 0.95;
+    letter-spacing: -0.03em; color: var(--text);
+    text-shadow: 0 0 24px rgba(232, 234, 237, 0.14);
+  }
+  .cd-num.sec {
+    color: var(--red);
+    text-shadow: 0 0 26px rgba(229, 72, 77, 0.45);
+  }
+  /* angka baru "jatuh" masuk saat berganti */
+  .cd-num.tick { animation: numtick 340ms cubic-bezier(.2,.8,.3,1); }
+  @keyframes numtick {
+    from { transform: translateY(-0.16em); opacity: 0.15; filter: blur(4px); }
+    to   { transform: none; opacity: 1; filter: blur(0); }
+  }
+  .cd-colon {
+    font-family: var(--mono); font-weight: 800;
+    font-size: clamp(2.2rem, 7vw, 4rem); line-height: 1.1;
+    color: var(--faint);
+    animation: colonblink 1s steps(1) infinite;
+  }
+  @keyframes colonblink { 50% { opacity: 0.15; } }
+  .cd-unit-label {
+    font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--faint);
+  }
+  .cd-when {
+    font-family: var(--mono); font-size: 0.8125rem; color: var(--faint);
+    font-variant-numeric: tabular-nums; margin-top: 0.4rem;
+  }
+
+  /* Sumbu waktu — memendek menuju nol, ujungnya menyala */
+  .cd-fuse {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background: var(--line-soft);
+  }
+  .cd-fuse-burn {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 100%;
+    background: linear-gradient(90deg, rgba(229,72,77,0.15), var(--red));
+    box-shadow: 0 0 12px rgba(229, 72, 77, 0.55);
+    transition: width 1s linear;
+  }
+  .cd-fuse-burn::after {
+    content: ""; position: absolute; right: -3px; top: 50%;
+    width: 7px; height: 7px; border-radius: 50%;
+    transform: translateY(-50%);
+    background: #FF6B6F; box-shadow: 0 0 10px rgba(255, 107, 111, 0.9);
+  }
+
+  /* Keadaan setelah waktunya tiba */
+  .countdown.live .cd-clock,
+  .countdown.live .cd-fuse { display: none; }
+  .cd-live {
+    display: none; align-items: center; gap: 0.85rem;
+    font-family: var(--mono); font-size: 0.9375rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: #fff; background: var(--red);
+    padding: 0.9rem 1.6rem; text-decoration: none; margin-top: 0.5rem;
+    transition: background 200ms ease;
+  }
+  .cd-live:hover { background: #F05B60; }
+  .countdown.live .cd-live { display: inline-flex; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cd-label::before, .cd-colon { animation: none; }
+    .cd-num.tick { animation: none; }
+    .cd-fuse-burn { transition: none; }
+  }
+
+  /* ── Baris CA (contract address) ── */
+  .ca-bar {
+    border-bottom: 1px solid var(--line-soft);
+    background: var(--bg);
+  }
+  .ca-inner {
+    max-width: var(--w); margin: 0 auto; padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .ca-label {
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--red); flex-shrink: 0;
+  }
+  .ca-value {
+    flex: 1; min-width: 0;
+    font-family: var(--mono); font-size: 0.875rem; color: var(--text);
+    background: var(--bg-panel); border: 1px solid var(--line);
+    padding: 0.7rem 1rem;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .ca-value.pending { color: var(--faint); font-family: var(--serif); font-style: italic; }
+  .ca-copy {
+    flex-shrink: 0; cursor: pointer;
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text);
+    background: var(--bg-raised); border: 1px solid var(--line);
+    padding: 0.7rem 1.2rem;
+    transition: border-color 200ms ease, color 200ms ease, background 200ms ease;
+  }
+  .ca-copy:hover { border-color: var(--red); }
+  .ca-copy:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .ca-copy.copied { background: var(--red); border-color: var(--red); color: #fff; }
+  .ca-copy:disabled { cursor: default; color: var(--faint); }
+  .ca-copy:disabled:hover { border-color: var(--line); }
+  @media (max-width: 560px) {
+    .ca-inner { flex-wrap: wrap; }
+    .ca-value { flex-basis: 100%; order: 3; }
+  }
 
   /* EKG strip */
   .ekg-wrap {
@@ -536,7 +699,7 @@
 
 <header class="hero">
   <div class="wrap">
-    <p class="kicker">Autonomous undertaker · Solana</p>
+    <p class="kicker">Autonomous undertaker · Solana · $HEARSE</p>
     <h1>Every token dies.<br /><span class="dim-line">We take the notes.</span></h1>
     <p class="hero-sub">
       Hundreds of tokens are born on pump.fun every day. Most are dead before lunch.
@@ -548,6 +711,39 @@
       <a class="btn" href="https://t.me/hearsefun" target="_blank" rel="noopener">Follow the parlour</a>
     </div>
   </div>
+  <div class="countdown" id="countdown">
+    <div class="cd-inner">
+      <span class="cd-label">Scheduled — file 00</span>
+      <p class="cd-title">The parlour opens in</p>
+
+      <div class="cd-clock" id="cd-clock" role="timer">
+        <div class="cd-group"><span class="cd-num" id="cd-d">--</span><span class="cd-unit-label">days</span></div>
+        <span class="cd-colon" aria-hidden="true">:</span>
+        <div class="cd-group"><span class="cd-num" id="cd-h">--</span><span class="cd-unit-label">hours</span></div>
+        <span class="cd-colon" aria-hidden="true">:</span>
+        <div class="cd-group"><span class="cd-num" id="cd-m">--</span><span class="cd-unit-label">min</span></div>
+        <span class="cd-colon" aria-hidden="true">:</span>
+        <div class="cd-group"><span class="cd-num sec" id="cd-s">--</span><span class="cd-unit-label">sec</span></div>
+      </div>
+
+      <span class="cd-when" id="cd-when">—</span>
+
+      <!-- Muncul otomatis begitu hitungannya habis -->
+      <a class="cd-live" id="cd-live" href="#" target="_blank" rel="noopener">
+        Now trading on pump.fun →
+      </a>
+    </div>
+    <div class="cd-fuse" aria-hidden="true"><div class="cd-fuse-burn" id="cd-fuse"></div></div>
+  </div>
+
+  <div class="ca-bar">
+    <div class="ca-inner">
+      <span class="ca-label">CA</span>
+      <span class="ca-value pending" id="ca-value">To be announced at issuance — beware of imitations.</span>
+      <button class="ca-copy" id="ca-copy" disabled>Copy</button>
+    </div>
+  </div>
+
   <div class="ekg-wrap">
     <canvas id="ekg" aria-hidden="true"></canvas>
     <span class="ekg-tag" id="ekg-tag">signal: acquiring</span>
@@ -659,8 +855,12 @@
     </div>
     <div class="specs corners rv">
       <div class="spec">
+        <span class="spec-label">Ticker</span>
+        <span class="spec-value">$HEARSE</span>
+      </div>
+      <div class="spec">
         <span class="spec-label">Contract</span>
-        <span class="spec-value pending">Not yet issued — the plot is still being dug.</span>
+        <span class="spec-value pending" id="spec-ca">Not yet issued — the plot is still being dug.</span>
       </div>
       <div class="spec">
         <span class="spec-label">Chain</span>
@@ -668,11 +868,23 @@
       </div>
       <div class="spec">
         <span class="spec-label">Issued via</span>
-        <span class="spec-value">pump.fun</span>
+        <span class="spec-value">pump.fun · Aug 13, 14:00 UTC</span>
       </div>
       <div class="spec">
         <span class="spec-label">Supply</span>
-        <span class="spec-value">1,000,000,000 · fixed</span>
+        <span class="spec-value">1,000,000,000 · fixed · no further issuance</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Tax</span>
+        <span class="spec-value">0% buy · 0% sell</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Team allocation</span>
+        <span class="spec-value">None — the undertaker keeps nothing</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Presale</span>
+        <span class="spec-value">None — every mourner enters through the same door</span>
       </div>
     </div>
   </section>
@@ -723,6 +935,125 @@
 
 <script>
 const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ═════════════════════════════════════════════════════════
+   ⚙️  ATUR TANGGAL PELUNCURAN DI SINI
+   Format: tahun-bulan-tanggal jam:menit, waktu UTC.
+   Contoh di bawah = 18 Agustus 2026, jam 20:00 UTC.
+   ═════════════════════════════════════════════════════════ */
+const LAUNCH_UTC = "2026-08-13T14:00:00Z";
+
+/* Kalau token sudah terbit, tempel tautan pump.fun-nya di sini.
+   Biarkan kosong selama belum ada.                          */
+const PUMPFUN_URL = "";
+
+/* ⚙️ CONTRACT ADDRESS — tempel di sini begitu token terbit.
+   Satu tempat ini mengisi baris CA di atas DAN di Particulars. */
+const CONTRACT_ADDRESS = "";
+
+(function contractAddress() {
+  const val  = document.getElementById("ca-value");
+  const btn  = document.getElementById("ca-copy");
+  const spec = document.getElementById("spec-ca");
+
+  if (!CONTRACT_ADDRESS) return;        // belum terbit — biarkan tampilan pending
+
+  val.textContent = CONTRACT_ADDRESS;
+  val.classList.remove("pending");
+  if (spec) { spec.textContent = CONTRACT_ADDRESS; spec.classList.remove("pending"); }
+  btn.disabled = false;
+
+  btn.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(CONTRACT_ADDRESS);
+    } catch {
+      // cadangan untuk browser lama
+      const ta = document.createElement("textarea");
+      ta.value = CONTRACT_ADDRESS;
+      document.body.appendChild(ta);
+      ta.select(); document.execCommand("copy");
+      ta.remove();
+    }
+    btn.textContent = "Copied";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = "Copy";
+      btn.classList.remove("copied");
+    }, 1600);
+  });
+})();
+
+(function launchCountdown() {
+  const box   = document.getElementById("countdown");
+  const when  = document.getElementById("cd-when");
+  const live  = document.getElementById("cd-live");
+  const fuse  = document.getElementById("cd-fuse");
+  const parts = {
+    d: document.getElementById("cd-d"),
+    h: document.getElementById("cd-h"),
+    m: document.getElementById("cd-m"),
+    s: document.getElementById("cd-s"),
+  };
+
+  const target = new Date(LAUNCH_UTC).getTime();
+  if (Number.isNaN(target)) {           // tanggal salah tulis
+    box.style.display = "none";
+    return;
+  }
+
+  // Sumbu waktunya sepanjang 7 hari terakhir sebelum peluncuran
+  const FUSE_SPAN = 7 * 86400 * 1000;
+
+  // Satu waktu saja: UTC — bahasa resmi crypto
+  const t = new Date(target);
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const utc = MONTHS[t.getUTCMonth()] + " " + t.getUTCDate() + ", " +
+              String(t.getUTCHours()).padStart(2,"0") + ":" +
+              String(t.getUTCMinutes()).padStart(2,"0") + " UTC";
+  when.textContent = utc;
+
+  if (PUMPFUN_URL) live.href = PUMPFUN_URL;
+
+  const pad = n => String(n).padStart(2, "0");
+
+  // Ganti angka + mainkan animasi "jatuh" hanya saat nilainya berubah
+  function setNum(el, val) {
+    if (el.textContent === val) return;
+    el.textContent = val;
+    if (REDUCED) return;
+    el.classList.remove("tick");
+    void el.offsetWidth;                // paksa browser mengulang animasinya
+    el.classList.add("tick");
+  }
+
+  function tick() {
+    const left = target - Date.now();
+
+    if (left <= 0) {                    // sudah lewat — ganti ke keadaan hidup
+      box.classList.add("live");
+      when.textContent = "Issued " + utc;
+      document.querySelector("#countdown .cd-label").textContent = "Live";
+      document.querySelector("#countdown .cd-title").textContent = "The parlour is open";
+      if (!PUMPFUN_URL) {
+        live.textContent = "Contract pending — check the notices";
+        live.href = "https://t.me/hearsefun";
+      }
+      return;                           // berhenti berdetak
+    }
+
+    const sec = Math.floor(left / 1000);
+    setNum(parts.d, pad(Math.floor(sec / 86400)));
+    setNum(parts.h, pad(Math.floor(sec % 86400 / 3600)));
+    setNum(parts.m, pad(Math.floor(sec % 3600 / 60)));
+    setNum(parts.s, pad(sec % 60));
+
+    // Sumbu memendek — penuh saat 7 hari tersisa, habis saat jam-nya tiba
+    fuse.style.width = Math.min(100, left / FUSE_SPAN * 100) + "%";
+
+    setTimeout(tick, 1000 - (Date.now() % 1000));  // tetap sinkron dengan detik jam
+  }
+  tick();
+})();
 
 /* ── EKG: berdetak, lalu flatline ─────────────────────────── */
 (function ekg() {

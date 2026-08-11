@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  /* Kartu preview 1200×630 — muncul saat link dibagikan di X/Telegram/Discord */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden;
+    background: #08090D; position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(#14171D 1px, transparent 1px),
+      linear-gradient(90deg, #14171D 1px, transparent 1px);
+    background-size: 60px 60px;
+    opacity: 0.55;
+    -webkit-mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, black 25%, transparent 80%);
+    mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, black 25%, transparent 80%);
+  }
+  .glow {
+    position: absolute; left: 50%; bottom: -220px; width: 900px; height: 440px;
+    transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(229,72,77,0.16), transparent 70%);
+  }
+  .inner {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 34px; text-align: center;
+  }
+  .kicker {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 21px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: #E5484D;
+  }
+  h1 {
+    font-size: 148px; font-weight: 800; letter-spacing: 0.06em;
+    color: #E8EAED; line-height: 1;
+  }
+  .ekg { width: 700px; }
+  .tag {
+    font-family: Georgia, "Times New Roman", serif; font-style: italic;
+    font-size: 34px; color: #8B919C;
+  }
+  .foot {
+    position: absolute; bottom: 38px; left: 0; right: 0;
+    display: flex; justify-content: center; gap: 40px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 19px; letter-spacing: 0.1em; color: #575D68;
+  }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="glow"></div>
+  <div class="inner">
+    <div class="kicker">Autonomous undertaker · Solana</div>
+    <h1>HEARSE</h1>
+    <svg class="ekg" viewBox="0 0 700 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10 48 L240 48 L275 14 L315 78 L350 33 L380 48 L672 48"
+            stroke="#E5484D" stroke-width="7"
+            stroke-linecap="round" stroke-linejoin="round"/>
+      <circle cx="682" cy="48" r="9" fill="#FF6B6F"/>
+    </svg>
+    <div class="tag">Someone should say a few words.</div>
+  </div>
+  <div class="foot">
+    <span>hearsefun.xyz</span>
+    <span>@hearsefun</span>
+  </div>
+</body>
+</html>
