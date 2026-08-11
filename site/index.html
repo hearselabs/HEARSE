@@ -258,6 +258,14 @@
   .cd-live:hover { background: #F05B60; }
   .countdown.live .cd-live { display: inline-flex; }
 
+  /* HP sempit: kecilkan angka supaya empat kelompok tetap muat satu baris */
+  @media (max-width: 430px) {
+    .cd-num { font-size: 2.05rem; }
+    .cd-colon { font-size: 1.6rem; }
+    .cd-clock { gap: 0.35rem; }
+    .cd-unit-label { font-size: 0.5625rem; letter-spacing: 0.12em; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .cd-label::before, .cd-colon { animation: none; }
     .cd-num.tick { animation: none; }
@@ -596,7 +604,7 @@
   .link-arrow { color: var(--red); font-family: var(--mono); transition: transform 200ms ease; }
   .link-card:hover .link-arrow { transform: translateX(4px); }
   /* Kartu untuk sesuatu yang belum ada — tampak mati, tidak bisa diklik */
-  .link-card.pending { cursor: default; opacity: 0.55; }
+  .link-card.pending { cursor: default; opacity: 0.55; pointer-events: none; }
   .link-card.pending:hover { border-color: var(--line); transform: none; }
   .link-card.pending .link-arrow { color: var(--faint); }
   .link-card.pending:hover .link-arrow { transform: none; }
@@ -909,12 +917,11 @@
         <span><span class="link-name">The method</span><span class="link-sub">GitHub — read how it decides</span></span>
         <span class="link-arrow">→</span>
       </a>
-      <!-- Token belum terbit. Saat sudah, ganti href ke tautan pump.fun-nya
-           dan hapus class "pending" di bawah ini. -->
-      <span class="link-card pending">
-        <span><span class="link-name">Acquire a share</span><span class="link-sub">$HEARSE — not yet issued</span></span>
-        <span class="link-arrow">◷</span>
-      </span>
+      <!-- Terisi otomatis dari PUMPFUN_URL di bagian pengaturan bawah -->
+      <a class="link-card pending" id="buy-card" href="#" rel="noopener">
+        <span><span class="link-name">Acquire a share</span><span class="link-sub" id="buy-sub">$HEARSE — not yet issued</span></span>
+        <span class="link-arrow" id="buy-arrow">◷</span>
+      </a>
     </div>
   </section>
 
@@ -981,6 +988,17 @@ const CONTRACT_ADDRESS = "";
       btn.classList.remove("copied");
     }, 1600);
   });
+})();
+
+/* Kartu "Acquire a share" ikut hidup otomatis begitu PUMPFUN_URL diisi */
+(function buyCard() {
+  if (!PUMPFUN_URL) return;
+  const card = document.getElementById("buy-card");
+  card.href = PUMPFUN_URL;
+  card.target = "_blank";
+  card.classList.remove("pending");
+  document.getElementById("buy-sub").textContent = "pump.fun — $HEARSE";
+  document.getElementById("buy-arrow").textContent = "→";
 })();
 
 (function launchCountdown() {
