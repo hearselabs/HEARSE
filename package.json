@@ -1,0 +1,15 @@
+{
+  "name": "hearse",
+  "version": "1.0.0",
+  "description": "An autonomous undertaker for dead Solana tokens.",
+  "type": "module",
+  "scripts": {
+    "start": "node hearse.js",
+    "dry": "node hearse.js --dry",
+    "models": "node hearse.js --models",
+    "site": "node serve.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,66 @@
+# Mesin HEARSE, dijalankan oleh server GitHub — bukan laptopmu.
+#
+# Berjalan tiap 6 jam. Tiap kali jalan:
+#   1. cari token pump.fun yang baru mati
+#   2. tulis obituarinya lewat Groq
+#   3. kirim ke channel Telegram
+#   4. simpan ke arsip, lalu commit ke repo ini
+#   5. Vercel melihat commit itu dan memperbarui website otomatis
+
+name: HEARSE — bury the dead
+
+on:
+  schedule:
+    # Menit 0, tiap 6 jam: 00:00, 06:00, 12:00, 18:00 UTC
+    - cron: "0 */6 * * *"
+  # Tombol "Run workflow" manual di tab Actions — untuk uji coba
+  workflow_dispatch:
+
+# Diperlukan supaya workflow boleh menulis balik arsipnya ke repo
+permissions:
+  contents: write
+
+# Kalau jadwal sebelumnya belum selesai, jangan tumpuk
+concurrency:
+  group: hearse-burials
+  cancel-in-progress: false
+
+jobs:
+  bury:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Ambil kode terbaru
+        uses: actions/checkout@v4
+
+      - name: Siapkan Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Jalankan pemakaman
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GROQ_MODEL: ${{ vars.GROQ_MODEL }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
+          TELEGRAM_OWNER_ID: ${{ secrets.TELEGRAM_OWNER_ID }}
+          MAX_BURIALS_PER_RUN: ${{ vars.MAX_BURIALS_PER_RUN }}
+        run: node hearse.js
+
+      - name: Simpan arsip ke repo
+        run: |
+          git config user.name  "HEARSE"
+          git config user.email "hearse@users.noreply.github.com"
+          git add data/ site/data/
+          # Kalau tidak ada yang mati, tidak ada yang perlu di-commit
+          if git diff --staged --quiet; then
+            echo "Tidak ada kematian baru. Tidak ada yang dicatat."
+            exit 0
+          fi
+          COUNT=$(node -e "console.log(require('./data/obituaries.json').length)")
+          git commit -m "burial: register now holds ${COUNT} obituaries"
+          # Repo bisa saja berubah saat job berjalan — tarik dulu baru dorong
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

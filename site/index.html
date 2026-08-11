@@ -1,0 +1,967 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HEARSE — Death monitoring for pump.fun</title>
+<meta name="description" content="An autonomous undertaker for dead Solana tokens. Every death recorded. Every obituary written." />
+<meta property="og:title" content="HEARSE" />
+<meta property="og:description" content="Someone should say a few words." />
+<style>
+  :root {
+    --bg:        #08090D;
+    --bg-raised: #0D0F14;
+    --bg-panel:  #10131A;
+    --line:      #1C2027;
+    --line-soft: #14171D;
+    --text:      #E8EAED;
+    --dim:       #8B919C;
+    --faint:     #575D68;
+    --red:       #E5484D;
+    --red-soft:  rgba(229, 72, 77, 0.12);
+    --green:     #46A758;
+
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+
+    --w: 1080px;
+    --gutter: 3.5rem;   /* ruang untuk garis sinyal di kiri konten */
+    --spine-x: 8px;     /* posisi garis sinyal di dalam kolom */
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; background: var(--bg); }
+
+  body {
+    margin: 0;
+    background: transparent;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* Kertas grafik monitor — samar, memudar ke bawah */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background-image:
+      linear-gradient(var(--line-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line-soft) 1px, transparent 1px);
+    background-size: 44px 44px;
+    opacity: 0.5;
+    -webkit-mask-image: radial-gradient(ellipse 120% 70% at 50% 0%, black 20%, transparent 80%);
+    mask-image: radial-gradient(ellipse 120% 70% at 50% 0%, black 20%, transparent 80%);
+  }
+
+  ::selection { background: var(--red); color: #fff; }
+
+  .wrap { max-width: var(--w); margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ── Topbar ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(8, 9, 13, 0.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.85rem 1.5rem; max-width: var(--w); margin: 0 auto;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: var(--mono); font-weight: 700; font-size: 0.9375rem;
+    letter-spacing: 0.14em; color: var(--text); text-decoration: none;
+  }
+  .brand-mark { width: 20px; height: 20px; }
+  .brand-mark path { stroke: var(--red); stroke-width: 2; fill: none; stroke-linejoin: round; }
+
+  .live-pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em;
+    color: var(--dim); text-transform: uppercase;
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+  }
+  .live-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(70, 167, 88, 0.5); }
+    50%      { box-shadow: 0 0 0 5px rgba(70, 167, 88, 0); }
+  }
+
+  /* ── Hero ── */
+  .hero { padding: 6rem 0 0; position: relative; }
+  .kicker {
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--red); margin: 0 0 1.5rem;
+  }
+  h1 {
+    font-size: clamp(3.25rem, 9.5vw, 6.75rem);
+    font-weight: 750; letter-spacing: -0.035em; line-height: 0.98;
+    margin: 0 0 1.75rem;
+  }
+  h1 .dim-line { color: var(--faint); }
+  .hero-sub {
+    font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--dim);
+    max-width: 34rem; margin: 0 0 2.5rem;
+  }
+  .hero-sub em { font-family: var(--serif); font-style: italic; color: var(--text); }
+
+  .hero-ctas { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-bottom: 4.5rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--mono); font-size: 0.8125rem; letter-spacing: 0.08em;
+    text-decoration: none; padding: 0.8rem 1.4rem;
+    border: 1px solid var(--line); color: var(--text);
+    background: var(--bg-raised);
+    transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
+  }
+  .btn:hover { border-color: var(--red); transform: translateY(-1px); }
+  .btn:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+  .btn.primary:hover { background: #F05B60; }
+
+  /* EKG strip */
+  .ekg-wrap {
+    border-top: 1px solid var(--line-soft);
+    border-bottom: 1px solid var(--line-soft);
+    background: var(--bg-raised);
+    position: relative;
+  }
+  #ekg { display: block; width: 100%; height: 110px; }
+  .ekg-tag {
+    position: absolute; right: 1.5rem; top: 0.75rem;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em;
+    color: var(--faint); text-transform: uppercase;
+  }
+
+  /* ── Stat bar ── */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .stat {
+    padding: 2rem 1.5rem; border-right: 1px solid var(--line-soft);
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .stat:last-child { border-right: 0; }
+  .stat-num {
+    font-family: var(--mono); font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .stat-num.red { color: var(--red); }
+  .stat-label {
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--faint);
+  }
+
+  /* ── Pita "in memoriam" berjalan ── */
+  .memorial {
+    border-bottom: 1px solid var(--line-soft);
+    overflow: hidden; white-space: nowrap;
+    padding: 0.8rem 0;
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.06em;
+    color: var(--faint);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+  .memorial-track {
+    display: inline-block;
+    animation: memorial 70s linear infinite;
+  }
+  .memorial:hover .memorial-track { animation-play-state: paused; }
+  .memorial b { color: var(--dim); font-weight: 600; }
+  .memorial i { color: var(--red); font-style: normal; }
+  @keyframes memorial {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ══ ZONA TERMONITOR: satu kolom besar dengan garis sinyal ══ */
+  .monitored { position: relative; }
+
+  .spine, .spine-fill {
+    position: absolute; top: 0; width: 2px;
+    left: calc(1.5rem + var(--spine-x));
+    transform: translateX(-50%);
+  }
+  .spine { bottom: 0; background: var(--line-soft); }
+  .spine-fill {
+    height: 0;
+    background: linear-gradient(to bottom, transparent, var(--red) 12%);
+    box-shadow: 0 0 12px rgba(229, 72, 77, 0.35);
+  }
+  .spine-head {
+    position: absolute; left: 50%; bottom: -3px; transform: translateX(-50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #FF6B6F; box-shadow: 0 0 10px rgba(229, 72, 77, 0.8);
+  }
+
+  .m-section { position: relative; padding: 6rem 0 0 var(--gutter); }
+
+  /* Simpul belah ketupat di garis sinyal, satu per seksi */
+  .sec-node {
+    position: absolute; left: var(--spine-x); top: 6.35rem;
+    width: 13px; height: 13px;
+    transform: translateX(-50%) rotate(45deg);
+    background: var(--bg); border: 1.5px solid var(--faint);
+    transition: border-color 400ms ease, background 400ms ease, box-shadow 400ms ease;
+  }
+  .m-section.lit .sec-node {
+    border-color: var(--red); background: var(--red-soft);
+    box-shadow: 0 0 10px rgba(229, 72, 77, 0.45);
+  }
+
+  .sec-head { position: relative; margin-bottom: 2.5rem; }
+  .sec-meta {
+    display: flex; gap: 1rem; align-items: baseline;
+    font-family: var(--mono); font-size: 0.71875rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+  .sec-file { color: var(--red); }
+  .sec-tag { color: var(--faint); }
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 700;
+    letter-spacing: -0.025em; line-height: 1.1; margin: 0;
+  }
+  /* Nomor hantu — angka raksasa bergaris tipis di belakang judul */
+  .sec-ghost {
+    position: absolute; right: 0; top: -2.2rem;
+    font-family: var(--mono); font-weight: 800;
+    font-size: clamp(4.5rem, 11vw, 8rem); line-height: 1;
+    letter-spacing: -0.04em;
+    color: transparent; -webkit-text-stroke: 1px var(--line);
+    pointer-events: none; user-select: none; z-index: -1;
+  }
+  @supports not (-webkit-text-stroke: 1px black) {
+    .sec-ghost { color: var(--bg-panel); }
+  }
+
+  /* Tanda silang kecil di sudut panel — gaya cetak biru */
+  .corners { position: relative; }
+  .corners::before, .corners::after {
+    content: "+"; position: absolute; z-index: 1;
+    font-family: var(--mono); font-size: 0.85rem; line-height: 1;
+    color: var(--faint);
+  }
+  .corners::before { top: -0.55em; left: -0.3em; }
+  .corners::after { bottom: -0.5em; right: -0.3em; }
+
+  /* 01 — service: teks + terminal */
+  .service { display: grid; grid-template-columns: 5fr 6fr; gap: 3.5rem; align-items: start; }
+  .service-copy p { color: var(--dim); margin: 0 0 1.15rem; }
+  .service-copy p strong { color: var(--text); font-weight: 600; }
+  .service-copy .oath {
+    font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+    color: var(--text); border-left: 2px solid var(--red);
+    padding-left: 1.15rem; margin-top: 1.75rem;
+  }
+
+  .terminal {
+    background: var(--bg-panel); border: 1px solid var(--line);
+    font-family: var(--mono); font-size: 0.8125rem;
+    overflow: hidden;
+  }
+  .terminal-bar {
+    display: flex; align-items: center; gap: 0.5rem;
+    padding: 0.65rem 1rem; border-bottom: 1px solid var(--line);
+    color: var(--faint); font-size: 0.6875rem; letter-spacing: 0.1em;
+  }
+  .terminal-dots { display: flex; gap: 5px; }
+  .terminal-dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); }
+  .terminal-body { padding: 1rem 1.15rem 1.25rem; display: flex; flex-direction: column; gap: 0.55rem; min-height: 240px; }
+  .tline {
+    display: flex; gap: 0.85rem; align-items: baseline; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+    opacity: 0; transform: translateY(4px);
+  }
+  .tline.on { opacity: 1; transform: none; transition: opacity 400ms ease, transform 400ms ease; }
+  .t-time { color: var(--faint); flex-shrink: 0; }
+  .t-sym { color: var(--text); font-weight: 700; flex-shrink: 0; min-width: 7ch; }
+  .t-data { color: var(--dim); overflow: hidden; text-overflow: ellipsis; }
+  .t-status { color: var(--red); flex-shrink: 0; margin-left: auto; letter-spacing: 0.08em; }
+
+  /* 02 — register */
+  .reg-tools { display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .search {
+    flex: 1; min-width: 240px;
+    background: var(--bg-panel); border: 1px solid var(--line); color: var(--text);
+    font-family: var(--mono); font-size: 0.875rem;
+    padding: 0.85rem 1.1rem; border-radius: 0;
+    transition: border-color 200ms ease;
+  }
+  .search:focus { outline: none; border-color: var(--red); }
+  .search::placeholder { color: var(--faint); }
+  .reg-count { font-family: var(--mono); font-size: 0.75rem; color: var(--faint); letter-spacing: 0.08em; }
+
+  /* Pemakaman terbaru — satu entri diangkat */
+  .featured {
+    border: 1px solid var(--line); background: var(--bg-panel);
+    padding: 2rem 1.9rem; margin-bottom: 2rem;
+    display: grid; grid-template-columns: 12rem 1fr; gap: 2rem;
+  }
+  .featured-label {
+    grid-column: 1 / -1;
+    display: flex; align-items: center; gap: 0.6rem;
+    font-family: var(--mono); font-size: 0.6875rem;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--red);
+  }
+  .featured-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--red);
+    animation: blink 1.6s ease-in-out infinite;
+  }
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+  .featured .obit-body { font-size: 1.25rem; }
+
+  .feed { border-top: 1px solid var(--line); }
+  .obit {
+    display: grid; grid-template-columns: 11rem 1fr; gap: 2rem;
+    padding: 1.85rem 1rem 1.85rem 1.15rem;
+    border-bottom: 1px solid var(--line-soft);
+    position: relative;
+    transition: background 250ms ease;
+  }
+  .obit::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+    background: var(--red); transform: scaleY(0); transform-origin: top;
+    transition: transform 300ms cubic-bezier(.2,.8,.3,1);
+  }
+  .obit:hover { background: var(--bg-raised); }
+  .obit:hover::before { transform: scaleY(1); }
+
+  .obit-meta { display: flex; flex-direction: column; gap: 0.45rem; }
+  .obit-sym { font-family: var(--mono); font-weight: 700; font-size: 1.05rem; word-break: break-word; }
+  .obit-dates {
+    font-family: var(--mono); font-size: 0.71875rem; color: var(--faint);
+    letter-spacing: 0.05em; font-variant-numeric: tabular-nums; line-height: 1.7;
+  }
+  /* Label jenazah — bentuk label gantung kamar mayat, dengan lubang tali */
+  .obit-tag {
+    position: relative;
+    display: inline-block; margin-top: 0.35rem; align-self: flex-start;
+    font-family: var(--mono); font-size: 0.625rem; letter-spacing: 0.16em;
+    color: var(--red); background: var(--red-soft);
+    padding: 0.28rem 0.6rem 0.28rem 1.05rem; text-transform: uppercase;
+    clip-path: polygon(9px 0, 100% 0, 100% 100%, 9px 100%, 0 50%);
+  }
+  .obit-tag::before {
+    content: ""; position: absolute; left: 8px; top: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px; height: 4px; border-radius: 50%; background: var(--bg);
+  }
+  .obit-text { display: flex; flex-direction: column; gap: 0.5rem; justify-content: center; }
+  .obit-body { font-family: var(--serif); font-size: 1.1rem; line-height: 1.6; margin: 0; }
+  .obit-close { font-family: var(--serif); font-style: italic; font-size: 0.975rem; color: var(--dim); margin: 0; }
+
+  .empty {
+    padding: 4rem 1rem; text-align: center; font-family: var(--serif);
+    font-style: italic; color: var(--faint); border-bottom: 1px solid var(--line-soft);
+  }
+
+  .more {
+    margin: 2rem auto 0; display: block;
+    background: none; border: 1px solid var(--line); color: var(--dim);
+    font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.14em;
+    text-transform: uppercase; padding: 0.85rem 2rem; cursor: pointer;
+    transition: border-color 200ms ease, color 200ms ease;
+  }
+  .more:hover { border-color: var(--red); color: var(--text); }
+  .more:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+  /* 03 — protocol: tahapan menggantung di garis sinyal */
+  .flow { display: flex; flex-direction: column; gap: 3rem; max-width: 42rem; }
+  .flow-step { position: relative; }
+  .flow-node {
+    position: absolute; left: calc(-1 * var(--gutter) + var(--spine-x)); top: 0.35rem;
+    transform: translateX(-50%);
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 1.5px solid var(--faint);
+    transition: border-color 400ms ease, background 400ms ease, box-shadow 400ms ease;
+  }
+  .flow-step.lit .flow-node {
+    border-color: var(--red); background: var(--red);
+    box-shadow: 0 0 8px rgba(229, 72, 77, 0.6);
+  }
+  .flow-meta {
+    font-family: var(--mono); font-size: 0.71875rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--red);
+  }
+  .flow-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; margin: 0.5rem 0 0.5rem; }
+  .flow-copy { color: var(--dim); font-size: 0.9575rem; margin: 0; }
+
+  /* 04 — particulars */
+  .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line-soft); border: 1px solid var(--line-soft); }
+  .spec { background: var(--bg-raised); padding: 1.6rem 1.75rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .spec-label { font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); }
+  .spec-value { font-family: var(--mono); font-size: 0.9375rem; word-break: break-all; }
+  .spec-value.pending { color: var(--dim); font-family: var(--serif); font-style: italic; word-break: normal; }
+
+  /* 05 — links */
+  .links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .link-card {
+    border: 1px solid var(--line); background: var(--bg-raised);
+    padding: 1.5rem 1.6rem; text-decoration: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    transition: border-color 200ms ease, transform 200ms ease;
+  }
+  .link-card:hover { border-color: var(--red); transform: translateY(-2px); }
+  .link-card:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+  .link-name { color: var(--text); font-weight: 600; }
+  .link-sub { font-family: var(--mono); font-size: 0.75rem; color: var(--faint); display: block; margin-top: 0.2rem; }
+  .link-arrow { color: var(--red); font-family: var(--mono); transition: transform 200ms ease; }
+  .link-card:hover .link-arrow { transform: translateX(4px); }
+
+  /* Akhir sinyal — garis vertikal berbelok jadi flatline */
+  .signal-end {
+    position: relative;
+    margin-top: 6.5rem; padding: 1.4rem 0 1.4rem var(--gutter);
+    display: flex; align-items: center; gap: 1.25rem;
+  }
+  .signal-end::before {
+    content: ""; position: absolute; left: var(--spine-x); right: 0; top: 50%;
+    height: 1px; background: linear-gradient(90deg, var(--red), var(--line-soft) 60%);
+    opacity: 0.6;
+  }
+  .signal-end-text {
+    position: relative; background: var(--bg); padding: 0 1rem 0 0.5rem;
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--faint);
+  }
+  .signal-end-text b { color: var(--red); font-weight: 600; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line-soft); padding: 3rem 0 4rem; margin-top: 2.5rem; }
+  .foot-inner { display: flex; flex-direction: column; gap: 1.5rem; }
+  .disclaimer { color: var(--faint); font-size: 0.8125rem; line-height: 1.7; max-width: 46rem; margin: 0; }
+  .foot-line {
+    font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--faint);
+    display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  }
+
+  /* Reveal saat digulir */
+  .rv { opacity: 0; transform: translateY(22px); }
+  .rv.on { opacity: 1; transform: none; transition: opacity 800ms ease, transform 800ms cubic-bezier(.16,.8,.3,1); }
+
+  @media (max-width: 880px) {
+    :root { --gutter: 0rem; }
+    .spine, .spine-fill, .sec-node, .flow-node { display: none; }
+    .m-section { padding-left: 0; }
+    .signal-end { padding-left: 0; }
+    .signal-end::before { left: 0; }
+    .service { grid-template-columns: 1fr; gap: 2.5rem; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line-soft); }
+    .links { grid-template-columns: 1fr; }
+    .obit, .featured { grid-template-columns: 1fr; gap: 0.9rem; }
+    .specs { grid-template-columns: 1fr; }
+    .sec-ghost { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rv, .rv.on { opacity: 1; transform: none; transition: none; }
+    .live-dot, .featured-dot { animation: none; }
+    .tline { opacity: 1; transform: none; }
+    .memorial-track { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#">
+      <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 14 L8 14 L10 7 L13 18 L15 11 L17 14 L21 14" />
+      </svg>
+      HEARSE
+    </a>
+    <span class="live-pill"><span class="live-dot"></span> monitoring pump.fun</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">Autonomous undertaker · Solana</p>
+    <h1>Every token dies.<br /><span class="dim-line">We take the notes.</span></h1>
+    <p class="hero-sub">
+      Hundreds of tokens are born on pump.fun every day. Most are dead before lunch.
+      HEARSE watches the chain, pronounces each death, and writes the obituary —
+      <em>because someone should say a few words.</em>
+    </p>
+    <div class="hero-ctas">
+      <a class="btn primary" href="#register">Read the register ↓</a>
+      <a class="btn" href="#" rel="noopener">$HEARSE on pump.fun</a>
+    </div>
+  </div>
+  <div class="ekg-wrap">
+    <canvas id="ekg" aria-hidden="true"></canvas>
+    <span class="ekg-tag" id="ekg-tag">signal: acquiring</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num red" id="stat-total">0</span>
+      <span class="stat-label">Interred</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" id="stat-today">0</span>
+      <span class="stat-label">Deaths · 24h</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" id="stat-shortest">—</span>
+      <span class="stat-label">Shortest life</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num" id="stat-peak">$0</span>
+      <span class="stat-label">Peak value interred</span>
+    </div>
+  </div>
+</div>
+
+<div class="memorial" aria-hidden="true"><div class="memorial-track" id="memorial"></div></div>
+
+<div class="wrap monitored" id="monitored">
+  <div class="spine" aria-hidden="true"></div>
+  <div class="spine-fill" id="spine-fill" aria-hidden="true"><span class="spine-head"></span></div>
+
+  <section class="m-section">
+    <span class="sec-node" aria-hidden="true"></span>
+    <div class="sec-head rv">
+      <span class="sec-ghost" aria-hidden="true">01</span>
+      <div class="sec-meta"><span class="sec-file">File 01</span><span class="sec-tag">continuous watch</span></div>
+      <h2>The service</h2>
+    </div>
+    <div class="service">
+      <div class="service-copy rv">
+        <p>They arrive without ceremony and they leave without one — and the people who held them are simply expected to move on.</p>
+        <p><strong>HEARSE is an autonomous undertaker.</strong> It monitors every launch, records the vitals, and when the liquidity flatlines it files a proper obituary: name, hours lived, cause of death, and the buyers left behind.</p>
+        <p>It does this every day, without being asked, and it does not editorialize.</p>
+        <p class="oath">The facts are unkind enough on their own.</p>
+      </div>
+      <div class="terminal corners rv">
+        <div class="terminal-bar">
+          <span class="terminal-dots"><i></i><i></i><i></i></span>
+          <span>hearse — death feed</span>
+        </div>
+        <div class="terminal-body" id="feed-terminal"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="m-section" id="register">
+    <span class="sec-node" aria-hidden="true"></span>
+    <div class="sec-head rv">
+      <span class="sec-ghost" aria-hidden="true">02</span>
+      <div class="sec-meta"><span class="sec-file">File 02</span><span class="sec-tag">public record · permanent</span></div>
+      <h2>The register</h2>
+    </div>
+    <div class="reg-tools rv">
+      <input class="search" id="q" type="search" placeholder="search the dead — e.g. VOID" autocomplete="off" />
+      <span class="reg-count" id="reg-count"></span>
+    </div>
+    <div id="featured-slot"></div>
+    <div class="feed" id="feed"><div class="empty">Opening the register…</div></div>
+    <button class="more" id="more" hidden>Show more</button>
+  </section>
+
+  <section class="m-section">
+    <span class="sec-node" aria-hidden="true"></span>
+    <div class="sec-head rv">
+      <span class="sec-ghost" aria-hidden="true">03</span>
+      <div class="sec-meta"><span class="sec-file">File 03</span><span class="sec-tag">procedure · three stages</span></div>
+      <h2>Protocol</h2>
+    </div>
+    <div class="flow">
+      <div class="flow-step rv">
+        <span class="flow-node" aria-hidden="true"></span>
+        <div class="flow-meta">stage / watch · always on</div>
+        <h3 class="flow-title">Monitor</h3>
+        <p class="flow-copy">Every pump.fun launch enters the watchlist. Liquidity, volume, and buyers are recorded while the patient is still breathing.</p>
+      </div>
+      <div class="flow-step rv">
+        <span class="flow-node" aria-hidden="true"></span>
+        <div class="flow-meta">stage / pronounce · on flatline</div>
+        <h3 class="flow-title">Pronounce</h3>
+        <p class="flow-copy">When liquidity is withdrawn or the last buyer leaves, the death is pronounced and the cause is entered into the record.</p>
+      </div>
+      <div class="flow-step rv">
+        <span class="flow-node" aria-hidden="true"></span>
+        <div class="flow-meta">stage / publish · within the hour</div>
+        <h3 class="flow-title">Publish</h3>
+        <p class="flow-copy">An obituary is written and filed — to this register, permanently, and to the parlour on Telegram. Nothing is deleted.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="m-section">
+    <span class="sec-node" aria-hidden="true"></span>
+    <div class="sec-head rv">
+      <span class="sec-ghost" aria-hidden="true">04</span>
+      <div class="sec-meta"><span class="sec-file">File 04</span><span class="sec-tag">the instrument · $HEARSE</span></div>
+      <h2>Particulars</h2>
+    </div>
+    <div class="specs corners rv">
+      <div class="spec">
+        <span class="spec-label">Contract</span>
+        <span class="spec-value pending">Not yet issued — the plot is still being dug.</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Chain</span>
+        <span class="spec-value">Solana</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Issued via</span>
+        <span class="spec-value">pump.fun</span>
+      </div>
+      <div class="spec">
+        <span class="spec-label">Supply</span>
+        <span class="spec-value">1,000,000,000 · fixed</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="m-section">
+    <span class="sec-node" aria-hidden="true"></span>
+    <div class="sec-head rv">
+      <span class="sec-ghost" aria-hidden="true">05</span>
+      <div class="sec-meta"><span class="sec-file">File 05</span><span class="sec-tag">visiting hours</span></div>
+      <h2>Where the undertaker keeps hours</h2>
+    </div>
+    <div class="links rv">
+      <a class="link-card" href="#" rel="noopener">
+        <span><span class="link-name">The daily notices</span><span class="link-sub">X — one obituary a day</span></span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-card" href="#" rel="noopener">
+        <span><span class="link-name">The parlour</span><span class="link-sub">Telegram — every death, live</span></span>
+        <span class="link-arrow">→</span>
+      </a>
+      <a class="link-card" href="#" rel="noopener">
+        <span><span class="link-name">Acquire a share</span><span class="link-sub">pump.fun — $HEARSE</span></span>
+        <span class="link-arrow">→</span>
+      </a>
+    </div>
+  </section>
+
+  <div class="signal-end">
+    <span class="signal-end-text"><b>end of signal</b> · the register remains open</span>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-inner">
+    <p class="disclaimer">HEARSE is a memecoin with an autonomous writer attached. It has no revenue, no roadmap, and no obligation to you. It is not an investment, and nobody involved is promising it will be worth anything. Buy it because the obituaries are good, or do not buy it.</p>
+    <div class="foot-line">
+      <span>© HEARSE — interring the dead since block zero</span>
+      <span>signal provided by the deceased</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* ── EKG: berdetak, lalu flatline ─────────────────────────── */
+(function ekg() {
+  const cv = document.getElementById("ekg");
+  const tag = document.getElementById("ekg-tag");
+  const ctx = cv.getContext("2d");
+  let W, H, dpr;
+
+  function size() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+  size();
+  window.addEventListener("resize", size);
+
+  const BEAT = 1.1, ALIVE = 7, FLAT = 3.5, CYCLE = ALIVE + FLAT;
+
+  function wave(t) {
+    const c = t % CYCLE;
+    if (c > ALIVE) return 0;
+    const b = (c % BEAT) / BEAT;
+    if (b < 0.08) return Math.sin(b / 0.08 * Math.PI) * 4;
+    if (b < 0.14) return 0;
+    if (b < 0.17) return -((b - 0.14) / 0.03) * 10;
+    if (b < 0.21) return -10 + ((b - 0.17) / 0.04) * 46;
+    if (b < 0.26) return 36 - ((b - 0.21) / 0.05) * 48;
+    if (b < 0.31) return -12 + ((b - 0.26) / 0.05) * 12;
+    if (b < 0.55) return Math.sin((b - 0.31) / 0.24 * Math.PI) * 7;
+    return 0;
+  }
+
+  const SPEED = 90;
+  let start = performance.now();
+
+  function frame(now) {
+    const t = (now - start) / 1000;
+    ctx.clearRect(0, 0, W, H);
+    const mid = H * 0.58;
+
+    ctx.strokeStyle = "#E5484D";
+    ctx.lineWidth = 1.6;
+    ctx.shadowColor = "rgba(229,72,77,0.55)";
+    ctx.shadowBlur = 8;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 2) {
+      const y = mid - wave(t - (W - x) / SPEED);
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    const headY = mid - wave(t);
+    ctx.fillStyle = "#FF6B6F";
+    ctx.beginPath();
+    ctx.arc(W - 2, headY, 2.4, 0, Math.PI * 2);
+    ctx.fill();
+
+    const flat = (t % CYCLE) > ALIVE;
+    tag.textContent = flat ? "signal: lost — pronouncing" : "signal: live";
+    tag.style.color = flat ? "#E5484D" : "";
+
+    requestAnimationFrame(frame);
+  }
+
+  if (REDUCED) {
+    const mid = H * 0.58;
+    ctx.strokeStyle = "#E5484D"; ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 2) ctx.lineTo(x, mid - wave(x / SPEED));
+    ctx.stroke();
+    tag.textContent = "signal: recorded";
+  } else {
+    requestAnimationFrame(frame);
+  }
+})();
+
+/* ── Garis sinyal halaman: mengisi mengikuti scroll ───────── */
+(function pageSpine() {
+  const container = document.getElementById("monitored");
+  const fill = document.getElementById("spine-fill");
+  if (!container || !fill) return;
+
+  const sparks = [
+    ...container.querySelectorAll(".m-section"),
+    ...container.querySelectorAll(".flow-step"),
+  ];
+
+  if (REDUCED) {
+    fill.style.height = "100%";
+    sparks.forEach(s => s.classList.add("lit"));
+    return;
+  }
+
+  let ticking = false;
+  function update() {
+    ticking = false;
+    const rect = container.getBoundingClientRect();
+    // Ujung sinyal berada sedikit di atas tengah layar
+    const target = Math.max(0, Math.min(rect.height, window.innerHeight * 0.55 - rect.top));
+    fill.style.height = target + "px";
+
+    for (const s of sparks) {
+      const topInContainer = s.getBoundingClientRect().top - rect.top;
+      s.classList.toggle("lit", topInContainer < target);
+    }
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", onScroll);
+  update();
+})();
+
+/* ── Reveal saat digulir ──────────────────────────────────── */
+const revealer = new IntersectionObserver((es) => {
+  for (const e of es) {
+    if (!e.isIntersecting) continue;
+    e.target.classList.add("on");
+    revealer.unobserve(e.target);
+  }
+}, { rootMargin: "0px 0px -10% 0px", threshold: 0.05 });
+
+document.querySelectorAll(".rv").forEach(el => {
+  if (REDUCED) el.classList.add("on");
+  else revealer.observe(el);
+});
+
+/* ── Data & render ────────────────────────────────────────── */
+const PAGE_SIZE = 10;
+let all = [], shown = PAGE_SIZE;
+
+const $feed = document.getElementById("feed");
+const $featured = document.getElementById("featured-slot");
+const $more = document.getElementById("more");
+const $q = document.getElementById("q");
+const $count = document.getElementById("reg-count");
+
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const clock = ms => {
+  const d = new Date(ms);
+  return String(d.getUTCHours()).padStart(2,"0") + ":" + String(d.getUTCMinutes()).padStart(2,"0");
+};
+const money = n => "$" + Math.round(n).toLocaleString("en-US");
+
+function filtered() {
+  const term = $q.value.trim().toLowerCase().replace(/^\$/, "");
+  if (!term) return all;
+  return all.filter(o =>
+    String(o.symbol).toLowerCase().includes(term) ||
+    String(o.name).toLowerCase().includes(term)
+  );
+}
+
+function obitMeta(o) {
+  return `
+    <div class="obit-meta">
+      <span class="obit-sym">$${esc(o.symbol)}</span>
+      <span class="obit-dates">${clock(o.bornAt)} — ${clock(o.diedAt)} UTC<br />${esc(o.lived)} · ${o.buyers.toLocaleString("en-US")} buyers<br />peak ${money(o.peakFdv)}</span>
+      <span class="obit-tag">deceased</span>
+    </div>
+    <div class="obit-text">
+      <p class="obit-body">${esc(o.body)}</p>
+      ${o.close ? `<p class="obit-close">${esc(o.close)}</p>` : ""}
+    </div>`;
+}
+
+function render() {
+  const searching = !!$q.value.trim();
+  const list = filtered();
+  $count.textContent = list.length ? list.length + " records" : "";
+
+  // Pemakaman terbaru diangkat — hanya saat tidak sedang mencari
+  if (!searching && list.length) {
+    $featured.innerHTML = `
+      <article class="featured corners rv">
+        <div class="featured-label"><span class="featured-dot"></span> latest interment</div>
+        ${obitMeta(list[0])}
+      </article>`;
+  } else {
+    $featured.innerHTML = "";
+  }
+
+  const rest = searching ? list : list.slice(1);
+  if (!list.length) {
+    $feed.innerHTML = '<div class="empty">' +
+      (searching ? "No such soul in this register." : "The register is empty. Nobody has died yet today.") +
+      "</div>";
+    $more.hidden = true;
+  } else if (!rest.length) {
+    $feed.innerHTML = "";
+    $more.hidden = true;
+  } else {
+    $feed.innerHTML = rest.slice(0, shown).map((o, i) => `
+      <article class="obit rv" style="transition-delay:${Math.min(i, 6) * 60}ms">
+        ${obitMeta(o)}
+      </article>`).join("");
+    $more.hidden = rest.length <= shown;
+  }
+
+  document.querySelectorAll("#featured-slot .rv, #feed .rv").forEach(el => {
+    if (REDUCED) el.classList.add("on");
+    else revealer.observe(el);
+  });
+}
+
+/* Pita in-memoriam berjalan */
+function renderMemorial() {
+  const el = document.getElementById("memorial");
+  if (!all.length) { el.parentElement.style.display = "none"; return; }
+  const items = all.slice(0, 14).map(o =>
+    `<i>✝</i>&nbsp; <b>$${esc(o.symbol)}</b> — lived ${esc(o.lived)}`
+  ).join(" &nbsp;·&nbsp; ");
+  // digandakan supaya animasinya mulus tanpa sambungan terlihat
+  el.innerHTML = "In memoriam: &nbsp;" + items + " &nbsp;·&nbsp; In memoriam: &nbsp;" + items + " &nbsp;·&nbsp;";
+}
+
+/* Terminal feed di seksi 01 */
+function renderTerminal() {
+  const t = document.getElementById("feed-terminal");
+  const rows = all.slice(0, 7);
+  if (!rows.length) {
+    t.innerHTML = '<div class="tline on"><span class="t-data">awaiting first death…</span></div>';
+    return;
+  }
+  t.innerHTML = rows.map(o => `
+    <div class="tline">
+      <span class="t-time">${clock(o.diedAt)}</span>
+      <span class="t-sym">$${esc(o.symbol)}</span>
+      <span class="t-data">${esc(o.lived)} · peak ${money(o.peakFdv)} · ${o.buyers.toLocaleString("en-US")} buyers</span>
+      <span class="t-status">✝ dead</span>
+    </div>`).join("");
+  const lines = t.querySelectorAll(".tline");
+  lines.forEach((l, i) => {
+    if (REDUCED) l.classList.add("on");
+    else setTimeout(() => l.classList.add("on"), 350 + i * 280);
+  });
+}
+
+/* Angka berhitung naik */
+function countUp(el, target, fmt) {
+  fmt = fmt || (v => Math.round(v).toLocaleString("en-US"));
+  if (REDUCED || !target) { el.textContent = fmt(target); return; }
+  const dur = 1200, t0 = performance.now();
+  (function step(now) {
+    const p = Math.min(1, (now - t0) / dur);
+    el.textContent = fmt(target * (1 - Math.pow(1 - p, 3)));
+    if (p < 1) requestAnimationFrame(step);
+  })(t0);
+}
+
+function stats() {
+  const dayAgo = Date.now() - 86400000;
+  countUp(document.getElementById("stat-total"), all.length);
+  countUp(document.getElementById("stat-today"), all.filter(o => o.diedAt > dayAgo).length);
+
+  const shortest = all.reduce((m, o) =>
+    Math.min(m, Math.max(1, Math.round((o.diedAt - o.bornAt) / 60000))), Infinity);
+  const $s = document.getElementById("stat-shortest");
+  if (shortest === Infinity) $s.textContent = "—";
+  else $s.textContent = shortest < 60 ? shortest + "m" : Math.round(shortest / 60) + "h";
+
+  const peak = all.reduce((sum, o) => sum + (o.peakFdv || 0), 0);
+  countUp(document.getElementById("stat-peak"), peak, v => {
+    const n = Math.round(v);
+    if (n >= 1e6) return "$" + (n / 1e6).toFixed(1) + "M";
+    if (n >= 1e3) return "$" + Math.round(n / 1e3) + "K";
+    return "$" + n;
+  });
+}
+
+$q.addEventListener("input", () => { shown = PAGE_SIZE; render(); });
+$more.addEventListener("click", () => { shown += PAGE_SIZE; render(); });
+
+fetch("data/obituaries.json", { cache: "no-store" })
+  .then(r => r.ok ? r.json() : [])
+  .then(data => {
+    all = Array.isArray(data) ? data : [];
+    stats();
+    render();
+    renderTerminal();
+    renderMemorial();
+  })
+  .catch(() => {
+    $feed.innerHTML = '<div class="empty">The register could not be opened.</div>';
+  });
+</script>
+</body>
+</html>
