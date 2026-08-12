@@ -1,7 +1,7 @@
 {
   "GGXWAKpwVeRF8fUzsKtf7uZnZmJms2WoqMjxhLEGpump": {
     "firstSeen": 1786366776702,
-    "peakFdv": 2528.03,
+    "peakFdv": 3596.6,
     "peakBuys": 1121,
     "peakSells": 1065,
     "name": "Glump",
@@ -26,20 +26,11 @@
     "symbol": "investor",
     "bornAt": 1786363367000
   },
-  "BZ9kBdCovUv5g7krWdwytNV7StLVabYTBro4DSbBpump": {
-    "firstSeen": 1786366776702,
-    "peakFdv": 364182,
-    "peakBuys": 28615,
-    "peakSells": 24159,
-    "name": "Pepes Dog",
-    "symbol": "ZEUS",
-    "bornAt": 1786364153000
-  },
   "7V6Sk63y8Rr1MvcN5mYNp61wgFhy4EeQg5gUASk9pump": {
     "firstSeen": 1786366776702,
-    "peakFdv": 546867,
-    "peakBuys": 8085,
-    "peakSells": 6480,
+    "peakFdv": 644542,
+    "peakBuys": 10000,
+    "peakSells": 7180,
     "name": "Hyper Bull",
     "symbol": "HBULL",
     "bornAt": 1783992332000
@@ -80,15 +71,6 @@
     "symbol": "Sheep",
     "bornAt": 1786251283000
   },
-  "8Bq4XvNTgGTjkZxtU9hsxPnVabtJsKJ7bj2Cq1r1pump": {
-    "firstSeen": 1786366776702,
-    "peakFdv": 90922,
-    "peakBuys": 14701,
-    "peakSells": 3686,
-    "name": "Maci The Cat",
-    "symbol": "MACI",
-    "bornAt": 1786358476000
-  },
   "EnA53NmMzfsAs7p44dATdvT55HHUACxpEbC9AKY3pump": {
     "firstSeen": 1786366776702,
     "peakFdv": 106048,
@@ -100,9 +82,9 @@
   },
   "AA3VLt3muGJiXedDaMnkcst3pfjrg1JBxgHVSdSbpump": {
     "firstSeen": 1786366776702,
-    "peakFdv": 139398,
-    "peakBuys": 2347,
-    "peakSells": 2508,
+    "peakFdv": 212081,
+    "peakBuys": 2735,
+    "peakSells": 2981,
     "name": "The Pygmy Hippo",
     "symbol": "TINYTANK",
     "bornAt": 1786018983000
@@ -479,8 +461,8 @@
   "CrJPSvj625TnPdWS42aG5ybMcHeFvnNqq5AExVespump": {
     "firstSeen": 1786417514949,
     "peakFdv": 1446730,
-    "peakBuys": 8380,
-    "peakSells": 7148,
+    "peakBuys": 8831,
+    "peakSells": 7804,
     "name": "モモ太",
     "symbol": "Momota",
     "bornAt": 1776086278000
@@ -532,9 +514,9 @@
   },
   "5deTwcca6TKzDR6WcFGypRnP4RaiPa3zZFiayo9Bpump": {
     "firstSeen": 1786417514949,
-    "peakFdv": 43725,
+    "peakFdv": 55796,
     "peakBuys": 49,
-    "peakSells": 14,
+    "peakSells": 16,
     "name": "KING TATE",
     "symbol": "KING",
     "bornAt": 1786085348000
@@ -569,24 +551,24 @@
   "4iMYUarGDXfbQWjJJpAmN8SGwJ7oaFPe5g6xhCcppump": {
     "firstSeen": 1786441900372,
     "peakFdv": 2288.62,
-    "peakBuys": 390,
-    "peakSells": 445,
+    "peakBuys": 656,
+    "peakSells": 683,
     "name": "The Disco Kittens",
     "symbol": "Kittens",
     "bornAt": 1786441613000
   },
   "opUSE74FpJeogzingvaJEoqaghbyd2aC164V4snpump": {
     "firstSeen": 1786441900372,
-    "peakFdv": 37792,
-    "peakBuys": 5745,
-    "peakSells": 4952,
+    "peakFdv": 59040,
+    "peakBuys": 6664,
+    "peakSells": 5836,
     "name": "The NightTrader",
     "symbol": "NightTrader",
     "bornAt": 1786441207000
   },
   "CX2v7JSHJQDcNooubzzvZG8TPaDwbaPgfzcXRSWJpump": {
     "firstSeen": 1786441900372,
-    "peakFdv": 1322290,
+    "peakFdv": 1328734,
     "peakBuys": 14086,
     "peakSells": 11774,
     "name": "Mario64",
@@ -596,8 +578,8 @@
   "Ataijhng2bbV2krTtkNxwGHGgBzGEKPtPCuuw8HFpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 13084.49,
-    "peakBuys": 325,
-    "peakSells": 195,
+    "peakBuys": 372,
+    "peakSells": 272,
     "name": "Farm Aura ",
     "symbol": "AURA",
     "bornAt": 1786437712000
@@ -605,8 +587,8 @@
   "488SaFq6wHF2z2k6NLSD3PtoSkXDNZaPkJwxze11pump": {
     "firstSeen": 1786441900372,
     "peakFdv": 286113,
-    "peakBuys": 24568,
-    "peakSells": 34698,
+    "peakBuys": 25690,
+    "peakSells": 35836,
     "name": "MomoCoin",
     "symbol": "MOMO",
     "bornAt": 1786435356000
@@ -614,8 +596,8 @@
   "CjADsFrqJAQhGg16WL48QSjPFCfGPyHHX8NWucEapump": {
     "firstSeen": 1786441900372,
     "peakFdv": 3699.01,
-    "peakBuys": 945,
-    "peakSells": 863,
+    "peakBuys": 952,
+    "peakSells": 876,
     "name": "/dogsay",
     "symbol": "dogsay",
     "bornAt": 1786438455000
@@ -650,8 +632,8 @@
   "Cp467wsLc1axm5uMtXTLzgRSAmVVgm8eyTpxD9RTpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 111705,
-    "peakBuys": 28877,
-    "peakSells": 52367,
+    "peakBuys": 28885,
+    "peakSells": 52378,
     "name": "Chill Frog",
     "symbol": "CHILLFROG",
     "bornAt": 1786436831000
@@ -659,8 +641,8 @@
   "9DS4sxq56EntkfFS97B8jzR43s3oMsKWGnbeYgNVpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 3638.28,
-    "peakBuys": 701,
-    "peakSells": 548,
+    "peakBuys": 740,
+    "peakSells": 587,
     "name": "copycat",
     "symbol": "copycat",
     "bornAt": 1786435813000
@@ -668,8 +650,8 @@
   "2WD9gyvzQHs44BW8YmfAe5Lr8Ty67vg55oK8rNXHpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 63278,
-    "peakBuys": 8375,
-    "peakSells": 7211,
+    "peakBuys": 8675,
+    "peakSells": 7518,
     "name": "Troot",
     "symbol": "Troot",
     "bornAt": 1786435493000
@@ -677,8 +659,8 @@
   "DLHkGNQQsCz5ANzjUSNrctBJhjvbyaF6kxFzJPm2pump": {
     "firstSeen": 1786441900372,
     "peakFdv": 11137,
-    "peakBuys": 7200,
-    "peakSells": 6140,
+    "peakBuys": 7225,
+    "peakSells": 6181,
     "name": "sami-openlife",
     "symbol": "sami",
     "bornAt": 1786429184000
@@ -686,8 +668,8 @@
   "6tfuqqJXL54BAyTHimbJeVvTWphW2Hhjb9Rd6pg9pump": {
     "firstSeen": 1786441900372,
     "peakFdv": 70051,
-    "peakBuys": 23888,
-    "peakSells": 25379,
+    "peakBuys": 24391,
+    "peakSells": 25872,
     "name": "Dogettecoin",
     "symbol": "DOGETTE",
     "bornAt": 1786434810000
@@ -695,8 +677,8 @@
   "2MsHGxUFzLz6fgJ3wb8V8AXgrmuUanLRq7ZnFcVfpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 2259.5,
-    "peakBuys": 957,
-    "peakSells": 929,
+    "peakBuys": 974,
+    "peakSells": 940,
     "name": "yn",
     "symbol": "yn",
     "bornAt": 1786434185000
@@ -704,8 +686,8 @@
   "C6ASDsxzqBvF5bCQFVAGMRWwfgZNhfozbb9DkgiKpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 1352489,
-    "peakBuys": 20643,
-    "peakSells": 17020,
+    "peakBuys": 33300,
+    "peakSells": 29813,
     "name": "Orange Coin",
     "symbol": "ORANGE",
     "bornAt": 1786434302000
@@ -732,7 +714,7 @@
     "firstSeen": 1786441900372,
     "peakFdv": 27494.1,
     "peakBuys": 370,
-    "peakSells": 281,
+    "peakSells": 310,
     "name": "DogWifHood",
     "symbol": "HOOD",
     "bornAt": 1786463002000
@@ -740,8 +722,8 @@
   "6Lc4HdkoJCQqU7hoV1vKHsgwSWFyoHHr84pfpbCrpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 18547.98,
-    "peakBuys": 1115,
-    "peakSells": 1030,
+    "peakBuys": 1266,
+    "peakSells": 1132,
     "name": "Trenchcat",
     "symbol": "Trenchcat",
     "bornAt": 1786442269000
@@ -767,8 +749,8 @@
   "QQTXTsxWdQRsD3JUKZwngqTcJkaMC4y1tXf7WQupump": {
     "firstSeen": 1786441900372,
     "peakFdv": 5558,
-    "peakBuys": 1749,
-    "peakSells": 1642,
+    "peakBuys": 1753,
+    "peakSells": 1656,
     "name": "Nestlé",
     "symbol": "NESTLE",
     "bornAt": 1786430764000
@@ -776,8 +758,8 @@
   "EmQCzVX585GvCz7UouAwhGDoBReoguvtDLj19xN4pump": {
     "firstSeen": 1786441900372,
     "peakFdv": 2919,
-    "peakBuys": 529,
-    "peakSells": 452,
+    "peakBuys": 539,
+    "peakSells": 522,
     "name": "BULLFROG",
     "symbol": "BULLFROG",
     "bornAt": 1786429143000
@@ -793,7 +775,7 @@
   },
   "CUTFq2j7HXCMZzMxFgQpVuaCiH6Got3gzdZt7VyJpump": {
     "firstSeen": 1786441900372,
-    "peakFdv": 17151,
+    "peakFdv": 18800,
     "peakBuys": 14788,
     "peakSells": 12405,
     "name": "Dentacoin",
@@ -848,17 +830,17 @@
   "4S2qS8P17LSPosME8grirgfUE4p6kW2kZfMSzgmDpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 120544,
-    "peakBuys": 15696,
-    "peakSells": 14969,
+    "peakBuys": 15703,
+    "peakSells": 14989,
     "name": "dot",
     "symbol": "DOT",
     "bornAt": 1786458639000
   },
   "3G2MqxsxXJapxboPFrYv9frApHVpaYCWquhG1bAQpump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 2773.59,
-    "peakBuys": 1064,
-    "peakSells": 945,
+    "peakFdv": 5297.18,
+    "peakBuys": 2023,
+    "peakSells": 1729,
     "name": "Zuzu",
     "symbol": "Zuzu",
     "bornAt": 1786460543000
@@ -883,9 +865,9 @@
   },
   "6WMszYPHAxEFgstkEpyRRwzaVtA9eM5pWvSf8v7qpump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 51010,
-    "peakBuys": 2424,
-    "peakSells": 1564,
+    "peakFdv": 54149,
+    "peakBuys": 4266,
+    "peakSells": 2629,
     "name": "Just a Toad Guy",
     "symbol": "TOADGUY",
     "bornAt": 1786459780000
@@ -902,8 +884,8 @@
   "4VnaCje2AUzyWUKJDtwmpFjzewE4bx2B6Ha4HgS4pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 13956.13,
-    "peakBuys": 1568,
-    "peakSells": 939,
+    "peakBuys": 2169,
+    "peakSells": 1270,
     "name": "Basket",
     "symbol": "BASKET",
     "bornAt": 1786459831000
@@ -911,20 +893,20 @@
   "5RXiSWdZKBqjHNDNYwhJ9dSRZny8NwPWRo9HTQG7pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 10304.28,
-    "peakBuys": 1331,
-    "peakSells": 1160,
+    "peakBuys": 1368,
+    "peakSells": 1202,
     "name": "The Webchemist",
     "symbol": "VEGA",
     "bornAt": 1786459811000
   },
   "GCa9TZMK9Q3VUSkhZgX76YAQBjqQd1dPxkBnZojFpump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 181934,
+    "peakFdv": 3263285,
     "peakBuys": 11060,
     "peakSells": 9193,
     "name": "Plumber",
     "symbol": "Plumber",
-    "bornAt": 1786426798000
+    "bornAt": 1786488948000
   },
   "J8ohpm2r1GG7Ce8cLxHMChNAeG8t8F3KQZ1inG62pump": {
     "firstSeen": 1786462238668,
@@ -938,8 +920,8 @@
   "AFdZw2VhFfZStKDmDjUZghyWVXCPriu5S5Rk2KJipump": {
     "firstSeen": 1786462238668,
     "peakFdv": 58438,
-    "peakBuys": 13880,
-    "peakSells": 11912,
+    "peakBuys": 13913,
+    "peakSells": 12020,
     "name": "cheese",
     "symbol": "cheese",
     "bornAt": 1786459205000
@@ -947,8 +929,8 @@
   "AMMFxAYHAQdgG3bzxTERoRh7oHx29uMWaGXeRi1Epump": {
     "firstSeen": 1786462238668,
     "peakFdv": 5760.33,
-    "peakBuys": 671,
-    "peakSells": 585,
+    "peakBuys": 787,
+    "peakSells": 690,
     "name": "なのちゃん",
     "symbol": "shrimpcat",
     "bornAt": 1786458255000
@@ -956,8 +938,8 @@
   "C1GTkJ4db49onZQswwmSDMzjVaKHFjgVKFAf8A7rpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 25978,
-    "peakBuys": 6775,
-    "peakSells": 5680,
+    "peakBuys": 6858,
+    "peakSells": 5835,
     "name": "Pump Stonk",
     "symbol": "PSTONK",
     "bornAt": 1786462041000
@@ -965,8 +947,8 @@
   "tSEakxwRz3Y3BpjDttokygCgScgLnui19NJGrR4pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 194766,
-    "peakBuys": 26240,
-    "peakSells": 21267,
+    "peakBuys": 27281,
+    "peakSells": 22256,
     "name": "Hellcat",
     "symbol": "Lucifer",
     "bornAt": 1786457309000
@@ -982,9 +964,9 @@
   },
   "36kaFs1RbsJqoBwJaKQfBcm85piyEQPmU4Ctgw7Qpump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 5699.41,
-    "peakBuys": 86,
-    "peakSells": 50,
+    "peakFdv": 6602.74,
+    "peakBuys": 114,
+    "peakSells": 76,
     "name": "KittyMum",
     "symbol": "$Mum",
     "bornAt": 1764350186000
@@ -1001,24 +983,24 @@
   "3oX9emrqYRGzFEDPP3jA6tYnUBML4QSr3DfgD2r5pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 18536,
-    "peakBuys": 76,
-    "peakSells": 57,
+    "peakBuys": 100,
+    "peakSells": 73,
     "name": "Sliding Cat",
     "symbol": "滑る猫",
     "bornAt": 1781690437000
   },
   "4je81UzH57Z1CoshknjeeidXv9qfL4tiUs4kn7d5pump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 189916,
-    "peakBuys": 5958,
-    "peakSells": 7962,
+    "peakFdv": 457865,
+    "peakBuys": 10783,
+    "peakSells": 14546,
     "name": "Unstable FOMO",
     "symbol": "USDUF",
     "bornAt": 1786440437000
   },
   "3YNCESdqhSgvsD4aARHC4rdqXpjyW9CWjosH82hNpump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 67375,
+    "peakFdv": 71597,
     "peakBuys": 35,
     "peakSells": 26,
     "name": "Dinky",
@@ -1028,8 +1010,8 @@
   "7rSpKgASuXN5hfw3jsKNZN6ysNCR1Eixb2PD2Nd9pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 104356,
-    "peakBuys": 859,
-    "peakSells": 647,
+    "peakBuys": 860,
+    "peakSells": 661,
     "name": "Cog",
     "symbol": "Cog",
     "bornAt": 1785021413000
@@ -1037,8 +1019,8 @@
   "GrY5ayYtca1Lq4j3q4hc4aMpE6tNavsRxDVcsXybpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 635450,
-    "peakBuys": 1145,
-    "peakSells": 1103,
+    "peakBuys": 2237,
+    "peakSells": 2187,
     "name": "GreenEpicOnchainFomoFuel",
     "symbol": "GEOFF ",
     "bornAt": 1786251692000
@@ -1081,9 +1063,9 @@
   },
   "BoBQZP9YgCRqVqkaBHuxL4xizKHgTFs8n3rRaXaWpump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 50378,
-    "peakBuys": 5914,
-    "peakSells": 5523,
+    "peakFdv": 89931,
+    "peakBuys": 7216,
+    "peakSells": 6763,
     "name": "Melkiy",
     "symbol": "Splash Dog",
     "bornAt": 1786446990000
@@ -1091,8 +1073,8 @@
   "AiPU5j3cKowYptPBzJKKNE4bbm7prWuno33b32ZWpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 2920.26,
-    "peakBuys": 927,
-    "peakSells": 840,
+    "peakBuys": 928,
+    "peakSells": 846,
     "name": "Momotacoin ",
     "symbol": "MOMOTA",
     "bornAt": 1786447539000
@@ -1108,9 +1090,9 @@
   },
   "BFgbu16BRciq4NmSiqNeU3RKS83cXNwDF1b98438pump": {
     "firstSeen": 1786462238668,
-    "peakFdv": 5395,
+    "peakFdv": 5887,
     "peakBuys": 88,
-    "peakSells": 73,
+    "peakSells": 74,
     "name": "Tina23664722279",
     "symbol": "ImTina",
     "bornAt": 1785909898000
@@ -1118,8 +1100,8 @@
   "DJyQkMrsG9JqNjMbVQ2DABxmkbMYfahEXTDgTyd2pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 3279.8,
-    "peakBuys": 1175,
-    "peakSells": 1070,
+    "peakBuys": 1193,
+    "peakSells": 1102,
     "name": "Pumpe",
     "symbol": "PUMPE",
     "bornAt": 1786443190000
@@ -1127,8 +1109,8 @@
   "EmY1vMh7s9iGS7WHhkTuBy8G5TaooEwxA7QsjaAkpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 5386,
-    "peakBuys": 6443,
-    "peakSells": 5519,
+    "peakBuys": 6451,
+    "peakSells": 5538,
     "name": "MomoCoin",
     "symbol": "MOMO",
     "bornAt": 1786439195000
@@ -1136,8 +1118,8 @@
   "32j1sTCHu2MZMKzjNiYUerJXSghG9zayWNF1tUqTpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 4437.72,
-    "peakBuys": 535,
-    "peakSells": 494,
+    "peakBuys": 670,
+    "peakSells": 676,
     "name": "20000 Emu's Vs. 1 Moose",
     "symbol": "EVM",
     "bornAt": 1786479410000
@@ -1145,8 +1127,8 @@
   "4gPxR34K32TRW6pZ6qSy6SuSS6rWmKBi15M2Z6bfpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 57111,
-    "peakBuys": 358,
-    "peakSells": 350,
+    "peakBuys": 428,
+    "peakSells": 440,
     "name": "Vivian musk",
     "symbol": "Vivian",
     "bornAt": 1786478999000
@@ -1154,8 +1136,8 @@
   "EwnWAmWfirvowCVaFsCFUgjdH5kbWZN8hsHvDSmHpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 44539,
-    "peakBuys": 367,
-    "peakSells": 284,
+    "peakBuys": 1306,
+    "peakSells": 1208,
     "name": "The Foreshadowing Vulture",
     "symbol": "Vulture",
     "bornAt": 1786478312000
@@ -1163,17 +1145,17 @@
   "2aaEFTVJyH6EKkB9h2a9vzspjAwFn8BK2EHM1X6Zpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 14187.7,
-    "peakBuys": 255,
-    "peakSells": 206,
+    "peakBuys": 560,
+    "peakSells": 498,
     "name": "MemeChain",
     "symbol": "MemeChain",
     "bornAt": 1786478678000
   },
   "BYcg2mDpq5LAysMEoCHgftE2UR9Fqa9fhzPgYARNpump": {
     "firstSeen": 1786479744892,
-    "peakFdv": 11393.78,
-    "peakBuys": 108,
-    "peakSells": 62,
+    "peakFdv": 13930.42,
+    "peakBuys": 5027,
+    "peakSells": 14589,
     "name": "Fortnite Player",
     "symbol": "Epictrader",
     "bornAt": 1786478227000
@@ -1181,8 +1163,8 @@
   "4ptrUgj8J98SmbDndjmF8wH2yWvC8juBk89bWSNVpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 2240,
-    "peakBuys": 1476,
-    "peakSells": 1358,
+    "peakBuys": 1489,
+    "peakSells": 1400,
     "name": "Memes Into Money",
     "symbol": "MIM",
     "bornAt": 1786478637000
@@ -1190,8 +1172,8 @@
   "HpokQWS1Ue43ts5d6RPkWzi9xv3F1iQ2WVwXH5wEpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 3892.51,
-    "peakBuys": 214,
-    "peakSells": 178,
+    "peakBuys": 311,
+    "peakSells": 306,
     "name": "Elon Kingdom",
     "symbol": "EK",
     "bornAt": 1786476822000
@@ -1199,8 +1181,8 @@
   "53DM4mikdxyaxeuQDGPBfUaUjiUQW9Nd7XEo8HcSpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 43242,
-    "peakBuys": 15066,
-    "peakSells": 16344,
+    "peakBuys": 16063,
+    "peakSells": 17371,
     "name": "Memes Into Money",
     "symbol": "MIM",
     "bornAt": 1786478333000
@@ -1208,8 +1190,8 @@
   "82o6JWZNJeTXwnH4MxkHEzxRj9ovquiZX6PGD4cFpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 3485,
-    "peakBuys": 4870,
-    "peakSells": 4403,
+    "peakBuys": 4903,
+    "peakSells": 4520,
     "name": "call out or he dies",
     "symbol": "callout",
     "bornAt": 1786477641000
@@ -1226,8 +1208,8 @@
   "93q9E5fdEr5x3UHfnbctVoKRKxRkaEh42o8oVci6pump": {
     "firstSeen": 1786479744892,
     "peakFdv": 1656,
-    "peakBuys": 1344,
-    "peakSells": 1241,
+    "peakBuys": 1350,
+    "peakSells": 1265,
     "name": "Stable Protocol",
     "symbol": "sTBL",
     "bornAt": 1786475342000
@@ -1235,8 +1217,8 @@
   "8Y7zoKf3H2BT8TMMLrzgMo55iA7Uk1UixAsNxZFrpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 20926,
-    "peakBuys": 6948,
-    "peakSells": 3647,
+    "peakBuys": 11161,
+    "peakSells": 10512,
     "name": "toadwifhat",
     "symbol": "TIF",
     "bornAt": 1786478410000
@@ -1244,8 +1226,8 @@
   "3tyWnENNfX7wyEzp798ztvACn4RnufZfwSF8Q4oNpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 22352,
-    "peakBuys": 1500,
-    "peakSells": 1267,
+    "peakBuys": 1979,
+    "peakSells": 1729,
     "name": "Shillpigs",
     "symbol": "SHILLPIG",
     "bornAt": 1786239824000
@@ -1261,9 +1243,9 @@
   },
   "3P24Bngt19ZArQuMVeySwS2JqPTgeecpUKRH5smxpump": {
     "firstSeen": 1786479744892,
-    "peakFdv": 3901.8,
-    "peakBuys": 59,
-    "peakSells": 24,
+    "peakFdv": 4163.31,
+    "peakBuys": 67,
+    "peakSells": 41,
     "name": "Grand Theft Crypto 6",
     "symbol": "GTC6",
     "bornAt": 1786051799000
@@ -1271,8 +1253,8 @@
   "DcCyR51p1Zoh5x3K7AF963GajruLqtj5ZT6ECq3ypump": {
     "firstSeen": 1786479744892,
     "peakFdv": 3561.06,
-    "peakBuys": 652,
-    "peakSells": 587,
+    "peakBuys": 692,
+    "peakSells": 647,
     "name": "One-Eyed Cat",
     "symbol": "HORUS",
     "bornAt": 1786477434000
@@ -1280,8 +1262,8 @@
   "2qxXNdewVfpmB1LKDzu5ykvUAJE9nZG63X8wPk89pump": {
     "firstSeen": 1786479744892,
     "peakFdv": 6841.19,
-    "peakBuys": 363,
-    "peakSells": 330,
+    "peakBuys": 1068,
+    "peakSells": 918,
     "name": "The Dancing Toad ",
     "symbol": "ToadStep",
     "bornAt": 1786475401000
@@ -1289,17 +1271,17 @@
   "S3UnbwmWBzKzTPc4qFZRRkce8FuwJnbA1GdUUJapump": {
     "firstSeen": 1786479744892,
     "peakFdv": 2340,
-    "peakBuys": 1515,
-    "peakSells": 1548,
+    "peakBuys": 1596,
+    "peakSells": 1644,
     "name": "Degenerates",
     "symbol": "Degenerates",
     "bornAt": 1786477268000
   },
   "74fofxdRVCtFg369ywUpnQm6d9LxGJWpKPaEM15hpump": {
     "firstSeen": 1786479744892,
-    "peakFdv": 4737.38,
-    "peakBuys": 858,
-    "peakSells": 749,
+    "peakFdv": 10754.93,
+    "peakBuys": 1011,
+    "peakSells": 902,
     "name": "The Schmelglin Cat",
     "symbol": "OLIVER",
     "bornAt": 1786475779000
@@ -1307,8 +1289,8 @@
   "DDqRBZQS8TtwdGtCfr8UinByTtWFeaUiRiY1tJwJpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 94213,
-    "peakBuys": 4596,
-    "peakSells": 1406,
+    "peakBuys": 10065,
+    "peakSells": 2838,
     "name": "bearwifcone",
     "symbol": "bearwif",
     "bornAt": 1786470973000
@@ -1320,20 +1302,20 @@
     "peakSells": 1070,
     "name": "Mario64",
     "symbol": "MARIO64",
-    "bornAt": 1786474550000
+    "bornAt": 1786486007000
   },
   "4QVa33qdXiFe3L3krfSGFaiQEfFUQsWpebJN2CPxpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 166151,
-    "peakBuys": 4538,
-    "peakSells": 3032,
+    "peakBuys": 6683,
+    "peakSells": 4713,
     "name": "GIGA TOAD PEPE",
     "symbol": "GIGATOAD",
     "bornAt": 1786469757000
   },
   "7pB9eagKnMTHpNWR6zrcsw9QkCVAAky8PRrFSPdApump": {
     "firstSeen": 1786479744892,
-    "peakFdv": 7335.09,
+    "peakFdv": 8924.79,
     "peakBuys": 139,
     "peakSells": 234,
     "name": "EearthCoin",
@@ -1342,9 +1324,9 @@
   },
   "8mWJoGgpr2tK2SgVxDwZiT67zcau1J6btMjFaonGpump": {
     "firstSeen": 1786479744892,
-    "peakFdv": 1920,
-    "peakBuys": 277,
-    "peakSells": 393,
+    "peakFdv": 1945,
+    "peakBuys": 282,
+    "peakSells": 396,
     "name": "PEPE FROG DNA",
     "symbol": "FROUMP",
     "bornAt": 1786471209000
@@ -1379,10 +1361,271 @@
   "DD96Kd3BYY4aYEmWYi4Fhq22rwhPeoou1fPFGwQSpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 5503,
-    "peakBuys": 10284,
-    "peakSells": 9827,
+    "peakBuys": 10404,
+    "peakSells": 9957,
     "name": "Take a chance",
     "symbol": "chance",
     "bornAt": 1786461746000
+  },
+  "8LkH4DDkVRpoZYYYWBi5KGmqkCeR9GRs4aSEFT4qpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 62296,
+    "peakBuys": 2880,
+    "peakSells": 2556,
+    "name": "BHENCHOD COIN",
+    "symbol": "BHENCHOD",
+    "bornAt": 1786511692000
+  },
+  "259KArDPebq3aHNHzotp5VNAcFCQigmeGz9yE6gopump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 29157.72,
+    "peakBuys": 1355,
+    "peakSells": 845,
+    "name": "The Male Ego",
+    "symbol": "EGO",
+    "bornAt": 1786510555000
+  },
+  "Gjog4G67BbJZfVhD9M93SEncd47rvbFVcGcuaufpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 15228.26,
+    "peakBuys": 3287,
+    "peakSells": 2537,
+    "name": "Bear In Pool",
+    "symbol": "BIP",
+    "bornAt": 1786494279000
+  },
+  "AVH4TopqphcEM8KXbwfNUxMNcKZfRSCz4qG2am6kpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 49629,
+    "peakBuys": 816,
+    "peakSells": 749,
+    "name": "Quantum Picture Television",
+    "symbol": "QPT",
+    "bornAt": 1786513146000
+  },
+  "CNyox46GjRq7o8rkTsiRAjRsY7PUE9Dr9S5X9rKhpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 10097.41,
+    "peakBuys": 1934,
+    "peakSells": 1071,
+    "name": "Moat OS",
+    "symbol": "MOAT",
+    "bornAt": 1786511668000
+  },
+  "G4DnBgvyBnusyrisSr9kN6y5YnK3DEEY7TfYbTb5pump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 12345.1,
+    "peakBuys": 353,
+    "peakSells": 230,
+    "name": "Bieber the Hamster",
+    "symbol": "Bieber",
+    "bornAt": 1786256408000
+  },
+  "7kPwxepEQ8Q6XrxyycNSzYVp18h96C271u6WT3mepump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 10304,
+    "peakBuys": 2950,
+    "peakSells": 2672,
+    "name": "LARGOAT",
+    "symbol": "LARGOAT",
+    "bornAt": 1786511565000
+  },
+  "6QeoFRMkWrm1bBw92V2Fi9HXRdtZqAcHY7ss6CJQpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 2216.13,
+    "peakBuys": 126,
+    "peakSells": 135,
+    "name": "The Vermeer Shiba",
+    "symbol": "MOMO",
+    "bornAt": 1786511892000
+  },
+  "E9RLC7rhARVodM9sR4ARHUtCRWD2eD5Rj6nt2HFDpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 3938.89,
+    "peakBuys": 775,
+    "peakSells": 710,
+    "name": "SpudCoin",
+    "symbol": "Spud",
+    "bornAt": 1779582142000
+  },
+  "6Dy2MDe4nAw2JKmWCCBXK3MggvFMU9N4LDMKwD9Bpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 7534.91,
+    "peakBuys": 199,
+    "peakSells": 122,
+    "name": "Potato Cat",
+    "symbol": "Pcat",
+    "bornAt": 1786414031000
+  },
+  "J4WbWdjCF38GzhSZqsRVZQGkpk53dTm8YsvyzHfPpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 17759.23,
+    "peakBuys": 1083,
+    "peakSells": 831,
+    "name": "Bobo The Cat",
+    "symbol": "BOBO",
+    "bornAt": 1786508651000
+  },
+  "5U2Jb7hgJzGvnFA7UueWbxotHhdrB2AXuSsireWtpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 9730,
+    "peakBuys": 3754,
+    "peakSells": 2981,
+    "name": "豆助",
+    "symbol": "Mamesuke",
+    "bornAt": 1786510654000
+  },
+  "EXXgpmjkGBk92r2N5BwAahqd3BrqezLcwaujahNVpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 3890,
+    "peakBuys": 2252,
+    "peakSells": 2043,
+    "name": "Burger Queen",
+    "symbol": "NANATTY",
+    "bornAt": 1786509638000
+  },
+  "FYP91ahKYnyUH8ULqhXAcfCp8ZfV5Lc5pcQ7BfTVpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 4773.33,
+    "peakBuys": 598,
+    "peakSells": 579,
+    "name": "Sack Cat ",
+    "symbol": "Sack",
+    "bornAt": 1786495428000
+  },
+  "6qnkWYyRSZwwbVowFACfaNuATMWuCNtY5tAXRcMxpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 20790,
+    "peakBuys": 1323,
+    "peakSells": 907,
+    "name": "smol cat",
+    "symbol": "smol",
+    "bornAt": 1786509088000
+  },
+  "BRyivtyzLgZtrD2FCvfVDjFuQAt6DNhfP3HSA2vApump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 4414,
+    "peakBuys": 1879,
+    "peakSells": 1656,
+    "name": "Devil Frog",
+    "symbol": "Diablo",
+    "bornAt": 1786509961000
+  },
+  "EGkqSQDT7MYJNhf17vR2JZn5pc4sbUDeN2gFCP6Ppump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 142807,
+    "peakBuys": 5979,
+    "peakSells": 3829,
+    "name": "PEACH64",
+    "symbol": "Peach64",
+    "bornAt": 1786507975000
+  },
+  "Cqs2xNRMCSMDpGzRZ5x225kjM9dhcnTFExiu5Hf6pump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 36794,
+    "peakBuys": 8308,
+    "peakSells": 5886,
+    "name": "The Wise Otter",
+    "symbol": "Otter",
+    "bornAt": 1786507060000
+  },
+  "6Nx4HSGYKBqCGvyHUydXnnfLX8tSuCtfxq6tHGvupump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 11209,
+    "peakBuys": 5352,
+    "peakSells": 4590,
+    "name": "The Unconcerned Lion",
+    "symbol": "LION",
+    "bornAt": 1786499193000
+  },
+  "5qHUGTgkRaDrSNGgQg5wQxb5tDrzEW5ewuGpSS3jpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 180065,
+    "peakBuys": 3707,
+    "peakSells": 4904,
+    "name": "Fomo Meow",
+    "symbol": "FOMEOW",
+    "bornAt": 1786482354000
+  },
+  "DAXtNurkMSUYTLZKaCvAC8runUqhd5fWfZy48a4Xpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 8144,
+    "peakBuys": 6459,
+    "peakSells": 5492,
+    "name": "Sergeant Basan",
+    "symbol": "BASAN",
+    "bornAt": 1786504255000
+  },
+  "AvecKFxn8ihToR7gwgAVjfqV56N1rWhN7hv8joXQpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 177091,
+    "peakBuys": 6826,
+    "peakSells": 5686,
+    "name": "Cogecoin",
+    "symbol": "COGE",
+    "bornAt": 1786505209000
+  },
+  "6aZeZ2ZG4b3byeJqw9Eg5NygrdgE2hKgXms6uyhkpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 5734,
+    "peakBuys": 1940,
+    "peakSells": 1493,
+    "name": "Normie Coin",
+    "symbol": "NURMIE",
+    "bornAt": 1786504551000
+  },
+  "GJJgqDxn4Njhht2RCPsATKpoaTycRuqDFTkmr5Xspump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 2674.94,
+    "peakBuys": 1245,
+    "peakSells": 1591,
+    "name": "Frogger",
+    "symbol": "FROGGER",
+    "bornAt": 1786502039000
+  },
+  "CXKPv7Bs4ohuc6pQgrB5YusXVVjxmzcoacsz4x6cpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 16671.29,
+    "peakBuys": 458,
+    "peakSells": 315,
+    "name": "PEACH COIN",
+    "symbol": "PEACH",
+    "bornAt": 1786488952000
+  },
+  "B1Ahew3dZeamHmz3eMjGWScLKmavN4SqM4p1rwnpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 8871791,
+    "peakBuys": 2238,
+    "peakSells": 350,
+    "name": "Transnational Oil Supply",
+    "symbol": "TNOS",
+    "bornAt": 1786499519000
+  },
+  "6HjvVo8yHNR4fLH3E2fXDACPvsc8mAtuuRRJagmQpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 13552,
+    "peakBuys": 2117,
+    "peakSells": 2640,
+    "name": "Layoo",
+    "symbol": "Layoo",
+    "bornAt": 1786488799000
+  },
+  "7xwJQh4jX5pgkLrKCcij4UXcdyXWxDwzeVr65NmKpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 225663,
+    "peakBuys": 4351,
+    "peakSells": 1999,
+    "name": "Callout Coin",
+    "symbol": "CALLOUT",
+    "bornAt": 1786496106000
+  },
+  "Bfe4xjuwH5nQeM3fPQFPr4Ac8gLr9jjcBsD4gtxWpump": {
+    "firstSeen": 1786513600394,
+    "peakFdv": 13783,
+    "peakBuys": 6239,
+    "peakSells": 5501,
+    "name": "pipo",
+    "symbol": "PIPO",
+    "bornAt": 1786496404000
   }
 }
