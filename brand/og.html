@@ -3,73 +3,114 @@
 <head>
 <meta charset="utf-8" />
 <style>
-  /* Kartu preview 1200×630 — muncul saat link dibagikan di X/Telegram/Discord */
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    width: 1200px; height: 630px; overflow: hidden;
-    background: #08090D; position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  body { width: 1200px; height: 630px; overflow: hidden; }
+
+  .card {
+    width: 1200px; height: 630px;
+    background: #08090D;
+    position: relative;
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 0 88px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #E8EAED;
+    overflow: hidden;
   }
+
+  /* kertas grafik monitor, memudar ke bawah */
   .grid {
     position: absolute; inset: 0;
     background-image:
       linear-gradient(#14171D 1px, transparent 1px),
       linear-gradient(90deg, #14171D 1px, transparent 1px);
     background-size: 60px 60px;
-    opacity: 0.55;
-    -webkit-mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, black 25%, transparent 80%);
-    mask-image: radial-gradient(ellipse 110% 90% at 50% 0%, black 25%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 110% 80% at 50% 0%, black 15%, transparent 75%);
   }
+
+  /* cahaya merah di belakang judul */
   .glow {
-    position: absolute; left: 50%; bottom: -220px; width: 900px; height: 440px;
-    transform: translateX(-50%);
-    background: radial-gradient(ellipse, rgba(229,72,77,0.16), transparent 70%);
+    position: absolute; left: 50%; top: -140px;
+    width: 1100px; height: 620px; transform: translateX(-50%);
+    background: radial-gradient(ellipse, rgba(229,72,77,0.13), transparent 62%);
   }
-  .inner {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 34px; text-align: center;
+
+  .inner { position: relative; }
+
+  .top {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 40px;
   }
-  .kicker {
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 21px; letter-spacing: 0.24em; text-transform: uppercase;
-    color: #E5484D;
+  .mark { width: 42px; height: 42px; }
+  .wordmark {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 25px; font-weight: 700; letter-spacing: 0.24em;
   }
+  .pill {
+    margin-left: auto;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #8B919C; border: 1px solid #1C2027; border-radius: 999px;
+    padding: 9px 20px;
+    display: flex; align-items: center; gap: 11px;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #46A758; }
+
   h1 {
-    font-size: 148px; font-weight: 800; letter-spacing: 0.06em;
-    color: #E8EAED; line-height: 1;
+    font-size: 92px; font-weight: 750;
+    letter-spacing: -0.035em; line-height: 0.99;
   }
-  .ekg { width: 700px; }
-  .tag {
-    font-family: Georgia, "Times New Roman", serif; font-style: italic;
-    font-size: 34px; color: #8B919C;
+  h1 .dim { color: #575D68; }
+
+  .sub {
+    margin-top: 34px;
+    font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-style: italic; font-size: 33px; color: #8B919C;
   }
+
   .foot {
-    position: absolute; bottom: 38px; left: 0; right: 0;
-    display: flex; justify-content: center; gap: 40px;
-    font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    font-size: 19px; letter-spacing: 0.1em; color: #575D68;
+    position: absolute; left: 88px; right: 88px; bottom: 54px;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 19px; letter-spacing: 0.1em;
   }
+  .domain { color: #E5484D; }
+  .meta { color: #575D68; text-align: right; line-height: 1.6; }
+
+  /* garis EKG melintang di dasar kartu */
+  .ekg { position: absolute; left: 0; right: 0; bottom: 66px; width: 1200px; }
 </style>
 </head>
 <body>
+<div class="card">
   <div class="grid"></div>
   <div class="glow"></div>
+
+  <svg class="ekg" viewBox="0 0 1200 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 45 L340 45 L360 16 L382 76 L402 45 L470 45 L488 30 L505 45 L1200 45"
+          stroke="#E5484D" stroke-width="2.6" stroke-linecap="round"
+          stroke-linejoin="round" opacity="0.5"/>
+  </svg>
+
   <div class="inner">
-    <div class="kicker">Autonomous undertaker · Solana</div>
-    <h1>HEARSE</h1>
-    <svg class="ekg" viewBox="0 0 700 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 48 L240 48 L275 14 L315 78 L350 33 L380 48 L672 48"
-            stroke="#E5484D" stroke-width="7"
-            stroke-linecap="round" stroke-linejoin="round"/>
-      <circle cx="682" cy="48" r="9" fill="#FF6B6F"/>
-    </svg>
-    <div class="tag">Someone should say a few words.</div>
+    <div class="top">
+      <svg class="mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 14 L8 14 L10 7 L13 18 L15 11 L17 14 L21 14"
+              stroke="#E5484D" stroke-width="2.1"
+              stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="wordmark">HEARSE</span>
+      <span class="pill"><span class="dot"></span> monitoring pump.fun</span>
+    </div>
+
+    <h1>Every token dies.<br /><span class="dim">We take the notes.</span></h1>
+    <p class="sub">Someone should say a few words.</p>
   </div>
+
   <div class="foot">
-    <span>hearsefun.xyz</span>
-    <span>@hearsefun</span>
+    <span class="domain">hearsefun.xyz</span>
+    <span class="meta">AUTONOMOUS UNDERTAKER<br />SOLANA &nbsp;·&nbsp; $HEARSE</span>
   </div>
+</div>
 </body>
 </html>

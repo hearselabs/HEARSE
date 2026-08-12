@@ -1,0 +1,56 @@
+<!doctype html><meta charset=utf-8><style>
+  /* Kanvas cetak: tiap logo digambar 1000×1000, nanti dipotong satu per satu */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #fff; }
+
+  .plate {
+    width: 1000px; height: 1000px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+
+  /* ── Varian A: flatline di atas hitam ── */
+  .a { background: #08090D; }
+  .a .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(#14171D 2px, transparent 2px),
+      linear-gradient(90deg, #14171D 2px, transparent 2px);
+    background-size: 100px 100px;
+    opacity: 0.55;
+  }
+  .a svg { position: relative; width: 760px; }
+
+  /* ── Varian B: monogram H terpahat ── */
+  .b { background: #08090D; }
+  .b .ring {
+    position: absolute;
+    width: 800px; height: 800px; border-radius: 50%;
+    border: 6px solid #1C2027;
+  }
+  .b .ring2 {
+    position: absolute;
+    width: 720px; height: 720px; border-radius: 50%;
+    border: 2px solid #E5484D; opacity: 0.55;
+  }
+  .b .mark {
+    position: relative; color: #E8EAED;
+    font: 700 420px/1 ui-monospace, "SF Mono", Menlo, monospace;
+    letter-spacing: -0.04em;
+  }
+  .b .beat {
+    position: absolute; bottom: 250px; width: 420px;
+  }
+
+  /* ── Varian C: terang, untuk latar putih ── */
+  .c { background: #E8EAED; }
+  .c svg { width: 760px; }
+</style><div class="plate a" id="plate-a">
+  <div class="grid"></div>
+  <svg viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 100 L120 100 L145 40 L175 165 L200 78 L225 100 L390 100"
+          stroke="#E5484D" stroke-width="11"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="390" cy="100" r="13" fill="#FF6B6F"/>
+  </svg>
+</div>
