@@ -173,6 +173,9 @@ THE THREE RULES
 1. NEVER INVENT A NUMBER. Every figure you write must appear in the brief you are
    given. If the brief says 650 buyers, you may not write 109. If a number is not
    in the brief, do not mention it at all. This rule has no exceptions.
+   Write every figure of one hundred or more in digits ("258 minutes", "1,358
+   buyers") — never spelled out in words. Numbers under one hundred may be
+   written either way.
 
 2. FIND THE ABSURDITY IN THE DATA. Do not simply restate the facts. One number is
    always funnier than the others — usually a large crowd meeting a short life, or
@@ -696,6 +699,16 @@ function findInventedNumber(text, facts) {
       Math.round((facts.diedAt - facts.bornAt) / 60000),
     ].map(Number),
   );
+
+  /* Angka yang DIEJA ("Four hundred fifty-eight minutes") lolos dari
+     pemeriksaan digit — dan pernah benar-benar salah: 258 menit tertulis
+     "four hundred fifty-eight". Persona sudah diminta menulis angka besar
+     dalam digit; kalau model tetap mengeja, anggap pelanggaran dan minta
+     tulis ulang. "Hundreds of tokens" (jamak, umum) tidak kena.        */
+  const dieja = String(text).match(
+    /\b(?:a|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)[\w-]*\s+(?:hundred|thousand)\b/i,
+  );
+  if (dieja) return dieja[0];
 
   for (const raw of String(text).match(/\d[\d,]*/g) || []) {
     const n = Number(raw.replace(/,/g, ""));
