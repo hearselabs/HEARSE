@@ -530,6 +530,10 @@ async function main() {
       peakSells: c.entry.peakSells || 0,
       liquidityUsd: c.now.liquidityUsd || 0,
       reason: c.reason,
+      // Jam saat mesin menyatakan kematian. Beberapa token yang dinyatakan
+      // dalam satu rondaan memang berbagi jam yang sama — begitulah cara
+      // pemeriksa bekerja, dan itu jujur.
+      pronouncedAt,
     };
 
     process.stdout.write(`    ⚰  $${facts.symbol} … `);
