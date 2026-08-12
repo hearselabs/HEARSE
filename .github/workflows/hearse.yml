@@ -13,7 +13,9 @@ on:
   schedule:
     # Tiap 2 jam. Sengaja sering: cron GitHub di runner gratis kerap telat
     # atau dilewati saat server sibuk, jadi jadwal yang hilang tidak terasa.
-    - cron: "0 */2 * * *"
+    # Menit 17, bukan 0 — menit 0 adalah menit tersibuk di seluruh GitHub
+    # dan jadwal di menit itu paling sering dikorbankan.
+    - cron: "17 */2 * * *"
   # Tombol "Run workflow" manual di tab Actions — untuk uji coba
   workflow_dispatch:
 

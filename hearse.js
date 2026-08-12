@@ -246,8 +246,11 @@ async function askGroq(facts, attempt, recentCloses = []) {
     `Died: ${clock(facts.diedAt)} UTC`,
     `Lifespan: ${lived}`,
     `Peak valuation seen: $${Math.round(facts.peakFdv).toLocaleString("en-US")}`,
-    `Buyers recorded: ${facts.peakBuys}`,
-    `Sellers recorded: ${facts.peakSells}`,
+    // Dengan pemisah ribuan, supaya model menirunya dan menulis "1,252
+    // buyers", bukan "1252 buyers". Penjaga angka tetap cocok — ia
+    // membuang koma sebelum membandingkan.
+    `Buyers recorded: ${Number(facts.peakBuys).toLocaleString("en-US")}`,
+    `Sellers recorded: ${Number(facts.peakSells).toLocaleString("en-US")}`,
     `Liquidity at death: $${Math.round(facts.liquidityUsd).toLocaleString("en-US")}`,
     `Cause of death: ${facts.reason}`,
   ].join("\n") +
@@ -354,11 +357,27 @@ async function telegramSend(chatId, text) {
   }
 }
 
+/* Baris waktu di bawah nama token.
+   "02:33 — 07:15" saja menyesatkan dua kali: pembaca global tidak tahu
+   itu zona apa, dan untuk token yang hidup lebih dari sehari kedua jam
+   itu jatuh di tanggal berbeda. Tanggal ikut ditulis bila melewati hari. */
+function lifeLine(o) {
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const tgl = (ms) => {
+    const d = new Date(ms);
+    return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}`;
+  };
+  const sehari = tgl(o.bornAt) === tgl(o.diedAt);
+  return sehari
+    ? `${clock(o.bornAt)} — ${clock(o.diedAt)} UTC · ${o.lived}`
+    : `${tgl(o.bornAt)}, ${clock(o.bornAt)} — ${tgl(o.diedAt)}, ${clock(o.diedAt)} UTC · ${o.lived}`;
+}
+
 /** Versi untuk channel Telegram (boleh pakai sedikit format). */
 function formatForTelegram(o) {
   return [
     `<b>$${escapeHtml(o.symbol)}</b>`,
-    `<i>${clock(o.bornAt)} — ${clock(o.diedAt)} · ${o.lived}</i>`,
+    `<i>${lifeLine(o)}</i>`,
     ``,
     escapeHtml(o.body),
     ``,
@@ -368,7 +387,18 @@ function formatForTelegram(o) {
 
 /** Versi untuk kamu salin ke X — polos, tanpa link, tanpa tagar. */
 function formatForX(o) {
-  return `$${o.symbol}\n${clock(o.bornAt)} — ${clock(o.diedAt)} · ${o.lived}\n\n${o.body}\n\n${o.close}`;
+  return `$${o.symbol}\n${lifeLine(o)}\n\n${o.body}\n\n${o.close}`;
+}
+
+/* Beberapa jenazah ditolak rumah duka ini.
+   pump.fun penuh token yang namanya berisi cacian rasial atau sejenisnya.
+   Menuliskan obituarinya berarti channel dan akun X kita yang menyebarkan
+   kata itu — cukup untuk kena tindakan platform, dan mencoreng brand.
+   Bukan penyuntingan register: mereka tidak pernah diterima sejak awal. */
+const REFUSED = [/n+[i1]+g+g/i, /f+a+g+[go]/i, /\bkike\b/i, /chink/i];
+function refused(entryOrNow) {
+  const s = `${entryOrNow.symbol || ""} ${entryOrNow.name || ""}`;
+  return REFUSED.some((re) => re.test(s));
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -423,13 +453,32 @@ async function main() {
       entry.lastAliveAt = Date.now();
     }
 
+    // Jenazah yang ditolak: berhenti dipantau, tidak pernah ditulis.
+    if (refused(entry) || refused(now)) {
+      delete watchlist[addr];
+      continue;
+    }
+
     const v = verdict(entry, now);
     if (v.forget) {
       // Lenyap tanpa pernah terdata. Tidak bisa ditulis, jadi cukup dilupakan.
       delete watchlist[addr];
       continue;
     }
-    if (v.dead) casualties.push({ addr, entry, now, reason: v.reason });
+    if (v.dead) {
+      /* Sudah mati saat PERTAMA KALI kami menemukannya? Jangan dikubur.
+         Kami tidak pernah menyaksikannya hidup, jadi jam kematiannya tidak
+         bisa dipertanggungjawabkan — dan menguburnya sekarang membuat semua
+         kematian bertumpuk di menit yang sama dengan jalannya mesin.
+         Ditandai saja; kalau ternyata masih bernyawa nanti, dia kembali
+         normal, dan kalau tidak, dibuang diam-diam setelah tiga hari. */
+      if (!entry.lastAliveAt) {
+        entry.arrivedDead = true;
+        if (Date.now() - entry.firstSeen > 72 * 3600 * 1000) delete watchlist[addr];
+        continue;
+      }
+      casualties.push({ addr, entry, now, reason: v.reason });
+    }
   }
 
   console.log(`    Terdeteksi meninggal: ${casualties.length}`);

@@ -1,5 +1,47 @@
 [
   {
+    "address": "8meCZHFajeBEV44NQxkZPK9z7jPtRfqsfps7DjgPpump",
+    "symbol": "BLOW",
+    "name": "Blow On This Chart",
+    "bornAt": 1786513062000,
+    "diedAt": 1786531886572,
+    "lived": "5 hours 14 minutes",
+    "peakFdv": 7461,
+    "buyers": 970,
+    "sellers": 785,
+    "reason": "liquidity fell below survivable levels",
+    "body": "Five hours and fourteen minutes were granted to $BLOW, during which time 970 buyers and 785 sellers transacted.",
+    "close": "Expiration was noted at the same moment liquidity did."
+  },
+  {
+    "address": "7RydUhBHnb4Xseqnv65UBgQLJhBkzHagzHJzibV6pump",
+    "symbol": "JEJE",
+    "name": "jeje",
+    "bornAt": 1786525764000,
+    "diedAt": 1786531886123,
+    "lived": "1 hour 42 minutes",
+    "peakFdv": 10520,
+    "buyers": 93,
+    "sellers": 63,
+    "reason": "liquidity fell below survivable levels",
+    "body": "Ninety-three buyers acquired $JEJE during its 1 hour 42 minutes of life, a period marked by a peak valuation of $10,520",
+    "close": "Financial support was withdrawn, leaving no remaining balance"
+  },
+  {
+    "address": "3ZNxtwTn1xgHhWuxXmqjbmqpeVP6xKXkzJWTvjTbpump",
+    "symbol": "Carpenter",
+    "name": "Carpenter",
+    "bornAt": 1786525325000,
+    "diedAt": 1786531885566,
+    "lived": "1 hour 49 minutes",
+    "peakFdv": 14135,
+    "buyers": 1359,
+    "sellers": 870,
+    "reason": "liquidity fell below survivable levels",
+    "body": "One thousand three hundred and fifty-nine buyers participated in $Carpenter's brief existence, which concluded after one hour and forty-nine minutes.",
+    "close": "Duration of ownership was brief for all parties involved."
+  },
+  {
     "address": "6jZprhqMyRSL43rDc4G3bjpESKZS6HHPht6vD2gGpump",
     "symbol": "Gus",
     "name": "The Wobbly Cat",

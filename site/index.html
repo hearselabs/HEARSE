@@ -48,6 +48,10 @@
   body {
     margin: 0;
     background: transparent;
+    /* Pagar terakhir: elemen dekoratif apa pun yang kelewat lebar tidak
+       boleh membuat halaman bisa digeser ke samping. "clip", bukan
+       "hidden" — clip tidak mengubah perilaku scroll dan position:sticky. */
+    overflow-x: clip;
     color: var(--text);
     font-family: var(--sans);
     font-size: 1rem;
@@ -125,7 +129,9 @@
   .hero { padding: 6.5rem 0 0; position: relative; text-align: center; }
   .hero::before {
     content: ""; position: absolute; left: 50%; top: -8rem;
-    width: min(900px, 120vw); height: 560px;
+    /* 100vw, bukan lebih — 120vw dulu membuat halaman bisa digeser
+       39px ke samping di ponsel */
+    width: min(900px, 100vw); height: 560px;
     transform: translateX(-50%);
     background: radial-gradient(ellipse, rgba(229, 72, 77, 0.11), transparent 65%);
     pointer-events: none;
@@ -1397,6 +1403,19 @@ const clock = ms => {
   const d = new Date(ms);
   return String(d.getUTCHours()).padStart(2,"0") + ":" + String(d.getUTCMinutes()).padStart(2,"0");
 };
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const dstamp = ms => {
+  const d = new Date(ms);
+  return MON[d.getUTCMonth()] + " " + d.getUTCDate();
+};
+/* Baris hidup–mati. Sebuah register kematian tanpa tanggal tidak bisa
+   dipercaya, jadi tanggal selalu ikut. Token yang hidup melewati hari
+   mendapat dua tanggal — kalau tidak, "04:12 — 09:30" untuk umur 56 hari
+   terbaca seperti kesalahan. */
+const lifespanLine = o =>
+  dstamp(o.bornAt) === dstamp(o.diedAt)
+    ? `${dstamp(o.diedAt)} · ${clock(o.bornAt)} — ${clock(o.diedAt)} UTC`
+    : `${dstamp(o.bornAt)}, ${clock(o.bornAt)} — ${dstamp(o.diedAt)}, ${clock(o.diedAt)} UTC`;
 const money = n => "$" + Math.round(n).toLocaleString("en-US");
 
 function filtered() {
@@ -1412,7 +1431,7 @@ function obitMeta(o) {
   return `
     <div class="obit-meta">
       <span class="obit-sym">$${esc(o.symbol)}</span>
-      <span class="obit-dates">${clock(o.bornAt)} — ${clock(o.diedAt)} UTC<br />${esc(o.lived)} · ${o.buyers.toLocaleString("en-US")} buyers<br />peak ${money(o.peakFdv)}</span>
+      <span class="obit-dates">${lifespanLine(o)}<br />${esc(o.lived)} · ${o.buyers.toLocaleString("en-US")} buyers<br />peak ${money(o.peakFdv)}</span>
       <span class="obit-tag">deceased</span>
     </div>
     <div class="obit-text">
