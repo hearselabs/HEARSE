@@ -1,9 +1,265 @@
 [
   {
+<<<<<<< Updated upstream
+=======
+    "address": "Gjog4G67BbJZfVhD9M93SEncd47rvbFVcGcuaufpump",
+    "symbol": "BIP",
+    "name": "Bear In Pool",
+    "bornAt": 1786494279000,
+    "diedAt": 1786513930613,
+    "lived": "5 hours 28 minutes",
+    "peakFdv": 12648,
+    "buyers": 3294,
+    "sellers": 2544,
+    "reason": "liquidity fell below survivable levels",
+    "body": "Five hours and twenty-eight minutes were allotted to $BIP, during which it attracted 3294 buyers and reached a valuation of $12,648.",
+    "close": "Its assets have been fully distributed."
+  },
+  {
+    "address": "Ataijhng2bbV2krTtkNxwGHGgBzGEKPtPCuuw8HFpump",
+    "symbol": "AURA",
+    "name": "Farm Aura ",
+    "bornAt": 1786437712000,
+    "diedAt": 1786513929258,
+    "lived": "21 hours 10 minutes",
+    "peakFdv": 13084,
+    "buyers": 372,
+    "sellers": 272,
+    "reason": "liquidity fell below survivable levels",
+    "body": "A crowd of 372 buyers was drawn to $AURA in its brief lifetime, which concluded after 21 hours and 10 minutes",
+    "close": "Its estate has been fully liquidated"
+  },
+  {
+    "address": "BYcg2mDpq5LAysMEoCHgftE2UR9Fqa9fhzPgYARNpump",
+    "symbol": "Epictrader",
+    "name": "Fortnite Player",
+    "bornAt": 1786478227000,
+    "diedAt": 1786513927753,
+    "lived": "9 hours 55 minutes",
+    "peakFdv": 13930,
+    "buyers": 5027,
+    "sellers": 14590,
+    "reason": "liquidity fell below survivable levels",
+    "body": "In nine hours and fifty-five minutes, $Epictrader reached a peak of $13,930 and found 5027 buyers.",
+    "close": "Its brief, shining moment was closely watched by nearly three times as many sellers."
+  },
+  {
+    "address": "4VnaCje2AUzyWUKJDtwmpFjzewE4bx2B6Ha4HgS4pump",
+    "symbol": "BASKET",
+    "name": "Basket",
+    "bornAt": 1786459831000,
+    "diedAt": 1786513925566,
+    "lived": "15 hours 2 minutes",
+    "peakFdv": 13956,
+    "buyers": 2169,
+    "sellers": 1270,
+    "reason": "liquidity fell below survivable levels",
+    "body": "Two thousand one hundred sixty-nine buyers and one thousand two hundred seventy sellers transacted $BASKET during its fifteen hours and two minutes of life.",
+    "close": "The liquidity dried up, as it sometimes does."
+  },
+  {
+    "address": "2aaEFTVJyH6EKkB9h2a9vzspjAwFn8BK2EHM1X6Zpump",
+    "symbol": "MemeChain",
+    "name": "MemeChain",
+    "bornAt": 1786478678000,
+    "diedAt": 1786513910825,
+    "lived": "9 hours 47 minutes",
+    "peakFdv": 14188,
+    "buyers": 560,
+    "sellers": 499,
+    "reason": "liquidity fell below survivable levels",
+    "body": "For nine hours and forty-seven minutes $MemeChain was valued as high as $14,188 by 560 buyers.",
+    "close": "Its demise was a matter of basic arithmetic."
+  },
+  {
+    "address": "CXKPv7Bs4ohuc6pQgrB5YusXVVjxmzcoacsz4x6cpump",
+    "symbol": "PEACH",
+    "name": "PEACH COIN",
+    "bornAt": 1786488952000,
+    "diedAt": 1786513909281,
+    "lived": "6 hours 56 minutes",
+    "peakFdv": 15867,
+    "buyers": 458,
+    "sellers": 317,
+    "reason": "liquidity fell below survivable levels",
+    "body": "In the span of six hours and fifty-six minutes, $PEACH COIN attracted 458 buyers and reached a peak valuation of $15,867.",
+    "close": "Its estate has been settled in full."
+  },
+  {
+    "address": "6Lc4HdkoJCQqU7hoV1vKHsgwSWFyoHHr84pfpbCrpump",
+    "symbol": "Trenchcat",
+    "name": "Trenchcat",
+    "bornAt": 1786442269000,
+    "diedAt": 1786513907770,
+    "lived": "19 hours 54 minutes",
+    "peakFdv": 18548,
+    "buyers": 1266,
+    "sellers": 1132,
+    "reason": "liquidity removed entirely",
+    "body": "For nineteen hours and fifty-four minutes $Trenchcat attracted 1266 buyers, ultimately reaching a peak valuation of $18,548.",
+    "close": "Its deployer has chosen to end its life with the liquidity it began with."
+  },
+  {
+    "address": "EwnWAmWfirvowCVaFsCFUgjdH5kbWZN8hsHvDSmHpump",
+    "symbol": "Vulture",
+    "name": "The Foreshadowing Vulture",
+    "bornAt": 1786478312000,
+    "diedAt": 1786513905380,
+    "lived": "9 hours 53 minutes",
+    "peakFdv": 44539,
+    "buyers": 1307,
+    "sellers": 1211,
+    "reason": "liquidity removed entirely",
+    "body": "One thousand three hundred and seven buyers and one thousand two hundred and eleven sellers transacted $Vulture in its brief life of nine hours and fifty-three minutes.",
+    "close": "Its valuation was entirely depleted in less time than a standard workday."
+  },
+  {
+    "address": "GGUYeTuG4KX4gneFR7CVYRuv2fTzrtvZdpNmPE1Ypump",
+    "symbol": "BEETLE",
+    "name": "The Horny Beetle ",
+    "bornAt": 1786417662000,
+    "diedAt": 1786513890202,
+    "lived": "26 hours 44 minutes",
+    "peakFdv": 15986,
+    "buyers": 1101,
+    "sellers": 856,
+    "reason": "liquidity removed entirely",
+    "body": "For twenty-six hours and forty-four minutes $BEETLE attracted 1101 buyers and reached $15,986, a valuation that will be remembered by all who participated.",
+    "close": "Its legacy will be maintained by the remaining balance."
+  },
+  {
+    "address": "JLsJo64ou3YRzvdHmMkq2WN9RSAHSxUKVy4UuSapump",
+    "symbol": "catana",
+    "name": "catana",
+    "bornAt": 1786350741000,
+    "diedAt": 1786513888790,
+    "lived": "45 hours 19 minutes",
+    "peakFdv": 17427,
+    "buyers": 1703,
+    "sellers": 1707,
+    "reason": "liquidity removed entirely",
+    "body": "In forty-five hours and nineteen minutes, $catana attracted 1703 buyers and reached a peak valuation of $17,427.",
+    "close": "It outlived its own liquidity by less than a minute."
+  },
+  {
+    "address": "8mvjPTJ7WDm4NHUTLMRnLHtPDjoMifogTLJVxkLfpump",
+    "symbol": "HOOD",
+    "name": "DogWifHood",
+    "bornAt": 1786463002000,
+    "diedAt": 1786513887334,
+    "lived": "14 hours 8 minutes",
+    "peakFdv": 27494,
+    "buyers": 370,
+    "sellers": 310,
+    "reason": "liquidity removed entirely",
+    "body": "370 buyers and 310 sellers transacted $HOOD during its fourteen hours and eight minutes of life, a period marked by a peak valuation of $27,494",
+    "close": "Its market history is now a closed ledger"
+  },
+  {
+    "address": "4gPxR34K32TRW6pZ6qSy6SuSS6rWmKBi15M2Z6bfpump",
+    "symbol": "Vivian",
+    "name": "Vivian musk",
+    "bornAt": 1786478999000,
+    "diedAt": 1786513885220,
+    "lived": "9 hours 41 minutes",
+    "peakFdv": 57111,
+    "buyers": 428,
+    "sellers": 440,
+    "reason": "liquidity removed entirely",
+    "body": "A crowd of 428 buyers and 440 sellers witnessed the brief life of $Vivian, which reached a peak valuation of $57,111.",
+    "close": "Its deployer has chosen not to comment on the nine hours and forty-one minutes it took to arrive at this outcome."
+  },
+  {
+    "address": "14VK8zXbVPM5H7NdA7j4kAa6Wef6YhbHRH5eBk5zpump",
+    "symbol": "gold",
+    "name": "gold flywheel",
+    "bornAt": 1786416764000,
+    "diedAt": 1786513870511,
+    "lived": "26 hours 58 minutes",
+    "peakFdv": 18300,
+    "buyers": 673,
+    "sellers": 660,
+    "reason": "liquidity removed entirely",
+    "body": "Six hundred and seventy-three buyers and six hundred and sixty sellers participated in $gold over nearly twenty-seven hours. The token peaked at $18,300.",
+    "close": "The estate has been settled in its entirety."
+  },
+  {
+    "address": "9uST9ZT7o3fPwKVdNy9uhKxz1jZpUrnJy4QYyyQspump",
+    "symbol": "LMA",
+    "name": "LUMINA",
+    "bornAt": 1784804432000,
+    "diedAt": 1786513869026,
+    "lived": "474 hours 51 minutes",
+    "peakFdv": 18797,
+    "buyers": 6,
+    "sellers": 1,
+    "reason": "liquidity removed entirely",
+    "body": "Six people participated in the brief life of $LMA, which reached a valuation of $18,797 in its nearly eighteen days of existence.",
+    "close": "It outlived the interest of its buyers."
+  },
+  {
+    "address": "BcygeEfTGeY8rXJ91i8GsM1nWgezsjMWrjqfgYd7pump",
+    "symbol": "DUDAS",
+    "name": "Dudas the Goat",
+    "bornAt": 1786443621000,
+    "diedAt": 1786513867512,
+    "lived": "19 hours 31 minutes",
+    "peakFdv": 18918,
+    "buyers": 775,
+    "sellers": 619,
+    "reason": "liquidity removed entirely",
+    "body": "For nineteen hours and thirty-one minutes $DUDAS walked among us, peaking at $18,918 with 775 buyers",
+    "close": "Liquidity was its sole means of support"
+  },
+  {
+    "address": "J4WbWdjCF38GzhSZqsRVZQGkpk53dTm8YsvyzHfPpump",
+    "symbol": "BOBO",
+    "name": "Bobo The Cat",
+    "bornAt": 1786508651000,
+    "diedAt": 1786513865255,
+    "lived": "1 hour 27 minutes",
+    "peakFdv": 20477,
+    "buyers": 1140,
+    "sellers": 867,
+    "reason": "liquidity fell below survivable levels",
+    "body": "One thousand one hundred forty people bought $BOBO in its seventy-seven minutes of viability.",
+    "close": "Its deployer has scheduled no memorial service."
+  },
+  {
+    "address": "259KArDPebq3aHNHzotp5VNAcFCQigmeGz9yE6gopump",
+    "symbol": "EGO",
+    "name": "The Male Ego",
+    "bornAt": 1786513598000,
+    "diedAt": 1786513849360,
+    "lived": "4 minutes",
+    "peakFdv": 20011,
+    "buyers": 210,
+    "sellers": 170,
+    "reason": "liquidity removed entirely",
+    "body": "For four minutes, $EGO swelled to $20,011, attracting 210 buyers.",
+    "close": "Its demise was entirely consistent with its nature."
+  },
+  {
+    "address": "6qnkWYyRSZwwbVowFACfaNuATMWuCNtY5tAXRcMxpump",
+    "symbol": "smol",
+    "name": "smol cat",
+    "bornAt": 1786509088000,
+    "diedAt": 1786513847832,
+    "lived": "1 hour 19 minutes",
+    "peakFdv": 21602,
+    "buyers": 1359,
+    "sellers": 943,
+    "reason": "liquidity fell below survivable levels",
+    "body": "For one hour and nineteen minutes, $smol captivated 1359 buyers with a peak valuation of $21,602.",
+    "close": "The deployer has requested a simple headstone."
+  },
+  {
+>>>>>>> Stashed changes
     "address": "CDbxPfEgw3TwBPmdKDSmXoae1TNtByL1J79FCYmdpump",
     "symbol": "FORTNITEKID",
     "name": "Fortnite Kid",
     "bornAt": 1786495853000,
+<<<<<<< Updated upstream
     "diedAt": 1786513606557,
     "lived": "4 hours 56 minutes",
     "peakFdv": 21298,
@@ -12,12 +268,51 @@
     "reason": "liquidity fell below survivable levels",
     "body": "One thousand seven hundred sixty-eight people purchased $FORTNITEKID during its brief existence, which spanned nearly five hours.",
     "close": "The ledger has been reconciled, with a deficit."
+=======
+    "diedAt": 1786513846395,
+    "lived": "5 hours",
+    "peakFdv": 23348,
+    "buyers": 1783,
+    "sellers": 1062,
+    "reason": "liquidity fell below survivable levels",
+    "body": "For five hours $FORTNITEKID drew the attention of 1783 buyers, reaching a valuation of $23,348.",
+    "close": "Its financial backing was exhausted by sunrise."
+  },
+  {
+    "address": "Ey1v44xiUVdF9bxyTbb5kLsbNviaCrpCDaeY6LA6pump",
+    "symbol": "CapyDuck",
+    "name": "Capybara Duck",
+    "bornAt": 1786354691000,
+    "diedAt": 1786513843744,
+    "lived": "44 hours 13 minutes",
+    "peakFdv": 129591,
+    "buyers": 12640,
+    "sellers": 10175,
+    "reason": "liquidity removed entirely",
+    "body": "Over forty-four hours, 12,640 people invested in $CapyDuck and it reached $129,591.",
+    "close": "Its entire existence was a prelude to a single administrative action."
+  },
+  {
+    "address": "G4DnBgvyBnusyrisSr9kN6y5YnK3DEEY7TfYbTb5pump",
+    "symbol": "Bieber",
+    "name": "Bieber the Hamster",
+    "bornAt": 1786256408000,
+    "diedAt": 1786513780671,
+    "lived": "71 hours 30 minutes",
+    "peakFdv": 24434,
+    "buyers": 430,
+    "sellers": 274,
+    "reason": "liquidity fell below survivable levels",
+    "body": "For 71 hours and 30 minutes, $Bieber brought value to 430 buyers, peaking at $24,434.",
+    "close": "Its estate has been settled with no remaining balance."
+>>>>>>> Stashed changes
   },
   {
     "address": "5H181sJFmPAsLs7hdTRqWp7WsDdc2k2Sb5bWANhhpump",
     "symbol": "Plunger",
     "name": "The Plunger",
     "bornAt": 1786502350000,
+<<<<<<< Updated upstream
     "diedAt": 1786513605555,
     "lived": "3 hours 8 minutes",
     "peakFdv": 22338,
@@ -26,34 +321,64 @@
     "reason": "liquidity fell below survivable levels",
     "body": "For three hours and eight minutes, $Plunger defied gravity with a peak valuation of $22,338 and 833 buyers.",
     "close": "Its descent was swifter than its ascent."
+=======
+    "diedAt": 1786513778575,
+    "lived": "3 hours 10 minutes",
+    "peakFdv": 27142,
+    "buyers": 855,
+    "sellers": 608,
+    "reason": "liquidity fell below survivable levels",
+    "body": "For three hours and ten minutes, $Plunger attracted 855 buyers and reached a peak valuation of $27,142.",
+    "close": "Its financial backing was exhausted in the end."
+>>>>>>> Stashed changes
   },
   {
     "address": "8Bq4XvNTgGTjkZxtU9hsxPnVabtJsKJ7bj2Cq1r1pump",
     "symbol": "MACI",
     "name": "Maci The Cat",
     "bornAt": 1786358476000,
+<<<<<<< Updated upstream
     "diedAt": 1786513604388,
     "lived": "43 hours 5 minutes",
+=======
+    "diedAt": 1786513777111,
+    "lived": "43 hours 8 minutes",
+>>>>>>> Stashed changes
     "peakFdv": 90922,
     "buyers": 14701,
     "sellers": 3686,
     "reason": "liquidity removed entirely",
+<<<<<<< Updated upstream
     "body": "Forty-three hours and five minutes were granted to $MACI, a span in which it attracted 14701 buyers and reached a valuation of $90,922.",
     "close": "Its estate is now in administration."
+=======
+    "body": "Forty-three hours and eight minutes were granted to $MACI, in which time 14701 buyers discovered it and 3686 sellers divested themselves of it.",
+    "close": "The estate has been settled in an orderly fashion."
+>>>>>>> Stashed changes
   },
   {
     "address": "BZ9kBdCovUv5g7krWdwytNV7StLVabYTBro4DSbBpump",
     "symbol": "ZEUS",
     "name": "Pepes Dog",
     "bornAt": 1786364153000,
+<<<<<<< Updated upstream
     "diedAt": 1786513602876,
     "lived": "41 hours 31 minutes",
+=======
+    "diedAt": 1786513774843,
+    "lived": "41 hours 34 minutes",
+>>>>>>> Stashed changes
     "peakFdv": 364182,
     "buyers": 28615,
     "sellers": 24159,
     "reason": "liquidity removed entirely",
+<<<<<<< Updated upstream
     "body": "Passed at 05:46, 41 hours 31 minutes after arriving. Recorded 28615 buyers and 24159 sellers in its short life. Cause of death: liquidity removed entirely.",
     "close": "The register is updated. The plot is filled."
+=======
+    "body": "In a lifespan that spanned 41 hours and 34 minutes, $ZEUS reached a valuation of $364,182 and was purchased by 28,615 individuals",
+    "close": "It outlived its liquidity by zero minutes"
+>>>>>>> Stashed changes
   },
   {
     "address": "6eMeeTcQE8q7Ad1143GaAiNMKGHb29mNu581vPQqpump",

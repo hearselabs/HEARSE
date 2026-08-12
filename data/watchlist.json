@@ -28,21 +28,18 @@
   },
   "7V6Sk63y8Rr1MvcN5mYNp61wgFhy4EeQg5gUASk9pump": {
     "firstSeen": 1786366776702,
+<<<<<<< Updated upstream
     "peakFdv": 644542,
     "peakBuys": 10000,
     "peakSells": 7180,
+=======
+    "peakFdv": 650557,
+    "peakBuys": 10003,
+    "peakSells": 7182,
+>>>>>>> Stashed changes
     "name": "Hyper Bull",
     "symbol": "HBULL",
     "bornAt": 1783992332000
-  },
-  "Ey1v44xiUVdF9bxyTbb5kLsbNviaCrpCDaeY6LA6pump": {
-    "firstSeen": 1786366776702,
-    "peakFdv": 129591,
-    "peakBuys": 12640,
-    "peakSells": 10175,
-    "name": "Capybara Duck",
-    "symbol": "CapyDuck",
-    "bornAt": 1786354691000
   },
   "EKppz9JRQDVLhye12yc4T4P9ue7N6A4vVEB4uyvxpump": {
     "firstSeen": 1786366776702,
@@ -82,9 +79,15 @@
   },
   "AA3VLt3muGJiXedDaMnkcst3pfjrg1JBxgHVSdSbpump": {
     "firstSeen": 1786366776702,
+<<<<<<< Updated upstream
     "peakFdv": 212081,
     "peakBuys": 2735,
     "peakSells": 2981,
+=======
+    "peakFdv": 206432,
+    "peakBuys": 2726,
+    "peakSells": 2980,
+>>>>>>> Stashed changes
     "name": "The Pygmy Hippo",
     "symbol": "TINYTANK",
     "bornAt": 1786018983000
@@ -278,15 +281,6 @@
     "symbol": "TIP",
     "bornAt": 1786364400000
   },
-  "14VK8zXbVPM5H7NdA7j4kAa6Wef6YhbHRH5eBk5zpump": {
-    "firstSeen": 1786417514949,
-    "peakFdv": 18300.38,
-    "peakBuys": 673,
-    "peakSells": 660,
-    "name": "gold flywheel",
-    "symbol": "gold",
-    "bornAt": 1786416764000
-  },
   "62nFWYu16ApPXbLG1Yqf71SucqmPTa97WDFP7s8Gpump": {
     "firstSeen": 1786417514949,
     "peakFdv": 12374.52,
@@ -461,8 +455,13 @@
   "CrJPSvj625TnPdWS42aG5ybMcHeFvnNqq5AExVespump": {
     "firstSeen": 1786417514949,
     "peakFdv": 1446730,
+<<<<<<< Updated upstream
     "peakBuys": 8831,
     "peakSells": 7804,
+=======
+    "peakBuys": 8837,
+    "peakSells": 7797,
+>>>>>>> Stashed changes
     "name": "モモ太",
     "symbol": "Momota",
     "bornAt": 1776086278000
@@ -514,7 +513,11 @@
   },
   "5deTwcca6TKzDR6WcFGypRnP4RaiPa3zZFiayo9Bpump": {
     "firstSeen": 1786417514949,
+<<<<<<< Updated upstream
     "peakFdv": 55796,
+=======
+    "peakFdv": 56216,
+>>>>>>> Stashed changes
     "peakBuys": 49,
     "peakSells": 16,
     "name": "KING TATE",
@@ -559,22 +562,33 @@
   },
   "opUSE74FpJeogzingvaJEoqaghbyd2aC164V4snpump": {
     "firstSeen": 1786441900372,
+<<<<<<< Updated upstream
     "peakFdv": 59040,
     "peakBuys": 6664,
     "peakSells": 5836,
+=======
+    "peakFdv": 59515,
+    "peakBuys": 6674,
+    "peakSells": 5850,
+>>>>>>> Stashed changes
     "name": "The NightTrader",
     "symbol": "NightTrader",
     "bornAt": 1786441207000
   },
   "CX2v7JSHJQDcNooubzzvZG8TPaDwbaPgfzcXRSWJpump": {
     "firstSeen": 1786441900372,
+<<<<<<< Updated upstream
     "peakFdv": 1328734,
+=======
+    "peakFdv": 1355264,
+>>>>>>> Stashed changes
     "peakBuys": 14086,
     "peakSells": 11774,
     "name": "Mario64",
     "symbol": "MARIO64",
     "bornAt": 1786448935000
   },
+<<<<<<< Updated upstream
   "Ataijhng2bbV2krTtkNxwGHGgBzGEKPtPCuuw8HFpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 13084.49,
@@ -589,6 +603,13 @@
     "peakFdv": 286113,
     "peakBuys": 25690,
     "peakSells": 35836,
+=======
+  "488SaFq6wHF2z2k6NLSD3PtoSkXDNZaPkJwxze11pump": {
+    "firstSeen": 1786441900372,
+    "peakFdv": 286113,
+    "peakBuys": 25708,
+    "peakSells": 35850,
+>>>>>>> Stashed changes
     "name": "MomoCoin",
     "symbol": "MOMO",
     "bornAt": 1786435356000
@@ -601,15 +622,6 @@
     "name": "/dogsay",
     "symbol": "dogsay",
     "bornAt": 1786438455000
-  },
-  "GGUYeTuG4KX4gneFR7CVYRuv2fTzrtvZdpNmPE1Ypump": {
-    "firstSeen": 1786441900372,
-    "peakFdv": 15985.8,
-    "peakBuys": 1101,
-    "peakSells": 856,
-    "name": "The Horny Beetle ",
-    "symbol": "BEETLE",
-    "bornAt": 1786417662000
   },
   "FatAU9fABpPguoAdQtKB2eNFx4SXBiPqY9oLGYrTpump": {
     "firstSeen": 1786441900372,
@@ -651,7 +663,11 @@
     "firstSeen": 1786441900372,
     "peakFdv": 63278,
     "peakBuys": 8675,
+<<<<<<< Updated upstream
     "peakSells": 7518,
+=======
+    "peakSells": 7524,
+>>>>>>> Stashed changes
     "name": "Troot",
     "symbol": "Troot",
     "bornAt": 1786435493000
@@ -660,7 +676,11 @@
     "firstSeen": 1786441900372,
     "peakFdv": 11137,
     "peakBuys": 7225,
+<<<<<<< Updated upstream
     "peakSells": 6181,
+=======
+    "peakSells": 6182,
+>>>>>>> Stashed changes
     "name": "sami-openlife",
     "symbol": "sami",
     "bornAt": 1786429184000
@@ -668,8 +688,13 @@
   "6tfuqqJXL54BAyTHimbJeVvTWphW2Hhjb9Rd6pg9pump": {
     "firstSeen": 1786441900372,
     "peakFdv": 70051,
+<<<<<<< Updated upstream
     "peakBuys": 24391,
     "peakSells": 25872,
+=======
+    "peakBuys": 24398,
+    "peakSells": 25887,
+>>>>>>> Stashed changes
     "name": "Dogettecoin",
     "symbol": "DOGETTE",
     "bornAt": 1786434810000
@@ -678,7 +703,11 @@
     "firstSeen": 1786441900372,
     "peakFdv": 2259.5,
     "peakBuys": 974,
+<<<<<<< Updated upstream
     "peakSells": 940,
+=======
+    "peakSells": 941,
+>>>>>>> Stashed changes
     "name": "yn",
     "symbol": "yn",
     "bornAt": 1786434185000
@@ -686,20 +715,16 @@
   "C6ASDsxzqBvF5bCQFVAGMRWwfgZNhfozbb9DkgiKpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 1352489,
+<<<<<<< Updated upstream
     "peakBuys": 33300,
     "peakSells": 29813,
+=======
+    "peakBuys": 33402,
+    "peakSells": 29921,
+>>>>>>> Stashed changes
     "name": "Orange Coin",
     "symbol": "ORANGE",
     "bornAt": 1786434302000
-  },
-  "BcygeEfTGeY8rXJ91i8GsM1nWgezsjMWrjqfgYd7pump": {
-    "firstSeen": 1786441900372,
-    "peakFdv": 18917.64,
-    "peakBuys": 775,
-    "peakSells": 619,
-    "name": "Dudas the Goat",
-    "symbol": "DUDAS",
-    "bornAt": 1786443621000
   },
   "LRmWAJf3J1LHDAWngBaS5LH2YAfiQJZ13dkddZzpump": {
     "firstSeen": 1786441900372,
@@ -710,6 +735,7 @@
     "symbol": "CATLAS",
     "bornAt": 1786431185000
   },
+<<<<<<< Updated upstream
   "8mvjPTJ7WDm4NHUTLMRnLHtPDjoMifogTLJVxkLfpump": {
     "firstSeen": 1786441900372,
     "peakFdv": 27494.1,
@@ -737,6 +763,8 @@
     "symbol": "LMA",
     "bornAt": 1784804432000
   },
+=======
+>>>>>>> Stashed changes
   "2Q2WLEsBLssmEYET8syEuTV999k8Bv5wcftwYb8upump": {
     "firstSeen": 1786441900372,
     "peakFdv": 2170.47,
@@ -750,7 +778,11 @@
     "firstSeen": 1786441900372,
     "peakFdv": 5558,
     "peakBuys": 1753,
+<<<<<<< Updated upstream
     "peakSells": 1656,
+=======
+    "peakSells": 1657,
+>>>>>>> Stashed changes
     "name": "Nestlé",
     "symbol": "NESTLE",
     "bornAt": 1786430764000
@@ -812,8 +844,8 @@
   "EzpVAbq3FRZKbqehcHzaLGgJd3UhDZJTkL6iUofkpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 8202.83,
-    "peakBuys": 1003,
-    "peakSells": 840,
+    "peakBuys": 1006,
+    "peakSells": 856,
     "name": "Mario 64",
     "symbol": "Mario64",
     "bornAt": 1786461634000
@@ -821,8 +853,8 @@
   "DRjC7BpbHsNCvKMTNT2ttd2TegTGM1fcFNJTu8Dnpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 8097.55,
-    "peakBuys": 2445,
-    "peakSells": 1752,
+    "peakBuys": 2484,
+    "peakSells": 1802,
     "name": "Memes Street",
     "symbol": "MemesSt",
     "bornAt": 1786461040000
@@ -857,17 +889,23 @@
   "3pinpNVKUkh5rPXqKqUiv1hceb9NLoDJU6xNJiwmpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 11171,
-    "peakBuys": 3334,
-    "peakSells": 3195,
+    "peakBuys": 3467,
+    "peakSells": 3308,
     "name": "bolds",
     "symbol": "BOLDS",
     "bornAt": 1786441688000
   },
   "6WMszYPHAxEFgstkEpyRRwzaVtA9eM5pWvSf8v7qpump": {
     "firstSeen": 1786462238668,
+<<<<<<< Updated upstream
     "peakFdv": 54149,
     "peakBuys": 4266,
     "peakSells": 2629,
+=======
+    "peakFdv": 56070,
+    "peakBuys": 4284,
+    "peakSells": 2634,
+>>>>>>> Stashed changes
     "name": "Just a Toad Guy",
     "symbol": "TOADGUY",
     "bornAt": 1786459780000
@@ -881,6 +919,7 @@
     "symbol": "COINTEXT",
     "bornAt": 1786460145000
   },
+<<<<<<< Updated upstream
   "4VnaCje2AUzyWUKJDtwmpFjzewE4bx2B6Ha4HgS4pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 13956.13,
@@ -894,6 +933,12 @@
     "firstSeen": 1786462238668,
     "peakFdv": 10304.28,
     "peakBuys": 1368,
+=======
+  "5RXiSWdZKBqjHNDNYwhJ9dSRZny8NwPWRo9HTQG7pump": {
+    "firstSeen": 1786462238668,
+    "peakFdv": 10304.28,
+    "peakBuys": 1369,
+>>>>>>> Stashed changes
     "peakSells": 1202,
     "name": "The Webchemist",
     "symbol": "VEGA",
@@ -901,7 +946,11 @@
   },
   "GCa9TZMK9Q3VUSkhZgX76YAQBjqQd1dPxkBnZojFpump": {
     "firstSeen": 1786462238668,
+<<<<<<< Updated upstream
     "peakFdv": 3263285,
+=======
+    "peakFdv": 3263713,
+>>>>>>> Stashed changes
     "peakBuys": 11060,
     "peakSells": 9193,
     "name": "Plumber",
@@ -929,8 +978,13 @@
   "AMMFxAYHAQdgG3bzxTERoRh7oHx29uMWaGXeRi1Epump": {
     "firstSeen": 1786462238668,
     "peakFdv": 5760.33,
+<<<<<<< Updated upstream
     "peakBuys": 787,
     "peakSells": 690,
+=======
+    "peakBuys": 790,
+    "peakSells": 692,
+>>>>>>> Stashed changes
     "name": "なのちゃん",
     "symbol": "shrimpcat",
     "bornAt": 1786458255000
@@ -939,7 +993,11 @@
     "firstSeen": 1786462238668,
     "peakFdv": 25978,
     "peakBuys": 6858,
+<<<<<<< Updated upstream
     "peakSells": 5835,
+=======
+    "peakSells": 5836,
+>>>>>>> Stashed changes
     "name": "Pump Stonk",
     "symbol": "PSTONK",
     "bornAt": 1786462041000
@@ -947,8 +1005,13 @@
   "tSEakxwRz3Y3BpjDttokygCgScgLnui19NJGrR4pump": {
     "firstSeen": 1786462238668,
     "peakFdv": 194766,
+<<<<<<< Updated upstream
     "peakBuys": 27281,
     "peakSells": 22256,
+=======
+    "peakBuys": 27284,
+    "peakSells": 22257,
+>>>>>>> Stashed changes
     "name": "Hellcat",
     "symbol": "Lucifer",
     "bornAt": 1786457309000
@@ -966,7 +1029,11 @@
     "firstSeen": 1786462238668,
     "peakFdv": 6602.74,
     "peakBuys": 114,
+<<<<<<< Updated upstream
     "peakSells": 76,
+=======
+    "peakSells": 77,
+>>>>>>> Stashed changes
     "name": "KittyMum",
     "symbol": "$Mum",
     "bornAt": 1764350186000
@@ -991,9 +1058,15 @@
   },
   "4je81UzH57Z1CoshknjeeidXv9qfL4tiUs4kn7d5pump": {
     "firstSeen": 1786462238668,
+<<<<<<< Updated upstream
     "peakFdv": 457865,
     "peakBuys": 10783,
     "peakSells": 14546,
+=======
+    "peakFdv": 469439,
+    "peakBuys": 10828,
+    "peakSells": 14611,
+>>>>>>> Stashed changes
     "name": "Unstable FOMO",
     "symbol": "USDUF",
     "bornAt": 1786440437000
@@ -1011,7 +1084,11 @@
     "firstSeen": 1786462238668,
     "peakFdv": 104356,
     "peakBuys": 860,
+<<<<<<< Updated upstream
     "peakSells": 661,
+=======
+    "peakSells": 668,
+>>>>>>> Stashed changes
     "name": "Cog",
     "symbol": "Cog",
     "bornAt": 1785021413000
@@ -1019,7 +1096,11 @@
   "GrY5ayYtca1Lq4j3q4hc4aMpE6tNavsRxDVcsXybpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 635450,
+<<<<<<< Updated upstream
     "peakBuys": 2237,
+=======
+    "peakBuys": 2236,
+>>>>>>> Stashed changes
     "peakSells": 2187,
     "name": "GreenEpicOnchainFomoFuel",
     "symbol": "GEOFF ",
@@ -1043,15 +1124,6 @@
     "symbol": "Baby Toad",
     "bornAt": 1786429510000
   },
-  "JLsJo64ou3YRzvdHmMkq2WN9RSAHSxUKVy4UuSapump": {
-    "firstSeen": 1786462238668,
-    "peakFdv": 17427,
-    "peakBuys": 1703,
-    "peakSells": 1707,
-    "name": "catana",
-    "symbol": "catana",
-    "bornAt": 1786350741000
-  },
   "m94xKoti5CFhiTpcUL36iSd1o7zLpBBkFpgjp5bpump": {
     "firstSeen": 1786462238668,
     "peakFdv": 2147.69,
@@ -1063,9 +1135,15 @@
   },
   "BoBQZP9YgCRqVqkaBHuxL4xizKHgTFs8n3rRaXaWpump": {
     "firstSeen": 1786462238668,
+<<<<<<< Updated upstream
     "peakFdv": 89931,
     "peakBuys": 7216,
     "peakSells": 6763,
+=======
+    "peakFdv": 102386,
+    "peakBuys": 7232,
+    "peakSells": 6774,
+>>>>>>> Stashed changes
     "name": "Melkiy",
     "symbol": "Splash Dog",
     "bornAt": 1786446990000
@@ -1110,7 +1188,11 @@
     "firstSeen": 1786462238668,
     "peakFdv": 5386,
     "peakBuys": 6451,
+<<<<<<< Updated upstream
     "peakSells": 5538,
+=======
+    "peakSells": 5539,
+>>>>>>> Stashed changes
     "name": "MomoCoin",
     "symbol": "MOMO",
     "bornAt": 1786439195000
@@ -1119,11 +1201,16 @@
     "firstSeen": 1786479744892,
     "peakFdv": 4437.72,
     "peakBuys": 670,
+<<<<<<< Updated upstream
     "peakSells": 676,
+=======
+    "peakSells": 677,
+>>>>>>> Stashed changes
     "name": "20000 Emu's Vs. 1 Moose",
     "symbol": "EVM",
     "bornAt": 1786479410000
   },
+<<<<<<< Updated upstream
   "4gPxR34K32TRW6pZ6qSy6SuSS6rWmKBi15M2Z6bfpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 57111,
@@ -1160,6 +1247,8 @@
     "symbol": "Epictrader",
     "bornAt": 1786478227000
   },
+=======
+>>>>>>> Stashed changes
   "4ptrUgj8J98SmbDndjmF8wH2yWvC8juBk89bWSNVpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 2240,
@@ -1191,7 +1280,11 @@
     "firstSeen": 1786479744892,
     "peakFdv": 3485,
     "peakBuys": 4903,
+<<<<<<< Updated upstream
     "peakSells": 4520,
+=======
+    "peakSells": 4522,
+>>>>>>> Stashed changes
     "name": "call out or he dies",
     "symbol": "callout",
     "bornAt": 1786477641000
@@ -1227,7 +1320,11 @@
     "firstSeen": 1786479744892,
     "peakFdv": 22352,
     "peakBuys": 1979,
+<<<<<<< Updated upstream
     "peakSells": 1729,
+=======
+    "peakSells": 1730,
+>>>>>>> Stashed changes
     "name": "Shillpigs",
     "symbol": "SHILLPIG",
     "bornAt": 1786239824000
@@ -1289,8 +1386,13 @@
   "DDqRBZQS8TtwdGtCfr8UinByTtWFeaUiRiY1tJwJpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 94213,
+<<<<<<< Updated upstream
     "peakBuys": 10065,
     "peakSells": 2838,
+=======
+    "peakBuys": 10093,
+    "peakSells": 2854,
+>>>>>>> Stashed changes
     "name": "bearwifcone",
     "symbol": "bearwif",
     "bornAt": 1786470973000
@@ -1307,8 +1409,13 @@
   "4QVa33qdXiFe3L3krfSGFaiQEfFUQsWpebJN2CPxpump": {
     "firstSeen": 1786479744892,
     "peakFdv": 166151,
+<<<<<<< Updated upstream
     "peakBuys": 6683,
     "peakSells": 4713,
+=======
+    "peakBuys": 6699,
+    "peakSells": 4722,
+>>>>>>> Stashed changes
     "name": "GIGA TOAD PEPE",
     "symbol": "GIGATOAD",
     "bornAt": 1786469757000
@@ -1362,20 +1469,42 @@
     "firstSeen": 1786479744892,
     "peakFdv": 5503,
     "peakBuys": 10404,
+<<<<<<< Updated upstream
     "peakSells": 9957,
+=======
+    "peakSells": 9958,
+>>>>>>> Stashed changes
     "name": "Take a chance",
     "symbol": "chance",
     "bornAt": 1786461746000
   },
+<<<<<<< Updated upstream
   "8LkH4DDkVRpoZYYYWBi5KGmqkCeR9GRs4aSEFT4qpump": {
     "firstSeen": 1786513600394,
     "peakFdv": 62296,
     "peakBuys": 2880,
     "peakSells": 2556,
+=======
+  "Dx194XFwRgm1wZSQfe8FANs9x9jfLayK4Y8mN1GSpump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 172646,
+    "peakBuys": 2154,
+    "peakSells": 1554,
+    "name": "CashToad",
+    "symbol": "CASHTOAD",
+    "bornAt": 1786510105000
+  },
+  "8LkH4DDkVRpoZYYYWBi5KGmqkCeR9GRs4aSEFT4qpump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 82719,
+    "peakBuys": 3093,
+    "peakSells": 2736,
+>>>>>>> Stashed changes
     "name": "BHENCHOD COIN",
     "symbol": "BHENCHOD",
     "bornAt": 1786511692000
   },
+<<<<<<< Updated upstream
   "259KArDPebq3aHNHzotp5VNAcFCQigmeGz9yE6gopump": {
     "firstSeen": 1786513600394,
     "peakFdv": 29157.72,
@@ -1399,19 +1528,34 @@
     "peakFdv": 49629,
     "peakBuys": 816,
     "peakSells": 749,
+=======
+  "AVH4TopqphcEM8KXbwfNUxMNcKZfRSCz4qG2am6kpump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 72135,
+    "peakBuys": 1189,
+    "peakSells": 1081,
+>>>>>>> Stashed changes
     "name": "Quantum Picture Television",
     "symbol": "QPT",
     "bornAt": 1786513146000
   },
   "CNyox46GjRq7o8rkTsiRAjRsY7PUE9Dr9S5X9rKhpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 10097.41,
     "peakBuys": 1934,
     "peakSells": 1071,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 9139.36,
+    "peakBuys": 2071,
+    "peakSells": 1198,
+>>>>>>> Stashed changes
     "name": "Moat OS",
     "symbol": "MOAT",
     "bornAt": 1786511668000
   },
+<<<<<<< Updated upstream
   "G4DnBgvyBnusyrisSr9kN6y5YnK3DEEY7TfYbTb5pump": {
     "firstSeen": 1786513600394,
     "peakFdv": 12345.1,
@@ -1426,10 +1570,18 @@
     "peakFdv": 10304,
     "peakBuys": 2950,
     "peakSells": 2672,
+=======
+  "7kPwxepEQ8Q6XrxyycNSzYVp18h96C271u6WT3mepump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 35278,
+    "peakBuys": 3053,
+    "peakSells": 2727,
+>>>>>>> Stashed changes
     "name": "LARGOAT",
     "symbol": "LARGOAT",
     "bornAt": 1786511565000
   },
+<<<<<<< Updated upstream
   "6QeoFRMkWrm1bBw92V2Fi9HXRdtZqAcHY7ss6CJQpump": {
     "firstSeen": 1786513600394,
     "peakFdv": 2216.13,
@@ -1444,19 +1596,34 @@
     "peakFdv": 3938.89,
     "peakBuys": 775,
     "peakSells": 710,
+=======
+  "E9RLC7rhARVodM9sR4ARHUtCRWD2eD5Rj6nt2HFDpump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 3648.01,
+    "peakBuys": 776,
+    "peakSells": 714,
+>>>>>>> Stashed changes
     "name": "SpudCoin",
     "symbol": "Spud",
     "bornAt": 1779582142000
   },
   "6Dy2MDe4nAw2JKmWCCBXK3MggvFMU9N4LDMKwD9Bpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 7534.91,
     "peakBuys": 199,
     "peakSells": 122,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 9127.44,
+    "peakBuys": 208,
+    "peakSells": 124,
+>>>>>>> Stashed changes
     "name": "Potato Cat",
     "symbol": "Pcat",
     "bornAt": 1786414031000
   },
+<<<<<<< Updated upstream
   "J4WbWdjCF38GzhSZqsRVZQGkpk53dTm8YsvyzHfPpump": {
     "firstSeen": 1786513600394,
     "peakFdv": 17759.23,
@@ -1471,21 +1638,39 @@
     "peakFdv": 9730,
     "peakBuys": 3754,
     "peakSells": 2981,
+=======
+  "5U2Jb7hgJzGvnFA7UueWbxotHhdrB2AXuSsireWtpump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 8070,
+    "peakBuys": 3787,
+    "peakSells": 3020,
+>>>>>>> Stashed changes
     "name": "豆助",
     "symbol": "Mamesuke",
     "bornAt": 1786510654000
   },
   "EXXgpmjkGBk92r2N5BwAahqd3BrqezLcwaujahNVpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 3890,
     "peakBuys": 2252,
     "peakSells": 2043,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 3788,
+    "peakBuys": 2252,
+    "peakSells": 2046,
+>>>>>>> Stashed changes
     "name": "Burger Queen",
     "symbol": "NANATTY",
     "bornAt": 1786509638000
   },
   "FYP91ahKYnyUH8ULqhXAcfCp8ZfV5Lc5pcQ7BfTVpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
+=======
+    "firstSeen": 1786513766039,
+>>>>>>> Stashed changes
     "peakFdv": 4773.33,
     "peakBuys": 598,
     "peakSells": 579,
@@ -1493,6 +1678,7 @@
     "symbol": "Sack",
     "bornAt": 1786495428000
   },
+<<<<<<< Updated upstream
   "6qnkWYyRSZwwbVowFACfaNuATMWuCNtY5tAXRcMxpump": {
     "firstSeen": 1786513600394,
     "peakFdv": 20790,
@@ -1507,10 +1693,18 @@
     "peakFdv": 4414,
     "peakBuys": 1879,
     "peakSells": 1656,
+=======
+  "BRyivtyzLgZtrD2FCvfVDjFuQAt6DNhfP3HSA2vApump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 3989,
+    "peakBuys": 1887,
+    "peakSells": 1682,
+>>>>>>> Stashed changes
     "name": "Devil Frog",
     "symbol": "Diablo",
     "bornAt": 1786509961000
   },
+<<<<<<< Updated upstream
   "EGkqSQDT7MYJNhf17vR2JZn5pc4sbUDeN2gFCP6Ppump": {
     "firstSeen": 1786513600394,
     "peakFdv": 142807,
@@ -1525,57 +1719,113 @@
     "peakFdv": 36794,
     "peakBuys": 8308,
     "peakSells": 5886,
+=======
+  "Cqs2xNRMCSMDpGzRZ5x225kjM9dhcnTFExiu5Hf6pump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 23007,
+    "peakBuys": 8486,
+    "peakSells": 6034,
+>>>>>>> Stashed changes
     "name": "The Wise Otter",
     "symbol": "Otter",
     "bornAt": 1786507060000
   },
   "6Nx4HSGYKBqCGvyHUydXnnfLX8tSuCtfxq6tHGvupump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 11209,
     "peakBuys": 5352,
     "peakSells": 4590,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 13365,
+    "peakBuys": 5364,
+    "peakSells": 4598,
+>>>>>>> Stashed changes
     "name": "The Unconcerned Lion",
     "symbol": "LION",
     "bornAt": 1786499193000
   },
   "5qHUGTgkRaDrSNGgQg5wQxb5tDrzEW5ewuGpSS3jpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 180065,
     "peakBuys": 3707,
     "peakSells": 4904,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 181847,
+    "peakBuys": 3791,
+    "peakSells": 5046,
+>>>>>>> Stashed changes
     "name": "Fomo Meow",
     "symbol": "FOMEOW",
     "bornAt": 1786482354000
   },
   "DAXtNurkMSUYTLZKaCvAC8runUqhd5fWfZy48a4Xpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 8144,
     "peakBuys": 6459,
     "peakSells": 5492,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 14389,
+    "peakBuys": 6536,
+    "peakSells": 5557,
+>>>>>>> Stashed changes
     "name": "Sergeant Basan",
     "symbol": "BASAN",
     "bornAt": 1786504255000
   },
+<<<<<<< Updated upstream
   "AvecKFxn8ihToR7gwgAVjfqV56N1rWhN7hv8joXQpump": {
     "firstSeen": 1786513600394,
     "peakFdv": 177091,
     "peakBuys": 6826,
     "peakSells": 5686,
+=======
+  "EGkqSQDT7MYJNhf17vR2JZn5pc4sbUDeN2gFCP6Ppump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 160287,
+    "peakBuys": 6337,
+    "peakSells": 4020,
+    "name": "PEACH64",
+    "symbol": "Peach64",
+    "bornAt": 1786507975000
+  },
+  "AvecKFxn8ihToR7gwgAVjfqV56N1rWhN7hv8joXQpump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 224990,
+    "peakBuys": 7097,
+    "peakSells": 5875,
+>>>>>>> Stashed changes
     "name": "Cogecoin",
     "symbol": "COGE",
     "bornAt": 1786505209000
   },
   "6aZeZ2ZG4b3byeJqw9Eg5NygrdgE2hKgXms6uyhkpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 5734,
     "peakBuys": 1940,
     "peakSells": 1493,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 6955,
+    "peakBuys": 1964,
+    "peakSells": 1494,
+>>>>>>> Stashed changes
     "name": "Normie Coin",
     "symbol": "NURMIE",
     "bornAt": 1786504551000
   },
   "GJJgqDxn4Njhht2RCPsATKpoaTycRuqDFTkmr5Xspump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
+=======
+    "firstSeen": 1786513766039,
+>>>>>>> Stashed changes
     "peakFdv": 2674.94,
     "peakBuys": 1245,
     "peakSells": 1591,
@@ -1583,6 +1833,7 @@
     "symbol": "FROGGER",
     "bornAt": 1786502039000
   },
+<<<<<<< Updated upstream
   "CXKPv7Bs4ohuc6pQgrB5YusXVVjxmzcoacsz4x6cpump": {
     "firstSeen": 1786513600394,
     "peakFdv": 16671.29,
@@ -1597,28 +1848,50 @@
     "peakFdv": 8871791,
     "peakBuys": 2238,
     "peakSells": 350,
+=======
+  "B1Ahew3dZeamHmz3eMjGWScLKmavN4SqM4p1rwnpump": {
+    "firstSeen": 1786513766039,
+    "peakFdv": 8998516,
+    "peakBuys": 2263,
+    "peakSells": 357,
+>>>>>>> Stashed changes
     "name": "Transnational Oil Supply",
     "symbol": "TNOS",
     "bornAt": 1786499519000
   },
   "6HjvVo8yHNR4fLH3E2fXDACPvsc8mAtuuRRJagmQpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 13552,
     "peakBuys": 2117,
     "peakSells": 2640,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 13552,
+    "peakBuys": 2117,
+    "peakSells": 2641,
+>>>>>>> Stashed changes
     "name": "Layoo",
     "symbol": "Layoo",
     "bornAt": 1786488799000
   },
   "7xwJQh4jX5pgkLrKCcij4UXcdyXWxDwzeVr65NmKpump": {
+<<<<<<< Updated upstream
     "firstSeen": 1786513600394,
     "peakFdv": 225663,
     "peakBuys": 4351,
     "peakSells": 1999,
+=======
+    "firstSeen": 1786513766039,
+    "peakFdv": 225663,
+    "peakBuys": 4414,
+    "peakSells": 2000,
+>>>>>>> Stashed changes
     "name": "Callout Coin",
     "symbol": "CALLOUT",
     "bornAt": 1786496106000
   },
+<<<<<<< Updated upstream
   "Bfe4xjuwH5nQeM3fPQFPr4Ac8gLr9jjcBsD4gtxWpump": {
     "firstSeen": 1786513600394,
     "peakFdv": 13783,
@@ -1627,5 +1900,33 @@
     "name": "pipo",
     "symbol": "PIPO",
     "bornAt": 1786496404000
+=======
+  "6QeoFRMkWrm1bBw92V2Fi9HXRdtZqAcHY7ss6CJQpump": {
+    "firstSeen": 1786513838841,
+    "peakFdv": 2216.13,
+    "peakBuys": 126,
+    "peakSells": 135,
+    "name": "The Vermeer Shiba",
+    "symbol": "MOMO",
+    "bornAt": 1786511892000
+  },
+  "2pLqg3TsrkKVwFoJJL5Sej31pWwRuBGFyJ9GnQ3Dpump": {
+    "firstSeen": 1786513838841,
+    "peakFdv": 2164.99,
+    "peakBuys": 332,
+    "peakSells": 248,
+    "name": "PlumbJak",
+    "symbol": "PlumbJak",
+    "bornAt": 1786509534000
+  },
+  "8FhfEQzqZqHhrCVP1RJXN7ck3KvGyXK3W3MsY9jNpump": {
+    "firstSeen": 1786513838841,
+    "peakFdv": 3137,
+    "peakBuys": 372,
+    "peakSells": 499,
+    "name": "Bar Queen",
+    "symbol": "NANATTY",
+    "bornAt": 1786509782000
+>>>>>>> Stashed changes
   }
 }

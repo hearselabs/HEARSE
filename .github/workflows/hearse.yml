@@ -1,6 +1,6 @@
 # Mesin HEARSE, dijalankan oleh server GitHub — bukan laptopmu.
 #
-# Berjalan tiap 6 jam. Tiap kali jalan:
+# Berjalan tiap 2 jam. Tiap kali jalan:
 #   1. cari token pump.fun yang baru mati
 #   2. tulis obituarinya lewat Groq
 #   3. kirim ke channel Telegram
@@ -11,8 +11,9 @@ name: HEARSE — bury the dead
 
 on:
   schedule:
-    # Menit 0, tiap 6 jam: 00:00, 06:00, 12:00, 18:00 UTC
-    - cron: "0 */6 * * *"
+    # Tiap 2 jam. Sengaja sering: cron GitHub di runner gratis kerap telat
+    # atau dilewati saat server sibuk, jadi jadwal yang hilang tidak terasa.
+    - cron: "0 */2 * * *"
   # Tombol "Run workflow" manual di tab Actions — untuk uji coba
   workflow_dispatch:
 
