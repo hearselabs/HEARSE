@@ -514,7 +514,7 @@
   .featured {
     border: 1px solid var(--line); background: var(--bg-panel);
     padding: 2rem 1.9rem; margin-bottom: 2rem;
-    display: grid; grid-template-columns: 12rem 1fr; gap: 2rem;
+    display: grid; grid-template-columns: 13rem 1fr; gap: 2rem;
   }
   .featured-label {
     grid-column: 1 / -1;
@@ -530,8 +530,10 @@
   .featured .obit-body { font-size: 1.25rem; }
 
   .feed { border-top: 1px solid var(--line); }
+  /* 13rem, bukan 11: sejak baris hidup–mati memuat tanggal, kolom lama
+     terlalu sempit dan "UTC" jatuh sendirian ke baris berikutnya. */
   .obit {
-    display: grid; grid-template-columns: 11rem 1fr; gap: 2rem;
+    display: grid; grid-template-columns: 13rem 1fr; gap: 2rem;
     padding: 1.85rem 1rem 1.85rem 1.15rem;
     border-bottom: 1px solid var(--line-soft);
     position: relative;
@@ -1547,18 +1549,86 @@ function stats() {
 $q.addEventListener("input", () => { shown = PAGE_SIZE; render(); });
 $more.addEventListener("click", () => { shown += PAGE_SIZE; render(); });
 
-fetch("data/obituaries.json", { cache: "no-store" })
-  .then(r => r.ok ? r.json() : [])
-  .then(data => {
-    all = Array.isArray(data) ? data : [];
-    stats();
+/* ── Register yang benar-benar hidup ──────────────────────────
+   Halaman ini mengaku memantau. Kalau arsipnya hanya diambil sekali
+   saat halaman dibuka, tab yang dibiarkan terbuka akan menampilkan
+   angka kemarin — persis kebalikan dari yang dijanjikan.
+
+   Jadi arsipnya diperiksa ulang berkala. Yang tidak boleh terjadi:
+   isi halaman melompat saat orang sedang membacanya. Karena itu
+   pemakaman baru tidak langsung disisipkan — muncul tombol kecil,
+   dan pembacanya yang memutuskan kapan daftar diperbarui.          */
+const PERIKSA_MS = 60000;
+let sidikArsip = "";
+
+const sidik = (a) => a.length + ":" + (a[0] ? a[0].address : "");
+
+function pasang(data, pertamaKali) {
+  const baru = Array.isArray(data) ? data : [];
+  const sidikBaru = sidik(baru);
+  if (!pertamaKali && sidikBaru === sidikArsip) return;   // tidak ada yang berubah
+
+  const bertambah = !pertamaKali && baru.length > all.length
+    ? baru.length - all.length : 0;
+
+  sidikArsip = sidikBaru;
+  all = baru;
+
+  // Angka, pita, dan terminal selalu ikut terbarui — semuanya di luar
+  // jangkauan baca dan tidak menggeser apa pun.
+  stats();
+  renderTerminal();
+  renderMemorial();
+
+  const sedangMencari = !!$q.value.trim();
+  const diAtas = window.scrollY < 400;
+
+  if (pertamaKali || (!sedangMencari && diAtas)) {
     render();
-    renderTerminal();
-    renderMemorial();
-  })
-  .catch(() => {
-    $feed.innerHTML = '<div class="empty">The register could not be opened.</div>';
-  });
+    return;
+  }
+  if (bertambah) tawarkan(bertambah);
+}
+
+/* Tombol "ada yang baru" — muncul sekali, tidak mengganggu bacaan */
+function tawarkan(n) {
+  let el = document.getElementById("new-records");
+  if (!el) {
+    el = document.createElement("button");
+    el.id = "new-records";
+    el.type = "button";
+    el.addEventListener("click", () => {
+      shown = PAGE_SIZE;
+      render();
+      el.remove();
+      document.getElementById("register")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    document.body.appendChild(el);
+  }
+  el.textContent = n === 1
+    ? "1 new interment — show"
+    : n + " new interments — show";
+}
+
+function periksaArsip(pertamaKali) {
+  return fetch("data/obituaries.json?t=" + Date.now(), { cache: "no-store" })
+    .then(r => r.ok ? r.json() : null)
+    .then(d => { if (d) pasang(d, pertamaKali); })
+    .catch(() => {
+      if (pertamaKali) {
+        $feed.innerHTML = '<div class="empty">The register could not be opened.</div>';
+      }
+      // Kegagalan pada pemeriksaan berkala sengaja didiamkan: yang sudah
+      // tampil di layar tetap benar, jadi tidak ada yang perlu dikabarkan.
+    });
+}
+
+periksaArsip(true);
+setInterval(() => { if (!document.hidden) periksaArsip(false); }, PERIKSA_MS);
+// Balik ke tab yang lama ditinggalkan: periksa saat itu juga
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden) periksaArsip(false);
+});
 </script>
 </body>
 </html>
