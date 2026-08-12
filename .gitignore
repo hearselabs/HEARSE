@@ -1,3 +1,6 @@
 node_modules/
 .env
 hearse.log
+
+# Berkas kerja pembuat aset (hasil PNG-nya tetap ikut)
+launch-kit-hearse/_templates/_render/

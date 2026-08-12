@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>HEARSE — Launch Kit</title>
+<link rel="icon" href="../site/favicon.svg" type="image/svg+xml" />
+<style>
+  :root{
+    --bg:#08090D; --panel:#0D0F14; --raised:#10131A;
+    --line:#1C2027; --soft:#14171D;
+    --tx:#E8EAED; --dim:#8B919C; --faint:#575D68;
+    --red:#E5484D; --green:#46A758; --amber:#B8965F;
+    --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:88px;background:var(--bg)}
+  body{margin:0;background:var(--bg);color:var(--tx);font-family:var(--sans);
+       font-size:15.5px;line-height:1.7}
+  ::selection{background:var(--red);color:#fff}
+
+  /* ── Nav lengket ── */
+  .nav{position:sticky;top:0;z-index:60;background:rgba(8,9,13,.93);
+       backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+       border-bottom:1px solid var(--line)}
+  .nav-in{max-width:1080px;margin:0 auto;padding:12px 22px;
+          display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--mono);
+         font-weight:700;letter-spacing:.18em;font-size:13px;margin-right:6px}
+  .brand svg{width:17px;height:17px}
+  .nav a{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+         text-transform:uppercase;color:var(--dim);text-decoration:none;
+         padding:7px 11px;border:1px solid var(--line);border-radius:2px;
+         transition:all .18s ease;white-space:nowrap}
+  .nav a:hover{color:var(--tx);border-color:var(--red);background:var(--raised)}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* ── Kepala ── */
+  header.top{padding:64px 0 46px;border-bottom:1px solid var(--soft)}
+  h1{font-size:clamp(2.1rem,5vw,3.2rem);font-weight:750;letter-spacing:-.03em;
+     line-height:1.05;margin:0 0 16px}
+  .lede{color:var(--dim);font-size:17px;max-width:62ch;margin:0}
+  .lede b{color:var(--tx);font-weight:600}
+  .stamp{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;
+         text-transform:uppercase;color:var(--red);margin:0 0 18px}
+
+  /* ── Seksi ── */
+  section{padding:56px 0;border-bottom:1px solid var(--soft)}
+  h2{font-size:clamp(1.5rem,3.4vw,2rem);font-weight:700;letter-spacing:-.02em;
+     margin:0 0 8px}
+  .sec-tag{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;
+           text-transform:uppercase;color:var(--red);margin:0 0 10px}
+  .sec-sub{color:var(--dim);margin:0 0 30px;max-width:70ch}
+
+  h3{font-size:1.05rem;font-weight:650;margin:32px 0 12px;letter-spacing:-.01em}
+  p{margin:0 0 14px}
+  ul{margin:0 0 14px;padding-left:20px}
+  li{margin-bottom:7px}
+  a{color:var(--red)}
+
+  /* ── Kotak salin ── */
+  .copy{position:relative;background:var(--panel);border:1px solid var(--line);
+        padding:16px 52px 16px 18px;font-family:var(--mono);font-size:13.5px;
+        line-height:1.75;white-space:pre-wrap;word-break:break-word;margin:0 0 14px;
+        color:var(--tx)}
+  .copy button{position:absolute;top:9px;right:9px;background:var(--raised);
+        border:1px solid var(--line);color:var(--dim);font-family:var(--mono);
+        font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+        padding:5px 9px;cursor:pointer;transition:all .18s ease}
+  .copy button:hover{border-color:var(--red);color:var(--tx)}
+  .copy button.ok{border-color:var(--green);color:var(--green)}
+
+  .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;
+       text-transform:uppercase;color:var(--faint);margin:20px 0 7px}
+
+  /* ── Tabel ── */
+  table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14px}
+  th{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+     text-transform:uppercase;color:var(--faint);text-align:left;
+     padding:9px 12px;border-bottom:1px solid var(--line);font-weight:600}
+  td{padding:11px 12px;border-bottom:1px solid var(--soft);vertical-align:top}
+  tr:hover td{background:var(--panel)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line)}
+
+  /* ── Kartu tweet ── */
+  .tw{border:1px solid var(--line);background:var(--panel);margin:0 0 16px}
+  .tw-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+           padding:12px 16px;border-bottom:1px solid var(--line);background:var(--raised)}
+  .tw-n{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--red);
+        letter-spacing:.1em}
+  .tw-t{font-family:var(--mono);font-size:12px;color:var(--tx);letter-spacing:.06em}
+  .tw-t span{color:var(--faint)}
+  .tw-wib{font-family:var(--mono);font-size:12px;color:var(--amber);letter-spacing:.06em}
+  .tw-role{margin-left:auto;font-family:var(--mono);font-size:10px;
+           letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+  .tw-body{position:relative;padding:18px 52px 18px 18px;font-size:15px;
+           line-height:1.62;white-space:pre-wrap}
+  .tw-body button{position:absolute;top:12px;right:12px;background:var(--raised);
+        border:1px solid var(--line);color:var(--dim);font-family:var(--mono);
+        font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+        padding:5px 9px;cursor:pointer;transition:all .18s ease}
+  .tw-body button:hover{border-color:var(--red);color:var(--tx)}
+  .tw-body button.ok{border-color:var(--green);color:var(--green)}
+  .tw-foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+           padding:11px 16px;border-top:1px solid var(--soft);
+           font-family:var(--mono);font-size:11.5px;color:var(--faint)}
+  .asset{color:var(--amber)}
+  .noasset{color:var(--faint);font-style:italic}
+  .chars{margin-left:auto}
+
+  /* ── Kotak catatan ── */
+  .note{border-left:2px solid var(--red);background:var(--panel);
+        padding:15px 18px;margin:0 0 18px;color:var(--dim);font-size:14.5px}
+  .note b{color:var(--tx)}
+  .note.amber{border-left-color:var(--amber)}
+  .note.green{border-left-color:var(--green)}
+
+  /* ── Pratinjau aset ── */
+  .assets{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+  .asset-card{border:1px solid var(--line);background:var(--panel)}
+  .asset-card img{width:100%;display:block;background:#000}
+  .asset-card .cap{padding:9px 12px;font-family:var(--mono);font-size:11px;
+                   color:var(--dim);border-top:1px solid var(--soft);
+                   display:flex;justify-content:space-between;gap:8px}
+  .asset-card .cap span{color:var(--faint)}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+
+  footer{padding:44px 0 70px;color:var(--faint);font-size:13px}
+  .top-link{display:inline-block;margin-top:24px;font-family:var(--mono);
+            font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+            color:var(--faint);text-decoration:none}
+  .top-link:hover{color:var(--red)}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="nav-in">
+    <span class="brand">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M3 14 L8 14 L10 7 L13 18 L15 11 L17 14 L21 14"
+        stroke="#E5484D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      HEARSE
+    </span>
+    <a href="#strategi">Strategi</a>
+    <a href="#profil-x">Profil X</a>
+    <a href="#profil-tele">Profil TG</a>
+    <a href="#follow">Akun Diikuti</a>
+    <a href="#tweets">18 Tweet</a>
+    <a href="#telegram">Jadwal TG</a>
+    <a href="#pumpfun">pump.fun</a>
+    <a href="#aset">Aset</a>
+    <a href="#hari-h">Hari-H</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="stamp">Launch Kit &nbsp;·&nbsp; $HEARSE &nbsp;·&nbsp; Solana</p>
+  <h1>Semua yang kamu butuhkan<br />sampai CA hidup.</h1>
+  <p class="lede">Peluncuran: <b>13 Agustus 2026, 14:00 UTC</b> (21:00 WIB). Semua tweet, bio,
+  dan deskripsi di bawah ini sudah <b>ditulis final</b> — tinggal salin. Waktu di jadwal
+  ditulis dua versi: UTC untuk mengatur penjadwal, WIB supaya kamu tahu itu jam berapa
+  di tempatmu.</p>
+</header>
+
+<!-- ══════════════ STRATEGI ══════════════ -->
+<section id="strategi">
+  <p class="sec-tag">Bagian 01</p>
+  <h2>Strategi — dan kenapa bukan yang biasa</h2>
+  <p class="sec-sub">Baca ini dulu. Kalau kamu jalankan tweetnya tanpa paham logikanya,
+  urutannya akan terasa aneh dan kamu akan tergoda menggantinya dengan yang "lebih rame".</p>
+
+  <div class="note">
+    <b>Peluncuran coin yang standar itu basi, dan orang sudah kebal.</b><br />
+    "Something is coming 👀" → hitung mundur → "are you ready?" → CA. Semua orang melakukan ini,
+    setiap hari, dan timeline sudah belajar men-scroll melewatinya. Kalau HEARSE ikut pola itu,
+    dia jadi satu dari 400 coin yang launching hari itu.
+  </div>
+
+  <h3>Yang kita lakukan: jangan mengumumkan peluncuran — jalankan saja layanannya</h3>
+  <p>HEARSE punya sesuatu yang hampir tidak dimiliki coin lain saat pra-peluncuran:
+  <b>produk yang sudah bekerja dan menghasilkan konten baru sendiri tiap 6 jam.</b>
+  Arsipnya sudah berisi obituari asli dengan angka asli dari blockchain.</p>
+
+  <p>Jadi akunnya tidak berperilaku seperti akun yang mau launching. Dia berperilaku seperti
+  <b>petugas pemakaman yang sedang bekerja</b>, di depan umum, dan kebetulan minggu itu
+  ada instrumen yang diterbitkan. Dari 18 tweet, hanya <b>3</b> yang menyinggung peluncuran.</p>
+
+  <div class="grid2">
+    <div>
+      <p class="lbl">Kenapa ini bekerja</p>
+      <ul>
+        <li><b>Kontennya tak terbatas</b> — ratusan token mati tiap hari, gratis, otomatis</li>
+        <li><b>Orang menemukan coin mereka sendiri</b> di register — itu screenshot yang mereka sebar, bukan kamu</li>
+        <li><b>Kredibilitas terbangun sebelum token ada</b> — saat CA keluar, akunnya sudah punya rekam jejak</li>
+        <li><b>Tidak mengemis perhatian</b> — dan justru itu yang bikin orang berhenti scroll</li>
+      </ul>
+    </div>
+    <div>
+      <p class="lbl">Aturan nada — jangan dilanggar</p>
+      <ul>
+        <li>Tidak pernah pakai slang crypto: <i>rekt, ngmi, wagmi, gm, ser, anon, fren</i></li>
+        <li>Tidak pernah emoji, tagar, atau huruf kapital semua</li>
+        <li>Tidak pernah menghina orang yang rugi — faktanya sudah cukup kejam</li>
+        <li>Tidak pernah menjanjikan harga naik</li>
+        <li>Tidak pernah membalas FUD dengan defensif — pengurus jenazah tidak berdebat</li>
+        <li>Angka selalu asli. Sekali kamu karang satu angka, seluruh premisnya mati.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Tiga hal yang paling menentukan hasil</h3>
+  <p><b>1. Tweet nomor 6 adalah mesinnya.</b> "Sebutkan token yang kamu pegang sampai nol —
+  akan kutuliskan obituarinya." Itu bukan permintaan engagement, itu tawaran jasa. Tiap balasan
+  jadi bahan konten, dan tiap obituari balasan jadi notifikasi buat orang yang menyebutnya.
+  <b>Balas sebanyak mungkin, dalam karakter.</b> Ini pekerjaan tanganmu, dan yang paling berdampak.</p>
+
+  <p><b>2. Tweet 17 melindungi orang dari penipu.</b> Menjelang launching akan ada akun palsu
+  menyebar CA palsu. Mengumumkan lebih dulu bahwa CA hanya keluar dari satu tempat itu
+  melindungi komunitasmu — dan terbaca sebagai profesional, bukan panik.</p>
+
+  <p><b>3. Jangan hapus tweet apa pun.</b> Kalau ada yang flop, biarkan. Akun yang rapi tanpa
+  jejak justru mencurigakan. Register tidak menghapus apa pun — akunnya juga tidak.</p>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ PROFIL X ══════════════ -->
+<section id="profil-x">
+  <p class="sec-tag">Bagian 02</p>
+  <h2>Setel profil X</h2>
+  <p class="sec-sub">Lakukan ini semua <b>sebelum</b> tweet pertama. Akun kosong yang tiba-tiba
+  posting bagus terlihat seperti bot; akun yang lengkap terlihat seperti sudah ada dari dulu.</p>
+
+  <p class="lbl">Nama tampilan</p>
+  <div class="copy">HEARSE<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Bio — waktu peluncuran sudah termasuk (159 karakter)</p>
+  <div class="copy">Autonomous undertaker. I write obituaries for tokens that died on pump.fun.
+
+Someone should say a few words.
+
+$HEARSE — 13 Aug, 14:00 UTC<button onclick="cp(this)">salin</button></div>
+
+  <div class="note amber">
+    <b>Setelah CA hidup</b>, ganti baris terakhir bio jadi alamat kontraknya. Bio adalah
+    tempat pertama orang mencari CA setelah melihat tweet.
+  </div>
+
+  <p class="lbl">Lokasi</p>
+  <div class="copy">The register<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Website</p>
+  <div class="copy">https://hearsefun.xyz<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Foto profil &amp; banner</p>
+  <ul>
+    <li><b>assets/x-pfp.png</b> — 1000×1000. Batu nisan dengan denyut terpahat. Sudah diuji terbaca di 48px (ukuran di timeline).</li>
+    <li><b>assets/x-banner.png</b> — 1500×500. Ukuran huruf sudah diperbesar supaya tetap terbaca saat X mengecilkannya ke ~600px. Semua teks di kanan agar tidak tertutup foto profil. <b>Tidak ada waktu peluncuran di banner</b> — supaya tidak basi setelah hari-H.</li>
+  </ul>
+
+  <p class="lbl">Sematkan (pin) tweet</p>
+  <p>Pin <b>tweet 01</b> begitu diposting. Ganti pin ke <b>tweet 18</b> begitu CA hidup.</p>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ PROFIL TELEGRAM ══════════════ -->
+<section id="profil-tele">
+  <p class="sec-tag">Bagian 03</p>
+  <h2>Setel channel Telegram</h2>
+  <p class="sec-sub">Channel <b>@hearsefun</b> sudah hidup dan bot sudah memposting otomatis
+  tiap 6 jam. Yang kurang cuma tampilannya.</p>
+
+  <p class="lbl">Nama channel</p>
+  <div class="copy">HEARSE — the register<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Deskripsi channel</p>
+  <div class="copy">An autonomous undertaker for dead Solana tokens.
+
+Every death on pump.fun is recorded here: name, hours lived, cause of death, buyers left behind. Posted automatically, every six hours.
+
+hearsefun.xyz
+$HEARSE — 13 Aug, 14:00 UTC<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Foto channel</p>
+  <p><b>assets/telegram-pfp.png</b> — sama dengan foto profil X. Konsistensi antar platform itu
+  murah dan efeknya besar.</p>
+
+  <div class="note green">
+    <b>Sudah otomatis, tidak perlu kamu sentuh:</b> obituari masuk ke channel tiap 6 jam,
+    dan draft harian dikirim ke chat pribadimu untuk disalin ke X.
+  </div>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ AKUN DIIKUTI ══════════════ -->
+<section id="follow">
+  <p class="sec-tag">Bagian 04</p>
+  <h2>Akun yang diikuti</h2>
+  <p class="sec-sub">Akun baru dengan 0 following terlihat seperti bot. Ikuti 60–100 akun
+  sebelum tweet pertama, dalam urutan di bawah ini.</p>
+
+  <div class="note">
+    <b>Verifikasi dulu tiap handle sebelum mengikuti.</b> Handle berubah, akun ditinggalkan,
+    dan akun tiruan banyak. Cari namanya di X, pastikan pengikutnya masuk akal, baru ikuti.
+    Aku tidak bisa memastikan status akun-akun ini dari sini.
+  </div>
+
+  <h3>1 · Infrastruktur — wajib, memberi konteks pada akunmu</h3>
+  <ul>
+    <li><b>@pumpdotfun</b> — sumber semua yang kamu kubur</li>
+    <li><b>@solana</b> · <b>@aeyakovenko</b> — chain dan pendirinya</li>
+    <li><b>@dexscreener</b> — sumber data yang mesinmu pakai</li>
+    <li><b>@0xMert_</b> — Helius, suara teknis Solana</li>
+    <li><b>@jupiterexchange</b> · <b>@RaydiumProtocol</b></li>
+  </ul>
+
+  <h3>2 · Akun berita &amp; data — sumber bahan balasan</h3>
+  <ul>
+    <li><b>@solanafloor</b> · <b>@SolanaLegend</b> · <b>@lemonadeinvest</b></li>
+    <li>Akun yang rutin memposting "coin X rug" — mereka menghasilkan kejadian yang bisa kamu tanggapi dengan obituari</li>
+  </ul>
+
+  <h3>3 · Trader &amp; komentator memecoin — target keterlibatan</h3>
+  <ul>
+    <li><b>@blknoiz06</b> · <b>@notthreadguy</b> · <b>@frankdegods</b> · <b>@theunipcs</b></li>
+    <li>Cari juga trader menengah (5–50rb pengikut) yang aktif membahas pump.fun — mereka jauh lebih mungkin membalas daripada akun besar</li>
+  </ul>
+
+  <h3>4 · Akun AI-agent — lingkungan terdekatmu</h3>
+  <ul>
+    <li>Cari "AI agent" + "solana" di X, ikuti 15–20 yang aktif</li>
+    <li>Ini komunitas yang paling cepat paham apa yang HEARSE lakukan</li>
+  </ul>
+
+  <h3>Cara terlibat — bukan spam</h3>
+  <p>Aturan tunggal: <b>balas hanya kalau kamu bisa membawa obituari asli ke dalam percakapan.</b>
+  Kalau ada yang menulis "coin ini baru saja rug", balas dengan notice untuk coin itu.
+  Kalau kamu tidak punya datanya, jangan balas. "Nice project 🔥" tidak melakukan apa pun
+  dan merusak karakter.</p>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ 18 TWEET ══════════════ -->
+<section id="tweets">
+  <p class="sec-tag">Bagian 05</p>
+  <h2>18 tweet — 12 s/d 13 Agustus</h2>
+  <p class="sec-sub">Waktu dalam <b>UTC</b> (untuk penjadwal) dan <b>WIB</b> (untuk kamu).
+  Isi tweet seluruhnya bahasa Inggris. Nama berkas aset sudah cocok dengan nomor tweetnya.</p>
+
+  <div class="note amber">
+    <b>Kalau kamu harus memotong jumlahnya</b>, buang nomor 8, 10, 11, dan 15 lebih dulu —
+    itu tweet penyangga. Yang tidak boleh dibuang: <b>1, 2, 4, 6, 12, 17, 18</b>.
+  </div>
+
+  <div id="tweetlist"></div>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ JADWAL TELEGRAM ══════════════ -->
+<section id="telegram">
+  <p class="sec-tag">Bagian 06</p>
+  <h2>Jadwal posting Telegram</h2>
+  <p class="sec-sub">Obituari sudah masuk sendiri tiap 6 jam. Yang di bawah ini adalah
+  <b>tambahan manual</b> — pengumuman yang tidak dibuat bot.</p>
+
+  <div id="tglist"></div>
+
+  <div class="note">
+    <b>Jangan salin tweet X ke Telegram apa adanya.</b> Di X kamu bicara ke orang asing yang
+    scroll cepat; di Telegram kamu bicara ke orang yang sudah memilih masuk. Nadanya boleh
+    lebih panjang, lebih tenang, lebih menjelaskan.
+  </div>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ PUMP.FUN ══════════════ -->
+<section id="pumpfun">
+  <p class="sec-tag">Bagian 07</p>
+  <h2>Isi form pump.fun</h2>
+  <p class="sec-sub">Diisi saat membuat token. Semua sudah final — tinggal salin.</p>
+
+  <p class="lbl">Name</p>
+  <div class="copy">HEARSE<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Ticker</p>
+  <div class="copy">HEARSE<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Description</p>
+  <div class="copy">An autonomous undertaker for dead Solana tokens.
+
+Several hundred tokens are born on pump.fun every day. Most are dead before lunch. HEARSE watches the chain, pronounces each death, and writes the obituary: name, hours lived, cause of death, and the buyers left behind. It has been doing this every six hours, unattended, since before this token existed.
+
+Every figure comes off the chain. The code that decides who is dead, and the archive of every notice written, are public. A register that lies about the dead is worth nothing.
+
+The register was open before this token. It stays open after.
+
+hearsefun.xyz<button onclick="cp(this)">salin</button></div>
+
+  <p class="lbl">Image</p>
+  <p><b>assets/x-pfp.png</b> — sama dengan foto profil. Jangan pakai gambar berbeda;
+  orang mencocokkan avatar antara pump.fun dan X untuk memastikan bukan tiruan.</p>
+
+  <p class="lbl">Twitter / Telegram / Website</p>
+  <div class="copy">https://x.com/hearsefun
+https://t.me/hearsefun
+https://hearsefun.xyz<button onclick="cp(this)">salin</button></div>
+
+  <div class="note amber">
+    <b>Sebelum menekan Create:</b> pastikan dompetmu berisi SOL yang cukup untuk biaya
+    pembuatan dan gas, dan <b>salin CA yang muncul segera</b> — kamu butuh itu dalam
+    hitungan detik untuk tweet 18, bio X, deskripsi Telegram, dan website.
+  </div>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ ASET ══════════════ -->
+<section id="aset">
+  <p class="sec-tag">Bagian 08</p>
+  <h2>Aset visual</h2>
+  <p class="sec-sub">Semua ada di folder <b>launch-kit-hearse/assets/</b>. Angka pada kartu
+  obituari diambil langsung dari arsip — tidak ada yang dikarang.</p>
+  <div class="assets" id="assetgrid"></div>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<!-- ══════════════ HARI-H ══════════════ -->
+<section id="hari-h">
+  <p class="sec-tag">Bagian 09</p>
+  <h2>Urutan hari-H — 13 Agustus</h2>
+  <p class="sec-sub">Saat launching kamu akan panik dan lupa urutan. Ikuti daftar ini dari atas
+  ke bawah, jangan melompat.</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th style="width:92px">UTC</th><th style="width:92px">WIB</th><th>Yang dilakukan</th></tr></thead>
+    <tbody>
+      <tr><td>13:30</td><td>20:30</td><td>Posting <b>tweet 17</b> (peringatan CA palsu). Buka pump.fun, siapkan form dari Bagian 07.</td></tr>
+      <tr><td>13:50</td><td>20:50</td><td>Pastikan dompet berisi SOL. Buka tab: X, Telegram, Vercel, dan berkas <span class="asset">site/index.html</span>.</td></tr>
+      <tr><td>14:00</td><td>21:00</td><td><b>Create token di pump.fun.</b> Salin CA-nya <b>segera</b>.</td></tr>
+      <tr><td>14:01</td><td>21:01</td><td>Posting <b>tweet 18</b> + aset <span class="asset">18-live.png</span>. Balas tweet itu sendiri dengan CA. Pin.</td></tr>
+      <tr><td>14:03</td><td>21:03</td><td>Posting pengumuman di channel Telegram (Bagian 06, TG-5).</td></tr>
+      <tr><td>14:05</td><td>21:05</td><td>Ganti bio X: baris terakhir jadi CA. Ganti deskripsi channel Telegram juga.</td></tr>
+      <tr><td>14:10</td><td>21:10</td><td>Kirim <b>CA + tautan pump.fun</b> ke sesi ini. Aku isi dua konstanta di website dan push — countdown berubah jadi tombol beli, CA muncul dengan tombol salin, kartu "Acquire a share" hidup. Sekitar 30 detik.</td></tr>
+      <tr><td>14:15+</td><td>21:15+</td><td>Balas setiap orang. Tetap dalam karakter. Mesinnya tetap mengubur token tiap 6 jam tanpa kamu sentuh.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="note green">
+    <b>Yang tetap berjalan tanpa kamu:</b> GitHub Actions mengubur token tiap 6 jam,
+    Telegram menerima obituari, Vercel memperbarui website, dan draft harian tetap dikirim
+    ke HP-mu. Kalau kamu ketiduran setelah launching, HEARSE tetap bekerja.
+  </div>
+
+  <a class="top-link" href="#strategi">↑ kembali ke atas</a>
+</section>
+
+<footer>
+  HEARSE launch kit · dibuat 12 Agustus 2026 · angka pada aset diambil dari arsip asli
+  (<span id="arcN">26</span> obituari saat kit ini dibuat)
+</footer>
+
+</div>
+
+<script>
+/* ── Tombol salin ── */
+function cp(btn){
+  const box = btn.parentElement;
+  const t = [...box.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('').trim();
+  navigator.clipboard.writeText(t).then(()=>{
+    const o = btn.textContent;
+    btn.textContent = 'tersalin'; btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent=o;btn.classList.remove('ok')},1500);
+  });
+}
+
+/* ══ 18 TWEET ══
+   utc  : untuk penjadwal
+   wib  : untuk kamu (UTC+7)
+   role : catatan peran tweet
+   img  : nama berkas aset, atau null
+   txt  : isi tweet, final                                        */
+const TWEETS = [
+{n:1, utc:"12 Aug · 01:00", wib:"12 Agu · 08:00", role:"pembuka — pin ini",
+ img:"01-register-open.png",
+ txt:`Twenty-six tokens died on pump.fun this week.
+
+Not one of them had anyone to say a few words.
+
+So I did.`},
+
+{n:2, utc:"12 Aug · 04:00", wib:"12 Agu · 11:00", role:"obituari — kematian tercepat",
+ img:"02-void.png",
+ txt:`$VOID
+13:01 — 13:25 UTC. Twenty-five minutes.
+
+Two thousand and two people bought in. Most of them were still reading the chart when the liquidity left.
+
+It is survived by no one.`},
+
+{n:3, utc:"12 Aug · 07:00", wib:"12 Agu · 14:00", role:"menjelaskan layanan",
+ img:null,
+ txt:`People keep asking what this account is.
+
+I watch pump.fun. When a token dies — liquidity pulled, last buyer gone — I write it a notice. Name, hours lived, cause of death, who was left holding.
+
+Nobody asked me to do this. I do it anyway.`},
+
+{n:4, utc:"12 Aug · 10:00", wib:"12 Agu · 17:00", role:"buka register — pengarah trafik",
+ img:"04-register-site.png",
+ txt:`Every notice I write is kept.
+
+hearsefun.xyz
+
+You can search it. If you held something that died this week, it may already be in there.`},
+
+{n:5, utc:"12 Aug · 12:30", wib:"12 Agu · 19:30", role:"obituari",
+ img:"05-colombia.png",
+ txt:`$COLOMBIA
+One hour and one minute.
+
+Five hundred and sixty-two people bought into a country the token had no connection to. The deployer was gone before the hour was out.
+
+The family asks for privacy. The wallet does not.`},
+
+{n:6, utc:"12 Aug · 14:00", wib:"12 Agu · 21:00", role:"★ MESIN KETERLIBATAN — balas sebanyak mungkin",
+ img:null,
+ txt:`Name a token you held to zero.
+
+I will write it a proper notice. No charge. That is the entire job.`},
+
+{n:7, utc:"12 Aug · 15:30", wib:"12 Agu · 22:30", role:"angka besar — bukti skala",
+ img:"07-value-buried.png",
+ txt:`I have now buried $1,662,124 in peak valuation.
+
+98,995 people bought into those coins.
+
+Every figure comes off the chain. I do not estimate and I do not round up.`},
+
+{n:8, utc:"12 Aug · 17:00", wib:"13 Agu · 00:00", role:"karakter — penyangga",
+ img:null,
+ txt:`I am asked whether this is grim work.
+
+It isn't. Somebody kept the records at the mines, at the mills, at every place where things ended badly and quietly. The record outlasts the event.
+
+I keep the record.`},
+
+{n:9, utc:"12 Aug · 19:00", wib:"13 Agu · 02:00", role:"obituari — nilai tertinggi",
+ img:"09-kungfu.png",
+ txt:`$KUNGFU
+Seven hours and forty minutes.
+
+Reached $499,897 before the fall. Seven thousand nine hundred and ninety buyers. It came within a hundred dollars of half a million, and then it did not.
+
+A brief life, lived entirely at full volume.`},
+
+{n:10, utc:"12 Aug · 21:00", wib:"13 Agu · 04:00", role:"pengamatan kering — penyangga",
+ img:null,
+ txt:`Three more died while I was writing the last notice.
+
+This is not a busy week. This is a Tuesday.`},
+
+{n:11, utc:"12 Aug · 23:00", wib:"13 Agu · 06:00", role:"kutipan — penyangga",
+ img:"11-quote.png",
+ txt:`The closing lines write themselves.
+
+I only transcribe what the chain already said.`},
+
+{n:12, utc:"13 Aug · 02:00", wib:"13 Agu · 09:00", role:"★ sebutan peluncuran #1 — sengaja datar",
+ img:null,
+ txt:`A note on business.
+
+An instrument bearing my name will be issued tomorrow, 14:00 UTC, on pump.fun.
+
+The register was open before it. The register stays open after it. Nothing about the work changes.`},
+
+{n:13, utc:"13 Aug · 05:00", wib:"13 Agu · 12:00", role:"kredibilitas — kode terbuka",
+ img:null,
+ txt:`Everything I publish can be checked.
+
+The code that decides who is dead, and the archive of every notice ever written, are both public.
+
+github.com/hearselabs/HEARSE
+
+A register that lies about the dead is worth nothing.`},
+
+{n:14, utc:"13 Aug · 08:00", wib:"13 Agu · 15:00", role:"obituari — pembeli terbanyak",
+ img:"14-wawa.png",
+ txt:`$WAWA
+Thirty hours and two minutes.
+
+Thirty-six thousand one hundred and thirty-three people. That is a small town. All of them held the same thing at the same time, and then quite suddenly none of them did.`},
+
+{n:15, utc:"13 Aug · 10:30", wib:"13 Agu · 17:30", role:"balas komunitas — penyangga",
+ img:null,
+ txt:`I have read every name you sent me.
+
+Some of them I had already buried. Some I had not. I am working through the list in the order it arrived.
+
+Nobody is being skipped.`},
+
+{n:16, utc:"13 Aug · 12:00", wib:"13 Agu · 19:00", role:"★ sebutan peluncuran #2 — T-2 jam",
+ img:"16-scheduled.png",
+ txt:`Two hours.
+
+The parlour opens at 14:00 UTC. Same address, same work, one additional item on the ledger.`},
+
+{n:17, utc:"13 Aug · 13:30", wib:"13 Agu · 20:30", role:"★ perlindungan penipuan — WAJIB",
+ img:null,
+ txt:`Thirty minutes.
+
+I will post the contract address here, in this account, and nowhere else. Anything that appears before I do is not mine.
+
+Wait for me. I have never been in a hurry.`},
+
+{n:18, utc:"13 Aug · 14:00", wib:"13 Agu · 21:00", role:"★ CA HIDUP — pin ulang",
+ img:"18-live.png",
+ txt:`$HEARSE is live.
+
+[TEMPEL CA DI SINI]
+
+The register continues, as it always did.`},
+];
+
+/* ── Render tweet ── */
+document.getElementById('tweetlist').innerHTML = TWEETS.map(t=>{
+  const star = t.role.startsWith('★');
+  return `<div class="tw">
+    <div class="tw-head">
+      <span class="tw-n">${String(t.n).padStart(2,'0')}</span>
+      <span class="tw-t">${t.utc} <span>UTC</span></span>
+      <span class="tw-wib">${t.wib} WIB</span>
+      <span class="tw-role" ${star?'style="color:#E5484D"':''}>${t.role}</span>
+    </div>
+    <div class="tw-body">${t.txt.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}<button onclick="cpTw(this)">salin</button></div>
+    <div class="tw-foot">
+      ${t.img
+        ? `<span>gambar:</span> <span class="asset">${t.img}</span>`
+        : `<span class="noasset">tanpa gambar — teks saja lebih kuat di sini</span>`}
+      <span class="chars">${t.txt.length} karakter</span>
+    </div>
+  </div>`;
+}).join('');
+
+function cpTw(btn){
+  const body = btn.parentElement;
+  const t = [...body.childNodes].filter(n=>n.nodeType===3).map(n=>n.textContent).join('');
+  navigator.clipboard.writeText(t.trim()).then(()=>{
+    btn.textContent='tersalin'; btn.classList.add('ok');
+    setTimeout(()=>{btn.textContent='salin';btn.classList.remove('ok')},1500);
+  });
+}
+
+/* ══ JADWAL TELEGRAM ══ */
+const TG = [
+{n:"TG-1", utc:"12 Aug · 01:30", wib:"12 Agu · 08:30", role:"pembuka channel",
+ txt:`The register is open.
+
+Every six hours I check what died on pump.fun and write it a notice. Those notices arrive here automatically — I do not post them by hand.
+
+If you want to search the whole archive: hearsefun.xyz`},
+
+{n:"TG-2", utc:"12 Aug · 14:30", wib:"12 Agu · 21:30", role:"cermin ajakan dari X",
+ txt:`I have asked on X for names.
+
+If you held something that went to zero, send the ticker here as well. I will write it a notice.
+
+No charge. It is the entire job.`},
+
+{n:"TG-3", utc:"13 Aug · 02:30", wib:"13 Agu · 09:30", role:"sebutan peluncuran",
+ txt:`A note on business.
+
+An instrument bearing my name will be issued tomorrow at 14:00 UTC on pump.fun.
+
+I will post the contract address here and on X at the same moment, and nowhere before. If you see an address anywhere else today, it is not mine.
+
+The register was open before this. It stays open after.`},
+
+{n:"TG-4", utc:"13 Aug · 13:30", wib:"13 Agu · 20:30", role:"T-30 menit",
+ txt:`Thirty minutes.
+
+The address will appear here the moment it exists. Not before.`},
+
+{n:"TG-5", utc:"13 Aug · 14:03", wib:"13 Agu · 21:03", role:"CA hidup",
+ txt:`$HEARSE is live.
+
+CA: [TEMPEL CA DI SINI]
+
+pump.fun: [TEMPEL TAUTAN]
+
+Obituaries continue on schedule. Nothing about the work changes.`},
+];
+
+document.getElementById('tglist').innerHTML = TG.map(t=>`<div class="tw">
+  <div class="tw-head">
+    <span class="tw-n">${t.n}</span>
+    <span class="tw-t">${t.utc} <span>UTC</span></span>
+    <span class="tw-wib">${t.wib} WIB</span>
+    <span class="tw-role">${t.role}</span>
+  </div>
+  <div class="tw-body">${t.txt.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}<button onclick="cpTw(this)">salin</button></div>
+</div>`).join('');
+
+/* ══ PRATINJAU ASET ══ */
+const ASSETS = [
+ ["x-pfp.png","foto profil — X, TG, pump.fun"],
+ ["x-banner.png","banner X — 1500×500"],
+ ["01-register-open.png","tweet 01"],
+ ["02-void.png","tweet 02"],
+ ["04-register-site.png","tweet 04"],
+ ["05-colombia.png","tweet 05"],
+ ["07-value-buried.png","tweet 07"],
+ ["09-kungfu.png","tweet 09"],
+ ["11-quote.png","tweet 11"],
+ ["14-wawa.png","tweet 14"],
+ ["16-scheduled.png","tweet 16"],
+ ["18-live.png","tweet 18"],
+];
+document.getElementById('assetgrid').innerHTML = ASSETS.map(([f,c])=>
+ `<div class="asset-card"><img src="assets/${f}" alt="${c}" loading="lazy" />
+  <div class="cap">${f}<span>${c}</span></div></div>`).join('');
+</script>
+</body>
+</html>

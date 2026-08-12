@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style>
+  /* ── Catatan ukuran ──
+     Berkas 1500×500, tapi X menampilkannya ~600px di desktop
+     dan lebih kecil di HP. Artinya semua ukuran huruf efektif
+     menyusut ~2,5×. Wordmark 118px → tampil ~47px (terbaca).
+     Apa pun di bawah 40px di berkas ini akan hilang.          */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1500px; height: 500px; overflow: hidden; }
+
+  .banner {
+    width: 1500px; height: 500px;
+    background: #08090D; position: relative; overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #E8EAED;
+  }
+
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(#161B24 1.5px, transparent 1.5px),
+      linear-gradient(90deg, #161B24 1.5px, transparent 1.5px);
+    background-size: 75px 75px;
+    -webkit-mask-image: radial-gradient(ellipse 85% 130% at 66% 45%, black 8%, transparent 70%);
+  }
+
+  .glow {
+    position: absolute; right: 8%; top: 50%;
+    width: 1150px; height: 760px; transform: translateY(-50%);
+    background: radial-gradient(ellipse, rgba(229,72,77,0.13), transparent 58%);
+  }
+
+  /* garis EKG melintang penuh, denyut besar di kiri-tengah */
+  .ekg { position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 1500px; }
+
+  /* ── Zona aman ──
+     Avatar X menutup kiri-bawah (lingkaran ±200px mulai x≈60).
+     Semua teks di kanan, di atas garis tengah bawah.            */
+  .content {
+    position: absolute; right: 84px; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; align-items: flex-end; gap: 26px;
+  }
+
+  .wordmark {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 118px; font-weight: 700; letter-spacing: 0.2em;
+    line-height: 1; text-indent: 0.2em;
+  }
+
+  .tagline {
+    font-family: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+    font-style: italic; font-size: 46px; color: #A8AEB8; line-height: 1.2;
+  }
+
+  .domain {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 42px; letter-spacing: 0.14em; color: #E5484D;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+  <div class="grid"></div>
+  <div class="glow"></div>
+
+  <svg class="ekg" viewBox="0 0 1500 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 100 L318 100 L344 40 L376 168 L404 100 L452 100 L470 74 L490 100 L1500 100"
+          stroke="#E5484D" stroke-width="4" stroke-linecap="round"
+          stroke-linejoin="round" opacity="0.6"/>
+  </svg>
+
+  <div class="content">
+    <div class="wordmark">HEARSE</div>
+    <div class="tagline">Someone should say a few words.</div>
+    <div class="domain">hearsefun.xyz</div>
+  </div>
+</div>
+</body>
+</html>
