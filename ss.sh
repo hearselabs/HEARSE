@@ -3,12 +3,14 @@
 #
 #   ./ss.sh
 #
-# Kenapa ada skrip ini: tangkapan layar yang dibuat kemarin sudah basi hari ini
-# (jumlah obituari terus naik), dan memotret manual gampang meleset — teks
-# kepotong, atau animasi muncul-saat-digulir belum sempat jalan sehingga
-# isinya masih transparan.
+# Yang dipotret adalah HERO situs — judul, tagline, lencana pemantauan,
+# dan dua tombolnya. Sengaja BUKAN daftar register: isi register berubah
+# tiap ada token mati, jadi tangkapan daftarnya pasti sudah beda dengan
+# yang dilihat orang saat mereka membuka situsnya. Hero tidak pernah
+# berubah — fotonya tidak bisa basi.
 #
-# Jalankan tepat sebelum memposting tweet 4. Angkanya akan sesuai detik itu.
+# Countdown sengaja di luar bingkai: setelah hari-H ia berganti tampilan,
+# dan foto yang memuatnya ikut kedaluwarsa.
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -21,47 +23,34 @@ const b = await chromium.launch({
 });
 // deviceScaleFactor 2 supaya tulisannya tetap tajam saat X mengecilkannya
 const p = await b.newPage({
-  viewport: { width: 1600, height: 900 },
+  viewport: { width: 1600, height: 775 },
   deviceScaleFactor: 2,
 });
 
 await p.goto("https://hearsefun.xyz/", { waitUntil: "networkidle" });
+await p.waitForTimeout(2200);            // biarkan grid & denyut hero selesai masuk
 
-// Tunggu arsip benar-benar termuat — jangan memotret daftar kosong
-await p.waitForFunction(
-  () => document.querySelectorAll("#feed .obit").length > 2,
-  null,
-  { timeout: 30000 },
-);
-
-// Gulir sampai ke bawah lalu balik: memicu semua animasi muncul-saat-digulir,
-// supaya tidak ada blok yang tertangkap dalam keadaan setengah transparan.
-await p.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-await p.waitForTimeout(1600);
-
-// Bingkai pada seksi register — pencarian, jumlah catatan, dan pemakaman terbaru.
-// Itu yang membuktikan isi tweetnya: publik, bisa dicari, permanen.
-await p.evaluate(() => {
-  const t = document.getElementById("featured-slot") ||
-            document.querySelector("#feed");
-  const y = t.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo(0, y - 232);           // ruang untuk judul seksi, di bawah header lengket
-});
-await p.waitForTimeout(1400);
-
-// Matikan animasi yang masih berjalan supaya tidak ada yang buram
+// Pastikan tetap di puncak halaman, lalu bekukan animasi supaya tidak buram
+await p.evaluate(() => window.scrollTo(0, 0));
 await p.addStyleTag({
-  content: `*,*::before,*::after{animation:none !important;transition:none !important}
-            .rv{opacity:1 !important;transform:none !important}`,
+  content: `*,*::before,*::after{animation:none !important;transition:none !important}`,
 });
 await p.waitForTimeout(300);
 
-await p.screenshot({ path: KELUAR });
+// Countdown tidak boleh ikut — periksa, jangan cuma berharap
+const adaCountdown = await p.evaluate(() => {
+  const c = document.getElementById("countdown");
+  if (!c) return false;
+  const r = c.getBoundingClientRect();
+  return r.top < innerHeight - 40;
+});
+if (adaCountdown) {
+  console.log("  ⚠ countdown masuk bingkai — tinggi bingkai perlu dikurangi");
+}
 
-const n = await p.evaluate(() =>
-  document.getElementById("reg-count")?.textContent || "?");
+await p.screenshot({ path: KELUAR });
 console.log(`  ✅ ${KELUAR}`);
-console.log(`     dari hearsefun.xyz — ${n} saat dipotret`);
+console.log("     hero hearsefun.xyz — bingkai yang tidak pernah basi");
 await b.close();
 JS
 
