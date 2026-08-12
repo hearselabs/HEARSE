@@ -25,7 +25,15 @@ on:
     #
     # Menit 17, bukan 0 — menit 0 adalah menit tersibuk di seluruh GitHub
     # dan jadwal di menit itu paling sering dikorbankan.
+    #
+    # DUA jadwal, bukan satu. Tiap entri dilewatkan atau tidak secara
+    # terpisah, jadi dua entri = dua kesempatan per jam. Terpantau nyata:
+    # slot 13:17 dan 14:17 sama-sama menguap tanpa jejak. Kalau keduanya
+    # kebetulan jalan berdekatan, concurrency group di bawah yang menahan
+    # supaya tidak tumpang tindih — dan jalan kedua keluar tanpa menulis
+    # apa-apa kalau tidak ada kematian baru.
     - cron: "17 * * * *"
+    - cron: "43 * * * *"
   # Tombol "Run workflow" manual di tab Actions — untuk uji coba
   workflow_dispatch:
 
