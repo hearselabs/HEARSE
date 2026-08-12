@@ -253,11 +253,30 @@ $HEARSE — 13 Aug, 14:00 UTC<button onclick="cp(this)">salin</button></div>
     tempat pertama orang mencari CA setelah melihat tweet.
   </div>
 
-  <p class="lbl">Lokasi</p>
-  <div class="copy">The register<button onclick="cp(this)">salin</button></div>
+  <p class="lbl">Lokasi — di sinilah alamat Telegram ditaruh</p>
+  <div class="copy">t.me/hearsefun<button onclick="cp(this)">salin</button></div>
 
   <p class="lbl">Website</p>
   <div class="copy">https://hearsefun.xyz<button onclick="cp(this)">salin</button></div>
+
+  <div class="note">
+    <b>Kenapa Telegram di kolom Lokasi?</b> X cuma memberi <b>satu</b> kolom
+    tautan, dan itu harus dipakai untuk situs — di sanalah tombol beli muncul saat
+    peluncuran. Kolom Lokasi isinya teks bebas dan tampil tepat di bawah bio, jadi
+    itu tempat kedua paling terlihat di seluruh profil.
+    <br><br>
+    Yang perlu kamu tahu: <b>tulisan di Lokasi tidak bisa diklik</b>, orang harus
+    mengetiknya sendiri. Karena itu tulis <b>tanpa</b> <code>https://</code> —
+    lebih pendek dan lebih mudah disalin dengan mata. Tautan Telegram yang
+    benar-benar bisa diklik ada di tiga tempat lain:
+    <ul style="margin-top:10px">
+      <li><b>Tweet yang disematkan</b> — satu-satunya tautan yang benar-benar diklik orang</li>
+      <li><b>hearsefun.xyz</b> — tombol Telegram sudah terpasang di sana</li>
+      <li><b>Balasan tweet 01</b> — balas tweetmu sendiri dengan tautannya</li>
+    </ul>
+    Jangan taruh tautan Telegram di badan tweet biasa: X menekan jangkauan tweet
+    yang mengarah keluar, dan itu terasa paling parah justru di akun baru.
+  </div>
 
   <p class="lbl">Foto profil &amp; banner</p>
   <ul>
@@ -357,9 +376,34 @@ $HEARSE — 13 Aug, 14:00 UTC<button onclick="cp(this)">salin</button></div>
   <p class="sec-sub">Waktu dalam <b>UTC</b> (untuk penjadwal) dan <b>WIB</b> (untuk kamu).
   Isi tweet seluruhnya bahasa Inggris. Nama berkas aset sudah cocok dengan nomor tweetnya.</p>
 
+  <div class="note">
+    <b>Aturan yang dipegang seluruh 18 tweet: X tidak pernah menyebut ticker orang lain.</b>
+    <br><br>
+    Obituari satuan sudah mengalir sendiri ke channel Telegram sepanjang hari.
+    Mengulanginya di X cuma bikin dua hal buruk sekaligus: isinya kembar dua
+    (tidak ada alasan mengikuti keduanya), dan tiap tweet jadi <i>mengiklankan koin
+    orang lain</i> — ticker merekalah yang jadi bintangnya, bukan HEARSE.
+    <br><br>
+    Jadi X memakai angka <b>gabungan</b>, yang cuma HEARSE yang punya:
+    54 dimakamkan · $2.730.711 nilai puncak · 186.198 pembelian lawan 173.061 penjualan ·
+    umur median 7 jam 40 menit. Angka-angka itu jauh lebih besar daripada token mana
+    pun satuan, tidak menguntungkan siapa-siapa, dan tidak bisa ditiru orang lain.
+    <br><br>
+    Waktu satu berkas besar terpaksa disinggung (tweet 09), namanya sengaja
+    ditahan — <i>"I don't print names out here"</i>. Itu bukan menghindar,
+    itu memang cara kantor pencatat kematian bicara, dan sekalian jadi alasan
+    orang membuka register.
+    <br><br>
+    <b>Pembagian tugasnya:</b> Telegram = arsipnya, nama per nama, sepanjang hari.
+    X = kantornya, bicara dengan angka besar dan mengajak orang bicara.
+  </div>
+
   <div class="note amber">
     <b>Kalau kamu harus memotong jumlahnya</b>, buang nomor 8, 10, 11, dan 15 lebih dulu —
-    itu tweet penyangga. Yang tidak boleh dibuang: <b>1, 2, 4, 6, 12, 17, 18</b>.
+    itu tweet penyangga. Yang tidak boleh dibuang: <b>1, 3, 4, 6, 12, 17, 18</b>.
+    <br><br>
+    Nomor 6 sampai 11 jatuh saat kamu tidur (WIB dini hari) tapi itu <b>jam paling ramai
+    di Amerika</b> — pakai fitur jadwal bawaan X, jangan digeser ke siang WIB.
   </div>
 
   <div id="tweetlist"></div>
@@ -495,145 +539,144 @@ function cp(btn){
    img  : nama berkas aset, atau null
    txt  : isi tweet, final                                        */
 const TWEETS = [
-{n:1, utc:"12 Aug · 01:00", wib:"12 Agu · 08:00", role:"pembuka — pin ini",
+{n:1, utc:"12 Aug · 11:30", wib:"12 Agu · 18:30", role:"pembuka — PIN INI",
  img:"01-register-open.png",
- txt:`Twenty-six tokens died on pump.fun this week.
+ txt:`I keep a register of tokens that died on pump.fun.
 
-Not one of them had anyone to say a few words.
+Fifty-four buried so far. Combined valuation at their peak: $2,730,711. Combined valuation now: nothing.
 
-So I did.`},
+Name one you held to zero. I'll write it a proper notice.`},
 
-{n:2, utc:"12 Aug · 04:00", wib:"12 Agu · 11:00", role:"obituari — kematian tercepat",
- img:"02-void.png",
- txt:`$VOID
-13:01 — 13:25 UTC. Twenty-five minutes.
+{n:2, utc:"12 Aug · 13:00", wib:"12 Agu · 20:00", role:"menjelaskan layanan", img:null,
+ txt:`Every notice follows the same form.
 
-Two thousand and two people bought in. Most of them were still reading the chart when the liquidity left.
+Born. Died. How long it lived. What it was worth at its best. How many bought it. Cause of death.
 
-It is survived by no one.`},
+No opinions. The numbers are unkind enough on their own.`},
 
-{n:3, utc:"12 Aug · 07:00", wib:"12 Agu · 14:00", role:"menjelaskan layanan",
- img:null,
- txt:`People keep asking what this account is.
+{n:3, utc:"12 Aug · 14:30", wib:"12 Agu · 21:30", role:"angka — celah buku besar",
+ img:"03-ledger-gap.png",
+ txt:`186,198 purchases.
 
-I watch pump.fun. When a token dies — liquidity pulled, last buyer gone — I write it a notice. Name, hours lived, cause of death, who was left holding.
+173,061 sales.
 
-Nobody asked me to do this. I do it anyway.`},
+The difference did not get out.`},
 
-{n:4, utc:"12 Aug · 10:00", wib:"12 Agu · 17:00", role:"buka register — pengarah trafik",
+{n:4, utc:"12 Aug · 16:00", wib:"12 Agu · 23:00", role:"buka register — pengarah trafik",
  img:"04-register-site.png",
- txt:`Every notice I write is kept.
+ txt:`The register is public and it stays public.
 
-hearsefun.xyz
+Every notice, every figure, timestamped and permanent. Nothing gets quietly deleted once it becomes embarrassing.
 
-You can search it. If you held something that died this week, it may already be in there.`},
+hearsefun.xyz`},
 
-{n:5, utc:"12 Aug · 12:30", wib:"12 Agu · 19:30", role:"obituari",
- img:"05-colombia.png",
- txt:`$COLOMBIA
-One hour and one minute.
+{n:5, utc:"12 Aug · 17:30", wib:"13 Agu · 00:30", role:"angka — umur",
+ img:"05-lifespan.png",
+ txt:`Median lifespan in my register: 7 hours, 40 minutes.
 
-Five hundred and sixty-two people bought into a country the token had no connection to. The deployer was gone before the hour was out.
+The shortest lived four minutes.
 
-The family asks for privacy. The wallet does not.`},
+It still found buyers.`},
 
-{n:6, utc:"12 Aug · 14:00", wib:"12 Agu · 21:00", role:"★ MESIN KETERLIBATAN — balas sebanyak mungkin",
- img:null,
+{n:6, utc:"12 Aug · 19:00", wib:"13 Agu · 02:00", role:"★ MESIN KETERLIBATAN — balas sebanyak mungkin", img:null,
  txt:`Name a token you held to zero.
 
-I will write it a proper notice. No charge. That is the entire job.`},
+Ticker is enough. I'll look up what it was worth on its best day, and I'll write it a notice.
 
-{n:7, utc:"12 Aug · 15:30", wib:"12 Agu · 22:30", role:"angka besar — bukti skala",
+No charge. This is what I do.`},
+
+{n:7, utc:"12 Aug · 20:30", wib:"13 Agu · 03:30", role:"angka besar — bukti skala",
  img:"07-value-buried.png",
- txt:`I have now buried $1,662,124 in peak valuation.
+ txt:`$2,730,711 in peak valuation currently sits in my register.
 
-98,995 people bought into those coins.
+Present value of the lot: zero.
 
-Every figure comes off the chain. I do not estimate and I do not round up.`},
+It took two days to collect.`},
 
-{n:8, utc:"12 Aug · 17:00", wib:"13 Agu · 00:00", role:"karakter — penyangga",
- img:null,
- txt:`I am asked whether this is grim work.
+{n:8, utc:"12 Aug · 22:00", wib:"13 Agu · 05:00", role:"karakter — penyangga", img:null,
+ txt:`Someone asked whether this is cruel work.
 
-It isn't. Somebody kept the records at the mines, at the mills, at every place where things ended badly and quietly. The record outlasts the event.
+It isn't. The cruel part already happened. All I do is write it down.
 
-I keep the record.`},
+Nobody else does. The chart goes flat and the thing is simply gone, as though no one had ever bought it.`},
 
-{n:9, utc:"12 Aug · 19:00", wib:"13 Agu · 02:00", role:"obituari — nilai tertinggi",
- img:"09-kungfu.png",
- txt:`$KUNGFU
-Seven hours and forty minutes.
+{n:9, utc:"12 Aug · 23:30", wib:"13 Agu · 06:30", role:"berkas terbesar — tanpa nama",
+ img:"09-largest-estate.png",
+ txt:`The largest estate I've handled reached $499,897.
 
-Reached $499,897 before the fall. Seven thousand nine hundred and ninety buyers. It came within a hundred dollars of half a million, and then it did not.
+It was seven hours and forty minutes old.
 
-A brief life, lived entirely at full volume.`},
+I don't print names out here. They're all in the register, and they're all in the same condition.`},
 
-{n:10, utc:"12 Aug · 21:00", wib:"13 Agu · 04:00", role:"pengamatan kering — penyangga",
- img:null,
+{n:10, utc:"13 Aug · 01:00", wib:"13 Agu · 08:00", role:"pengamatan kering — penyangga", img:null,
  txt:`Three more died while I was writing the last notice.
 
-This is not a busy week. This is a Tuesday.`},
+This isn't a busy week. This is every week.`},
 
-{n:11, utc:"12 Aug · 23:00", wib:"13 Agu · 06:00", role:"kutipan — penyangga",
+{n:11, utc:"13 Aug · 03:00", wib:"13 Agu · 10:00", role:"kutipan — penyangga",
  img:"11-quote.png",
- txt:`The closing lines write themselves.
+ txt:`A line from this morning's notices:
 
-I only transcribe what the chain already said.`},
+"Financial obligations to its buyers were apparently not a surviving concern."
 
-{n:12, utc:"13 Aug · 02:00", wib:"13 Agu · 09:00", role:"★ sebutan peluncuran #1 — sengaja datar",
- img:null,
+I didn't write that to be cruel. It's just what the ledger said.`},
+
+{n:12, utc:"13 Aug · 06:00", wib:"13 Agu · 13:00", role:"★ sebutan peluncuran #1 — sengaja datar", img:null,
  txt:`A note on business.
 
-An instrument bearing my name will be issued tomorrow, 14:00 UTC, on pump.fun.
+There will be a token. 13 August, 14:00 UTC, on pump.fun.
 
-The register was open before it. The register stays open after it. Nothing about the work changes.`},
+It doesn't unlock anything. The register is free and stays free. It's a way to hold a share of the undertaking, and that's all it is.`},
 
-{n:13, utc:"13 Aug · 05:00", wib:"13 Agu · 12:00", role:"kredibilitas — kode terbuka",
- img:null,
+{n:13, utc:"13 Aug · 08:30", wib:"13 Agu · 15:30", role:"angka — sebab kematian",
+ img:"13-causes.png",
+ txt:`Cause of death, across all fifty-four:
+
+Liquidity removed entirely — 30
+Liquidity fell below survivable levels — 24
+
+There is no third category. Nothing here has ever died of old age.`},
+
+{n:14, utc:"13 Aug · 10:00", wib:"13 Agu · 17:00", role:"kredibilitas — kode terbuka", img:null,
  txt:`Everything I publish can be checked.
 
-The code that decides who is dead, and the archive of every notice ever written, are both public.
+The code that finds the dead and writes the notices is open. The archive is a plain file anyone can download and read.
 
-github.com/hearselabs/HEARSE
+I'd rather be verifiable than believed.
 
-A register that lies about the dead is worth nothing.`},
+github.com/hearselabs/HEARSE`},
 
-{n:14, utc:"13 Aug · 08:00", wib:"13 Agu · 15:00", role:"obituari — pembeli terbanyak",
- img:"14-wawa.png",
- txt:`$WAWA
-Thirty hours and two minutes.
+{n:15, utc:"13 Aug · 11:00", wib:"13 Agu · 18:00", role:"balas komunitas — penyangga", img:null,
+ txt:`I've read every name you sent me.
 
-Thirty-six thousand one hundred and thirty-three people. That is a small town. All of them held the same thing at the same time, and then quite suddenly none of them did.`},
+Some were already in the register. Some I had to go and look up, and once I saw the numbers I understood why you still remember it.
 
-{n:15, utc:"13 Aug · 10:30", wib:"13 Agu · 17:30", role:"balas komunitas — penyangga",
- img:null,
- txt:`I have read every name you sent me.
+The rest are being written.`},
 
-Some of them I had already buried. Some I had not. I am working through the list in the order it arrived.
-
-Nobody is being skipped.`},
-
-{n:16, utc:"13 Aug · 12:00", wib:"13 Agu · 19:00", role:"★ sebutan peluncuran #2 — T-2 jam",
+{n:16, utc:"13 Aug · 12:00", wib:"13 Agu · 19:00", role:"★ T-2 jam",
  img:"16-scheduled.png",
  txt:`Two hours.
 
-The parlour opens at 14:00 UTC. Same address, same work, one additional item on the ledger.`},
+Nothing about the register changes today. It was running before any of this and it runs after.
 
-{n:17, utc:"13 Aug · 13:30", wib:"13 Agu · 20:30", role:"★ perlindungan penipuan — WAJIB",
- img:null,
+13 August, 14:00 UTC.`},
+
+{n:17, utc:"13 Aug · 13:30", wib:"13 Agu · 20:30", role:"★ PERLINDUNGAN PENIPUAN — WAJIB", img:null,
  txt:`Thirty minutes.
 
-I will post the contract address here, in this account, and nowhere else. Anything that appears before I do is not mine.
+There will be exactly one contract address. It appears here and on hearsefun.xyz at the same moment.
 
-Wait for me. I have never been in a hurry.`},
+Anything posted before that is fake. Anything sent to you in a DM is fake. I will never message you first.`},
 
-{n:18, utc:"13 Aug · 14:00", wib:"13 Agu · 21:00", role:"★ CA HIDUP — pin ulang",
+{n:18, utc:"13 Aug · 14:00", wib:"13 Agu · 21:00", role:"★ CA HIDUP — PIN ULANG",
  img:"18-live.png",
  txt:`$HEARSE is live.
 
-[TEMPEL CA DI SINI]
+[CONTRACT ADDRESS]
 
-The register continues, as it always did.`},
+Also on hearsefun.xyz, which updated itself the moment it went out.
+
+The register continues. It always did.`},
 ];
 
 /* ── Render tweet ── */

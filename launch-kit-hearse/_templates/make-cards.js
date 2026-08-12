@@ -128,6 +128,52 @@ function quoteCard({ tag, quote, attrib, foot }) {
   );
 }
 
+/* ── Kartu dua angka bersanding (mis. beli vs jual) ──────── */
+function pairCard({ tag, aVal, aLab, bVal, bLab, sub, foot }) {
+  const kolom = (v, l, warna) =>
+    `<div style="flex:1">
+       <div class="mono" style="font-size:13px;letter-spacing:.2em;color:#575D68;
+            text-transform:uppercase">${l}</div>
+       <div class="mono" style="font-size:82px;font-weight:800;letter-spacing:-.035em;
+            line-height:1.05;margin-top:12px;color:${warna}">${v}</div>
+     </div>`;
+  return shell(
+    tag,
+    `<div style="margin:auto 0">
+      <div style="display:flex;gap:60px;align-items:flex-start">
+        ${kolom(aVal, aLab, "#E8EAED")}
+        ${kolom(bVal, bLab, "#E8EAED")}
+      </div>
+      <div style="height:1px;background:#1C2027;margin:40px 0 32px"></div>
+      <div class="serif" style="font-size:33px;font-style:italic;color:#8B919C;
+           max-width:900px;line-height:1.42">${sub}</div>
+    </div>`,
+    foot,
+  );
+}
+
+/* ── Kartu rincian (sebab kematian) ──────────────────────── */
+function breakdownCard({ tag, title, rows, sub, foot }) {
+  const baris = rows.map((r) =>
+    `<div style="display:flex;align-items:baseline;gap:22px;margin-top:22px">
+       <div class="mono" style="font-size:52px;font-weight:800;color:#E5484D;
+            min-width:96px;letter-spacing:-.03em">${r[1]}</div>
+       <div class="serif" style="font-size:31px;color:#C6CAD1">${r[0]}</div>
+     </div>`).join("");
+  return shell(
+    tag,
+    `<div style="margin:34px 0 auto">
+      <div class="mono" style="font-size:16px;letter-spacing:.22em;color:#575D68;
+           text-transform:uppercase">${title}</div>
+      ${baris}
+      <div style="height:1px;background:#1C2027;margin:38px 0 26px"></div>
+      <div class="serif" style="font-size:30px;font-style:italic;color:#8B919C;
+           max-width:880px;line-height:1.4">${sub}</div>
+    </div>`,
+    foot,
+  );
+}
+
 /* ── Kartu peluncuran ────────────────────────────────────── */
 function launchCard({ tag, kicker, big, sub, foot }) {
   return shell(
@@ -145,8 +191,25 @@ function launchCard({ tag, kicker, big, sub, foot }) {
 }
 
 /* ═══ Daftar aset — nomor mengikuti urutan tweet ═══════════ */
-const totalPeak = all.reduce((s, o) => s + o.peakFdv, 0);
+/* Angka gabungan. Sengaja TIDAK ada kartu yang menyebut ticker orang lain:
+   di X, HEARSE bicara dengan angkanya sendiri. Nama-namanya ada di register
+   dan di channel Telegram — mengulanginya di X hanya mengiklankan koin orang. */
+const totalPeak   = all.reduce((s, o) => s + o.peakFdv, 0);
 const totalBuyers = all.reduce((s, o) => s + o.buyers, 0);
+const totalSellers = all.reduce((s, o) => s + (o.sellers || 0), 0);
+
+const umur = all.map((o) => o.diedAt - o.bornAt)
+  .filter((x) => x > 0 && x < 30 * 86400000).sort((a, b) => a - b);
+const median = umur[Math.floor(umur.length / 2)];
+const jamMenit = (ms) =>
+  Math.floor(ms / 3600000) + "h " + Math.round(ms % 3600000 / 60000) + "m";
+const terpendek = Math.round(umur[0] / 60000);
+const terbesar = [...all].sort((a, b) => b.peakFdv - a.peakFdv)[0];
+
+const sebab = {};
+all.forEach((o) => { sebab[o.reason] = (sebab[o.reason] || 0) + 1; });
+const sebabUrut = Object.entries(sebab).sort((a, b) => b[1] - a[1])
+  .map(([k, v]) => [k.charAt(0).toUpperCase() + k.slice(1), v]);
 
 const CARDS = [
   ["01-register-open", statCard({
@@ -155,26 +218,47 @@ const CARDS = [
     foot: "AUTONOMOUS UNDERTAKER",
   })],
 
-  ["02-void", obitCard("VOID", "notice of death")],
-
-  ["05-colombia", obitCard("COLOMBIA", "notice of death")],
-
-  ["07-value-buried", statCard({
-    tag: "the ledger", big: "$" + n(totalPeak), label: "buried, at peak value",
-    sub: `Across ${n(totalBuyers)} buyers. Every figure taken from the chain, not from memory.`,
+  ["03-ledger-gap", pairCard({
+    tag: "the ledger",
+    aVal: n(totalBuyers), aLab: "purchases recorded",
+    bVal: n(totalSellers), bLab: "sales recorded",
+    sub: `A difference of ${n(totalBuyers - totalSellers)}. That difference did not get out.`,
     foot: "THE REGISTER &nbsp;·&nbsp; HEARSEFUN.XYZ",
   })],
 
-  ["09-kungfu", obitCard("KUNGFU", "notice of death")],
+  ["05-lifespan", statCard({
+    tag: "mortality", big: jamMenit(median), label: "median lifespan",
+    sub: `The shortest lived ${terpendek} minutes. It still found buyers.`,
+    foot: `ACROSS ${all.length} NOTICES`,
+  })],
+
+  ["07-value-buried", statCard({
+    tag: "the ledger", big: "$" + n(totalPeak), label: "buried, at peak value",
+    sub: `Present value of all of it: nothing. Collected in ${
+      Math.max(1, Math.round((Date.now() - Math.min(...all.map((o) => o.diedAt))) / 86400000))
+    } days.`,
+    foot: "THE REGISTER &nbsp;·&nbsp; HEARSEFUN.XYZ",
+  })],
+
+  ["09-largest-estate", statCard({
+    tag: "case file", big: "$" + n(terbesar.peakFdv), label: "largest estate handled",
+    sub: `It was ${terbesar.lived} old. I do not print names out here — they are all in the register.`,
+    foot: "NAME WITHHELD &nbsp;·&nbsp; HEARSEFUN.XYZ",
+  })],
 
   ["11-quote", quoteCard({
     tag: "from the register",
-    quote: "&ldquo;In lieu of flowers, the deployer asks that you buy his new coin.&rdquo;",
+    quote: "&ldquo;Financial obligations to its buyers were apparently not a surviving concern.&rdquo;",
     attrib: "closing line — recorded, not invented",
     foot: "HEARSE",
   })],
 
-  ["14-wawa", obitCard("WAWA", "notice of death")],
+  ["13-causes", breakdownCard({
+    tag: "post-mortem", title: `Cause of death · all ${all.length} notices`,
+    rows: sebabUrut,
+    sub: "There is no third category. Nothing here has ever died of old age.",
+    foot: "HEARSEFUN.XYZ",
+  })],
 
   ["16-scheduled", launchCard({
     tag: "scheduled", big: "The parlour opens.",
