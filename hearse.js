@@ -183,7 +183,11 @@ THE THREE RULES
    the crowd, sometimes the money.
 
 The CLOSE is your punchline and the most important line you write. Dry and ironic,
-never sentimental. The words "rest", "memory", "gone too soon", "may it" are banned.
+never sentimental. These are banned outright, because they have already been overused:
+"rest", "memory", "gone too soon", "may it", "its estate", "the estate",
+"its assets", "fully liquidated", "settled in full", "its demise was",
+"liquidity dried up", "its deployer has chosen".
+Also: do not begin the CLOSE with "Its" — over half the register already does.
 The humour comes from treating an absurd death with administrative seriousness.
 
 WORKED EXAMPLES
@@ -204,12 +208,12 @@ Never use markdown, asterisks, underscores, emoji, hashtags, or links.
 
 Return only valid JSON: {"body": "...", "close": "..."}`;
 
-async function writeObituary(facts) {
+async function writeObituary(facts, recentCloses = []) {
   if (!CFG.groqKey) return fallbackObituary(facts);
 
   // Dicoba dua kali: kalau percobaan pertama mengarang angka, minta tulis ulang.
   for (let attempt = 1; attempt <= 2; attempt++) {
-    const draft = await askGroq(facts, attempt);
+    const draft = await askGroq(facts, attempt, recentCloses);
     if (!draft) return fallbackObituary(facts);
 
     const invented = findInventedNumber(draft.body + " " + draft.close, facts);
@@ -226,10 +230,18 @@ async function writeObituary(facts) {
   return fallbackObituary(facts);
 }
 
-async function askGroq(facts, attempt) {
+async function askGroq(facts, attempt, recentCloses = []) {
   const lived = humanDuration(facts.diedAt - facts.bornAt);
   const brief = [
-    `Token: $${facts.symbol} (${facts.name})`,
+    // Nama hanya disertakan bila berbeda bermakna dari simbolnya,
+    // supaya model tidak menulis "$PEACH COIN" saat simbolnya PEACH.
+    (() => {
+      const s = String(facts.symbol).toLowerCase().replace(/[^a-z0-9]/g, "");
+      const n = String(facts.name).toLowerCase().replace(/[^a-z0-9]/g, "");
+      return n && n !== s && !n.startsWith(s) && !s.startsWith(n)
+        ? `Token: ${facts.symbol}, also known as ${facts.name}`
+        : `Token: ${facts.symbol}`;
+    })(),
     `Born: ${clock(facts.bornAt)} UTC`,
     `Died: ${clock(facts.diedAt)} UTC`,
     `Lifespan: ${lived}`,
@@ -238,7 +250,14 @@ async function askGroq(facts, attempt) {
     `Sellers recorded: ${facts.peakSells}`,
     `Liquidity at death: $${Math.round(facts.liquidityUsd).toLocaleString("en-US")}`,
     `Cause of death: ${facts.reason}`,
-  ].join("\n");
+  ].join("\n") +
+    // Model tidak punya ingatan antar panggilan, jadi tanpa daftar ini
+    // ia akan terus jatuh ke frasa penutup yang sama.
+    (recentCloses.length
+      ? "\n\nClosing lines already used in the last notices. Do not reuse " +
+        "these, their opening words, or their idea:\n" +
+        recentCloses.map((c) => "- " + c).join("\n")
+      : "");
 
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -399,6 +418,9 @@ async function main() {
       entry.name = now.name;
       entry.symbol = now.symbol;
       entry.bornAt = now.bornAt || entry.firstSeen;
+      // Dicatat tiap kali kita melihatnya masih bernyawa. Dipakai untuk
+      // memperkirakan kapan kematiannya benar-benar terjadi.
+      entry.lastAliveAt = Date.now();
     }
 
     const v = verdict(entry, now);
@@ -420,7 +442,15 @@ async function main() {
   const newEntries = [];
   for (const c of toBury) {
     const bornAt = c.entry.bornAt || c.entry.firstSeen;
-    const diedAt = Date.now();
+    /* Kapan sebenarnya token ini mati?
+       Kita tidak pernah tahu persis — yang kita tahu hanya "terakhir
+       terlihat hidup" dan "sekarang sudah mati". Memakai jam sekarang
+       membuat semua kematian dalam satu jalan bertumpuk di menit yang
+       sama, dan itu terbaca jelas sebagai buatan mesin.
+       Perkiraan yang jujur: titik tengah antara keduanya. */
+    const lastAlive = c.entry.lastAliveAt || c.entry.firstSeen;
+    const diedAt = Math.round((lastAlive + Date.now()) / 2);
+    const pronouncedAt = Date.now();
 
     const facts = {
       symbol: c.entry.symbol || c.now.symbol || "???",
@@ -435,7 +465,10 @@ async function main() {
     };
 
     process.stdout.write(`    ⚰  $${facts.symbol} … `);
-    const written = await writeObituary(facts);
+    // 12 penutup terakhir — cukup untuk mencegah pengulangan tanpa
+    // membengkakkan prompt.
+    const recentCloses = obituaries.slice(0, 12).map((o) => o.close).filter(Boolean);
+    const written = await writeObituary(facts, recentCloses);
 
     const record = {
       address: c.addr,
