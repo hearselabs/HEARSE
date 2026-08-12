@@ -45,7 +45,7 @@ await p.evaluate(() => {
   const t = document.getElementById("featured-slot") ||
             document.querySelector("#feed");
   const y = t.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo(0, y - 190);           // beri ruang untuk judul seksi di atasnya
+  window.scrollTo(0, y - 232);           // ruang untuk judul seksi, di bawah header lengket
 });
 await p.waitForTimeout(1400);
 
