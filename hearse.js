@@ -33,7 +33,7 @@ const CFG = {
   minAgeMinutes: num(process.env.MIN_AGE_MINUTES, 60),
 
   // Berapa banyak obituari maksimal per sekali jalan
-  maxBurialsPerRun: num(process.env.MAX_BURIALS_PER_RUN, 4),
+  maxBurialsPerRun: num(process.env.MAX_BURIALS_PER_RUN, 3),
 
   // Buang token yang likuiditasnya palsu (kolam raksasa tapi tak ada transaksi)
   fakeLiquidityUsd: num(process.env.FAKE_LIQUIDITY_USD, 5_000_000),
@@ -330,7 +330,15 @@ function fallbackObituary(facts) {
 // 4. KIRIM — Telegram (gratis, tanpa batas)
 // ─────────────────────────────────────────────────────────────
 
-async function telegramSend(chatId, text) {
+/**
+ * @param {boolean} silent  Kirim tanpa membunyikan notifikasi.
+ *
+ * Obituari datang berpuluh-puluh setiap hari. Kalau tiap satu membunyikan
+ * ponsel orang, kanal ini akan di-mute dalam sehari — dan begitu di-mute,
+ * pengumuman yang benar-benar penting ikut tidak terdengar. Jadi obituari
+ * masuk diam-diam seperti pita berjalan, dan hanya pengumuman yang berdering.
+ */
+async function telegramSend(chatId, text, silent = false) {
   if (!CFG.tgToken || !chatId) return false;
   try {
     const res = await fetch(
@@ -343,6 +351,7 @@ async function telegramSend(chatId, text) {
           text,
           parse_mode: "HTML",
           disable_web_page_preview: true,
+          disable_notification: silent,
         }),
       },
     );
@@ -373,10 +382,20 @@ function lifeLine(o) {
     : `${tgl(o.bornAt)}, ${clock(o.bornAt)} — ${tgl(o.diedAt)}, ${clock(o.diedAt)} UTC · ${o.lived}`;
 }
 
-/** Versi untuk channel Telegram (boleh pakai sedikit format). */
+/** Versi untuk channel Telegram (boleh pakai sedikit format).
+ *
+ *  Ticker dibungkus <code> karena dua alasan sekaligus:
+ *  1. Telegram tidak pernah mengubah isi <code> menjadi tautan. Tanpa ini,
+ *     "$MOAT" jadi biru dan bisa diklik sedangkan "$Gus" tetap hitam —
+ *     Telegram hanya menautkan ticker huruf besar semua, jadi tampilannya
+ *     belang tanpa alasan yang bisa dijelaskan ke pembaca.
+ *  2. Tautan itu menuju pencarian Telegram untuk token yang sudah mati:
+ *     jalan buntu yang menarik orang keluar dari kanal.
+ *  Monospace-nya pun sama persis dengan cara situs menulis ticker.
+ */
 function formatForTelegram(o) {
   return [
-    `<b>$${escapeHtml(o.symbol)}</b>`,
+    `<b><code>$${escapeHtml(o.symbol)}</code></b>`,
     `<i>${lifeLine(o)}</i>`,
     ``,
     escapeHtml(o.body),
@@ -539,7 +558,7 @@ async function main() {
     delete watchlist[c.addr]; // sudah dimakamkan, berhenti dipantau
     console.log("selesai");
 
-    if (!DRY) await telegramSend(CFG.tgChannel, formatForTelegram(record));
+    if (!DRY) await telegramSend(CFG.tgChannel, formatForTelegram(record), true); // diam-diam
     await sleep(400);
   }
 
@@ -696,6 +715,11 @@ function findInventedNumber(text, facts) {
 function clean(s) {
   return String(s)
     .replace(/[*_`#]+/g, "") // buang tanda format Markdown
+    // Buang "$" yang menempel pada nama token di tengah kalimat.
+    // Judul pesan sudah memuat tickernya; di dalam prosa, "$JENNA" membuat
+    // Telegram mengubahnya jadi tautan pencarian biru di tengah paragraf.
+    // Nominal uang tidak tersentuh — sesudahnya selalu angka, bukan huruf.
+    .replace(/\$(?=[A-Za-z])/g, "")
     .replace(/^["'\s]+|["'\s]+$/g, "") // buang tanda kutip pembungkus
     .replace(/\s+/g, " ") // rapikan spasi ganda
     .trim();
