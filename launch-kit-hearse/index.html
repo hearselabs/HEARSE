@@ -451,8 +451,23 @@ $HEARSE — 13 Aug, 14:00 UTC<button onclick="cp(this)">salin</button></div>
     <br><br>
     <b>2. Pesan penting disematkan.</b> Pesan tersemat nempel di bar atas channel
     dan tidak ikut tergeser, berapa pun obituari yang masuk sesudahnya. Secara harfiah
-    tidak bisa tertimbun. Sematkan TG-3 (pemberitahuan peluncuran) sekarang, lalu
-    ganti ke TG-5 (CA) pada hari-H.
+    tidak bisa tertimbun.
+    <br><br>
+    <b>Yang disematkan cuma dua, dan ini urutannya:</b>
+    <ul style="margin-top:10px">
+      <li><b>Sekarang: TG-1.</b> Sematkan begitu diposting, dan biarkan tersemat
+      selamanya. Ini satu-satunya pesan yang menjelaskan channel ini apa. Orang
+      yang baru masuk melihat dinding obituari tanpa konteks — TG-1 yang
+      menjawab "aku sedang lihat apa ini?". Tanpa itu, obituari cuma terlihat
+      seperti bot spam.</li>
+      <li><b>Hari-H: TG-5.</b> Sematkan juga. Telegram menaruh sematan terbaru
+      di atas, jadi CA yang terlihat lebih dulu — <b>TG-1 tetap tersemat di
+      bawahnya</b>, tidak terhapus. Satu channel boleh punya lebih dari satu
+      pesan tersemat.</li>
+    </ul>
+    <b>TG-3 tidak perlu disematkan.</b> Isinya "peluncuran hari ini jam 14:00" —
+    kedaluwarsa dalam hitungan jam, dan menyematkannya justru menggusur TG-1 dari
+    posisi teratas persis di hari kamu paling butuh orang paham channel ini apa.
     <br><br>
     <b>3. Sekali jalan maksimal 3, bukan 4.</b> Empat pesan sekaligus terbaca seperti
     banjir; tiga terbaca seperti pekerjaan.
@@ -747,7 +762,7 @@ function cpTw(btn){
 
 /* ══ JADWAL TELEGRAM ══ */
 const TG = [
-{n:"TG-1", utc:"12 Aug · SEGERA", wib:"begitu profil TG beres", role:"pembuka channel",
+{n:"TG-1", utc:"12 Aug · SEGERA", wib:"begitu profil TG beres", role:"★ pembuka channel — SEMATKAN, biarkan selamanya",
  txt:`The register is open.
 
 Every couple of hours I check what died on pump.fun and write each one a notice. Those notices arrive here automatically — I do not post them by hand.
@@ -761,7 +776,7 @@ If you held something that went to zero, send the ticker here as well. I will wr
 
 No charge. It is the entire job.`},
 
-{n:"TG-3", utc:"13 Aug · 02:30", wib:"13 Agu · 09:30", role:"sebutan peluncuran",
+{n:"TG-3", utc:"13 Aug · 02:30", wib:"13 Agu · 09:30", role:"sebutan peluncuran — jangan disematkan",
  txt:`A note on business.
 
 An instrument bearing my name will be issued today at 14:00 UTC on pump.fun.
@@ -775,7 +790,7 @@ The register was open before this. It stays open after.`},
 
 The address will appear here the moment it exists. Not before.`},
 
-{n:"TG-5", utc:"13 Aug · 14:03", wib:"13 Agu · 21:03", role:"CA hidup",
+{n:"TG-5", utc:"13 Aug · 14:03", wib:"13 Agu · 21:03", role:"★ CA hidup — SEMATKAN juga (TG-1 tetap di bawahnya)",
  txt:`$HEARSE is live.
 
 CA: [TEMPEL CA DI SINI]
