@@ -62,6 +62,20 @@ jobs:
           fi
           COUNT=$(node -e "console.log(require('./data/obituaries.json').length)")
           git commit -m "burial: register now holds ${COUNT} obituaries"
-          # Repo bisa saja berubah saat job berjalan — tarik dulu baru dorong
-          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+
+          # Repo bisa berubah saat job berjalan. Kalau rebase bentrok di berkas
+          # arsip (mesin dan manusia sama-sama menambah entri di ujung array),
+          # git menyisipkan penanda konflik ke dalam JSON dan website jadi blank.
+          # merge-archive.js menggabungkan kedua sisi dan membuang duplikat.
+          if ! git pull --rebase origin "${GITHUB_REF_NAME}"; then
+            echo "Rebase bentrok — menggabungkan arsip secara semantik."
+            node scripts/merge-archive.js
+            git add data/ site/data/
+            GIT_EDITOR=true git rebase --continue || git rebase --skip
+          fi
+
+          # Jaring pengaman terakhir: jangan pernah dorong JSON yang cacat
+          node -e "JSON.parse(require('fs').readFileSync('site/data/obituaries.json','utf8'))" \
+            || { echo '::error::arsip tidak valid, push dibatalkan'; exit 1; }
+
           git push origin "HEAD:${GITHUB_REF_NAME}"
