@@ -1,0 +1,409 @@
+<title>HEARSE — Playbook Ganti CA</title>
+<style>
+  :root{
+    /* Palet diambil langsung dari situs HEARSE — playbook ini bagian dari
+       perkakas yang sama, jadi warnanya tidak boleh terasa dari tempat lain. */
+    --void:#08090D; --panel:#0D0F14; --raised:#10131A;
+    --line:#1C2027; --soft:#14171D;
+    --tx:#E8EAED; --dim:#8B919C; --faint:#575D68;
+    --red:#E5484D; --red-dim:rgba(229,72,77,.10);
+    --green:#46A758; --amber:#B8965F;
+    --mono:ui-monospace,'SF Mono',SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --serif:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--void); color:var(--tx); overflow-x:clip;
+    font-family:var(--sans); font-size:16px; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--red); color:#fff}
+  .wrap{max-width:780px; margin:0 auto; padding:0 22px 96px}
+
+  /* ── Kepala ───────────────────────────────────────── */
+  header{padding:64px 0 34px}
+  .eyebrow{
+    font-family:var(--mono); font-size:11px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--red); margin:0 0 14px;
+  }
+  h1{
+    font-size:clamp(2rem,6vw,2.9rem); font-weight:760; letter-spacing:-.035em;
+    line-height:1.04; margin:0 0 16px; text-wrap:balance;
+  }
+  .lede{color:var(--dim); font-size:17px; margin:0; max-width:60ch}
+  .lede b{color:var(--tx); font-weight:600}
+
+  /* ── Jam mundur ───────────────────────────────────── */
+  .clock{
+    margin:30px 0 0; border:1px solid var(--line); background:var(--panel);
+    padding:16px 20px; display:flex; align-items:baseline; gap:16px; flex-wrap:wrap;
+  }
+  .clock-k{
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.2em;
+    text-transform:uppercase; color:var(--faint);
+  }
+  .clock-v{
+    font-family:var(--mono); font-size:26px; font-weight:700; color:var(--red);
+    letter-spacing:-.02em; font-variant-numeric:tabular-nums; line-height:1;
+  }
+  .clock-sub{
+    margin-left:auto; font-family:var(--mono); font-size:11.5px;
+    color:var(--faint); letter-spacing:.06em; text-align:right;
+  }
+
+  /* ── Bagian ───────────────────────────────────────── */
+  section{padding:46px 0 0}
+  h2{
+    font-size:1.32rem; font-weight:700; letter-spacing:-.015em;
+    margin:0 0 6px;
+  }
+  .sec-note{color:var(--dim); margin:0 0 24px; font-size:15px; max-width:62ch}
+
+  /* ── Rel waktu ────────────────────────────────────── */
+  .steps{
+    display:grid; gap:14px;
+    border-left:1px solid var(--line); padding-left:0; margin:0;
+    list-style:none;
+  }
+  .step{
+    display:grid; grid-template-columns:88px 1fr; gap:0;
+    border:1px solid var(--line); border-left:none; background:var(--panel);
+    margin-left:-1px;
+  }
+  .step-t{
+    font-family:var(--mono); font-size:12px; color:var(--faint);
+    letter-spacing:.04em; padding:15px 0 15px 16px; border-right:1px solid var(--soft);
+    font-variant-numeric:tabular-nums; white-space:nowrap;
+  }
+  .step-t b{display:block; color:var(--tx); font-weight:700; font-size:13px}
+  /* min-width:0 wajib: tanpa ini, blok keluaran terminal yang lebar
+     memaksa kolom 1fr melebar dan halaman jadi bisa digeser ke samping
+     di ponsel. Dengan ini, yang menggulir adalah bloknya sendiri. */
+  .step-b{padding:15px 18px; min-width:0}
+  .step-b h3{
+    margin:0 0 5px; font-size:15.5px; font-weight:650; letter-spacing:-.01em;
+  }
+  .step-b p{margin:0; color:var(--dim); font-size:14.5px}
+  .step-b p + p{margin-top:9px}
+  .step-b b{color:var(--tx); font-weight:600}
+
+  /* Langkah paling menentukan */
+  .step.key{border-color:var(--red); background:var(--red-dim)}
+  .step.key .step-t{border-right-color:rgba(229,72,77,.28)}
+  .step.key .step-t b{color:var(--red)}
+  .step.key .step-b h3{color:var(--tx)}
+
+  /* ── Blok perintah ────────────────────────────────── */
+  .cmd{
+    position:relative; margin:12px 0 0; background:var(--void);
+    border:1px solid var(--line); padding:14px 84px 14px 16px;
+    font-family:var(--mono); font-size:13.5px; line-height:1.7;
+    white-space:pre-wrap; word-break:break-word; color:var(--tx);
+    overflow-x:auto;
+  }
+  .cmd .p{color:var(--faint)}
+  .cmd button{
+    position:absolute; top:9px; right:9px; background:var(--raised);
+    border:1px solid var(--line); color:var(--dim); font-family:var(--mono);
+    font-size:10px; letter-spacing:.12em; text-transform:uppercase;
+    padding:6px 10px; cursor:pointer; transition:border-color .16s, color .16s;
+  }
+  .cmd button:hover{border-color:var(--red); color:var(--tx)}
+  .cmd button:focus-visible{outline:2px solid var(--red); outline-offset:2px}
+  .cmd button.ok{border-color:var(--green); color:var(--green)}
+
+  /* ── Keluaran terminal ────────────────────────────── */
+  .out{
+    margin:12px 0 0; background:#050609; border:1px solid var(--soft);
+    border-left:2px solid var(--green); padding:13px 16px;
+    font-family:var(--mono); font-size:12.5px; line-height:1.75;
+    color:var(--dim); white-space:pre; overflow-x:auto;
+  }
+  .out .ok{color:var(--green)}
+  .out .hi{color:var(--tx)}
+
+  /* ── Kotak gagal ──────────────────────────────────── */
+  .fail{
+    border:1px solid var(--line); background:var(--panel);
+    padding:0; margin:0 0 12px;
+  }
+  .fail-h{
+    display:flex; gap:12px; align-items:baseline; flex-wrap:wrap;
+    padding:13px 18px; border-bottom:1px solid var(--soft); background:var(--raised);
+  }
+  .fail-h .sym{font-family:var(--mono); font-size:13px; color:var(--amber)}
+  .fail-h .ttl{font-weight:650; font-size:15px}
+  .fail-b{padding:14px 18px; min-width:0; color:var(--dim); font-size:14.5px}
+  .fail-b p{margin:0}
+  .fail-b p + p{margin-top:9px}
+  .fail-b b{color:var(--tx); font-weight:600}
+
+  /* ── Larangan ─────────────────────────────────────── */
+  .dont{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+  .dont li{
+    display:grid; grid-template-columns:24px 1fr; gap:12px; min-width:0;
+    border-left:2px solid var(--red); padding:11px 16px;
+    background:var(--panel); color:var(--dim); font-size:14.5px;
+  }
+  .dont .x{color:var(--red); font-family:var(--mono); font-weight:700}
+  .dont b{color:var(--tx); font-weight:600}
+
+  .quote{
+    font-family:var(--serif); font-style:italic; font-size:17px;
+    color:var(--dim); border-top:1px solid var(--soft);
+    margin:56px 0 0; padding:26px 0 0; text-wrap:balance;
+  }
+
+  @media (max-width:560px){
+    .step{grid-template-columns:1fr}
+    .step-t{
+      border-right:none; border-bottom:1px solid var(--soft);
+      padding:11px 16px; display:flex; gap:9px; align-items:baseline;
+    }
+    .step-t b{display:inline}
+    .clock-sub{margin-left:0; text-align:left; width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Playbook · satu operasi saja</p>
+  <h1>Menerbitkan contract address</h1>
+  <p class="lede">Satu perintah, satu kali, di bawah tekanan. Halaman ini cuma membahas
+  itu — bukan seluruh peluncuran. <b>Baca sekali sekarang, latihan sekali sekarang.</b>
+  Besok kamu tinggal mengulang.</p>
+
+  <div class="clock">
+    <div>
+      <div class="clock-k">Sisa waktu</div>
+      <div class="clock-v" id="cd">—</div>
+    </div>
+    <div class="clock-sub">
+      13 Agustus · 14:00 UTC<br>21:00 WIB
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ LATIHAN ══════════ -->
+<section>
+  <h2>Lakukan sekarang: latihan</h2>
+  <p class="sec-note">Mode latihan memakai alamat contoh dan <b>tidak menyentuh situs
+  sungguhan</b>. Tujuannya supaya besok bukan pertama kali kamu mengetik perintah ini.</p>
+
+  <div class="cmd"><span class="p">$ </span>cd ~/Desktop/hearse
+<span class="p">$ </span>./go-live.sh 6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN --latihan<button onclick="cp(this)">salin</button></div>
+
+  <div class="out"><span class="ok">  🧪 MODE LATIHAN — situs sungguhan TIDAK disentuh.</span>
+
+  Alamat lolos pemeriksaan bentuk.
+  Kalau ini sungguhan, isi berkasnya jadi:
+
+      {
+        <span class="hi">"ca"</span>: "6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN",
+        <span class="hi">"pumpfun"</span>: "https://pump.fun/coin/6p6xgHyF…"
+      }</div>
+
+  <p class="sec-note" style="margin-top:16px">Kalau kamu melihat tulisan itu,
+  kamu sudah bisa menjalankannya besok. Tidak ada langkah tersembunyi.</p>
+</section>
+
+<!-- ══════════ HARI-H ══════════ -->
+<section>
+  <h2>Hari-H</h2>
+  <p class="sec-note">Waktu di kiri adalah WIB. Urutannya penting — jangan melompat,
+  terutama antara langkah merah dan tweet 18.</p>
+
+  <ol class="steps">
+
+    <li class="step">
+      <div class="step-t"><b>20:50</b>T−10 mnt</div>
+      <div class="step-b">
+        <h3>Siapkan meja</h3>
+        <p>Buka <b>Terminal</b>, ketik <code>cd ~/Desktop/hearse</code>, tekan Enter,
+        lalu <b>biarkan jendelanya terbuka</b>. Buka juga tab pump.fun dan X.
+        Pastikan dompet berisi SOL.</p>
+        <p>Jangan tutup Terminal sampai semuanya selesai.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-t"><b>21:00</b>T−0</div>
+      <div class="step-b">
+        <h3>Buat token di pump.fun</h3>
+        <p>Isi formulirnya dari kit Bagian 07, tekan Create. Begitu jadi,
+        <b>salin contract address-nya segera</b> — ada di alamat halaman tokenmu,
+        bagian setelah <code>/coin/</code>.</p>
+      </div>
+    </li>
+
+    <li class="step key">
+      <div class="step-t"><b>21:00</b>langsung</div>
+      <div class="step-b">
+        <h3>Terbitkan ke situs</h3>
+        <p>Balik ke Terminal. Ketik perintah di bawah — <b>ada spasi di belakangnya</b> —
+        lalu tempel CA, lalu Enter.</p>
+        <div class="cmd"><span class="p">$ </span>./go-live.sh <button onclick="cp(this)">salin</button></div>
+        <div class="out"><span class="ok">  ✅ TERBIT</span>
+     CA   6p6xgHyF7AeE6TZkSmFsko444wqoP15icUSqi2jfGiPN
+     Beli https://pump.fun/coin/6p6xgHyF…</div>
+        <p>Selesai. <b>±2 detik</b> kemudian situs sudah menampilkan CA dengan tombol
+        salin, dan countdown berubah jadi tombol beli — termasuk di layar orang yang
+        tabnya sudah terbuka sejak tadi, tanpa mereka menekan refresh.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-t"><b>21:00</b>+30 dtk</div>
+      <div class="step-b">
+        <h3>Periksa sekali, cepat</h3>
+        <p>Buka <b>hearsefun.xyz</b> di ponsel. Yang harus terlihat: CA di bagian atas
+        dengan tombol <b>Copy</b>, dan kartu <b>Acquire a share</b> sudah bisa diklik.</p>
+        <p>Kalau ya — lanjut. Kalau tidak, lompat ke bagian merah di bawah.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-t"><b>21:01</b></div>
+      <div class="step-b">
+        <h3>Tweet 18 + pin</h3>
+        <p>Posting tweet 18 dengan CA di badan tweet, lampirkan
+        <code>18-live.png</code>. Lalu <b>pin</b> — menggantikan tweet 1.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-t"><b>21:02</b></div>
+      <div class="step-b">
+        <h3>Balas tweet 18</h3>
+        <p>Isi balasannya: tautan pump.fun, <b>t.me/hearsefun</b>, dan hearsefun.xyz.
+        Pin lama sudah turun, jadi pintu ke Telegram harus ikut pindah ke sini.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-t"><b>21:03</b></div>
+      <div class="step-b">
+        <h3>TG-5 di Telegram + pin</h3>
+        <p>Kirim <code>18-live.png</code> dengan teks TG-5 sebagai caption — satu pesan,
+        bukan dua. Lalu tahan pesannya → <b>Pin</b>. TG-1 tetap tersemat di bawahnya.</p>
+      </div>
+    </li>
+
+    <li class="step">
+      <div class="step-t"><b>21:05</b></div>
+      <div class="step-b">
+        <h3>Bio X</h3>
+        <p>Ganti baris terakhir bio jadi CA-nya. Ini tempat kedua yang orang cek
+        untuk memastikan alamat yang mereka pegang benar.</p>
+      </div>
+    </li>
+
+  </ol>
+</section>
+
+<!-- ══════════ KALAU GAGAL ══════════ -->
+<section>
+  <h2>Kalau ada yang gagal</h2>
+  <p class="sec-note">Tiga kemungkinan, dari yang paling sering. Semuanya punya jalan keluar
+  yang bisa kamu jalankan sendiri dalam bawah satu menit.</p>
+
+  <div class="fail">
+    <div class="fail-h"><span class="sym">01</span><span class="ttl">Skrip menolak alamatnya</span></div>
+    <div class="fail-b">
+      <p><code>❌ "…" bukan bentuk alamat Solana yang sah — tidak jadi diterbitkan.</code></p>
+      <p>Ini <b>bukan kerusakan</b> — pengaman bekerja. Biasanya kepencet tempel dua kali,
+      atau ikut terbawa spasi. <b>Tidak ada yang terbit</b>, jadi aman diulang. Salin ulang
+      CA-nya dari pump.fun, jalankan lagi.</p>
+    </div>
+  </div>
+
+  <div class="fail">
+    <div class="fail-h"><span class="sym">02</span><span class="ttl">Terminal error, atau internet ngadat</span></div>
+    <div class="fail-b">
+      <p>Kirim CA-nya ke sesi Claude ini. Aku yang jalankan dari sisiku — hasilnya
+      persis sama.</p>
+      <p>Sementara menunggu, <b>tweet 18 tetap boleh diposting</b>. CA di tweet lebih
+      penting daripada CA di situs.</p>
+    </div>
+  </div>
+
+  <div class="fail">
+    <div class="fail-h"><span class="sym">03</span><span class="ttl">Situs tetap tidak berubah setelah 1 menit</span></div>
+    <div class="fail-b">
+      <p>Pakai jalur darurat. Tautan ini menampilkan CA langsung begitu dibuka, tanpa
+      bergantung pada GitHub maupun Vercel:</p>
+      <div class="cmd">hearsefun.xyz/?ca=CA_KAMU<button onclick="cp(this)">salin</button></div>
+      <p style="margin-top:10px">Ganti <code>CA_KAMU</code> dengan alamatmu, lalu bagikan
+      tautan itu. Tetap kabari aku supaya jalur normalnya kubetulkan.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ JANGAN ══════════ -->
+<section>
+  <h2>Jangan lakukan ini</h2>
+  <p class="sec-note">Empat kesalahan yang paling mahal, semuanya sulit ditarik kembali.</p>
+  <ul class="dont">
+    <li><span class="x">✕</span><div><b>Jangan posting tweet 18 sebelum menjalankan skrip.</b>
+      Tweet 17 sudah berjanji CA muncul di X dan situs bersamaan. Situs yang telat adalah
+      hal pertama yang dicek orang untuk menilai kamu asli atau palsu.</div></li>
+    <li><span class="x">✕</span><div><b>Jangan mengetik ulang CA dengan tangan.</b>
+      Selalu salin–tempel. Satu huruf meleset dan uang orang masuk ke token lain.</div></li>
+    <li><span class="x">✕</span><div><b>Jangan membagikan CA lewat DM ke siapa pun.</b>
+      Tweet 17 sudah menyatakan kamu tidak pernah DM duluan. Sekali kamu melanggarnya,
+      penipu punya alasan untuk meniru.</div></li>
+    <li><span class="x">✕</span><div><b>Jangan menyunting <code>site/index.html</code> untuk menaruh CA.</b>
+      Itu cara lama. Sekarang CA hidup di <code>live.json</code>, dan menyuntingnya lewat
+      HTML berarti menunggu Vercel membangun ulang situs — puluhan detik yang tidak kamu punya.</div></li>
+  </ul>
+</section>
+
+<p class="quote">Satu perintah. Kalau ia mencetak TERBIT, pekerjaanmu di situs sudah selesai
+dan tidak ada lagi yang perlu kamu sentuh di sana malam itu.</p>
+
+</div>
+
+<script>
+  /* Salin isi blok perintah, tanpa ikut menyalin tombolnya. */
+  function cp(btn){
+    var box = btn.parentElement.cloneNode(true);
+    var b = box.querySelector('button');
+    if (b) b.remove();
+    var teks = box.textContent.replace(/^\s*\$\s?/gm, '').trim();
+    var selesai = function(){
+      btn.textContent = 'tersalin';
+      btn.classList.add('ok');
+      setTimeout(function(){ btn.textContent = 'salin'; btn.classList.remove('ok'); }, 1500);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(teks).then(selesai, function(){ jatuhkan(teks, selesai); });
+    } else { jatuhkan(teks, selesai); }
+  }
+  function jatuhkan(teks, selesai){
+    var ta = document.createElement('textarea');
+    ta.value = teks; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    ta.remove(); selesai();
+  }
+
+  /* Hitung mundur ke jam peluncuran. Berhenti sendiri saat lewat. */
+  (function(){
+    var target = new Date('2026-08-13T14:00:00Z').getTime();
+    var el = document.getElementById('cd');
+    function pad(n){ return String(n).padStart(2, '0'); }
+    function tick(){
+      var sisa = target - Date.now();
+      if (sisa <= 0) { el.textContent = 'SEKARANG'; return; }
+      var d = Math.floor(sisa / 86400000);
+      var h = Math.floor(sisa % 86400000 / 3600000);
+      var m = Math.floor(sisa % 3600000 / 60000);
+      var s = Math.floor(sisa % 60000 / 1000);
+      el.textContent = (d ? d + 'h ' : '') + pad(h) + ':' + pad(m) + ':' + pad(s);
+      setTimeout(tick, 1000 - (Date.now() % 1000));
+    }
+    tick();
+  })();
+</script>
