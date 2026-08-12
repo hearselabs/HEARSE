@@ -763,6 +763,7 @@ function cpTw(btn){
 /* ══ JADWAL TELEGRAM ══ */
 const TG = [
 {n:"TG-1", utc:"12 Aug · SEGERA", wib:"begitu profil TG beres", role:"★ pembuka channel — SEMATKAN, biarkan selamanya",
+ img:"01-register-open.png", imgWhy:"pesan tersemat butuh wajah — ini yang orang lihat pertama saat membuka channel",
  txt:`The register is open.
 
 Every couple of hours I check what died on pump.fun and write each one a notice. Those notices arrive here automatically — I do not post them by hand.
@@ -770,6 +771,7 @@ Every couple of hours I check what died on pump.fun and write each one a notice.
 If you want to search the whole archive: hearsefun.xyz`},
 
 {n:"TG-2", utc:"12 Aug · 20:00", wib:"13 Agu · 03:00 — pakai jadwal bawaan Telegram, harus SETELAH tweet 6 tayang", role:"cermin ajakan dari X",
+ img:"03-ledger-gap.png", imgWhy:"selisih beli–jual = orang yang tidak sempat keluar. persis perasaan yang kamu minta mereka ceritakan",
  txt:`I have asked on X for names.
 
 If you held something that went to zero, send the ticker here as well. I will write it a notice.
@@ -777,6 +779,7 @@ If you held something that went to zero, send the ticker here as well. I will wr
 No charge. It is the entire job.`},
 
 {n:"TG-3", utc:"13 Aug · 02:30", wib:"13 Agu · 09:30", role:"sebutan peluncuran — jangan disematkan",
+ img:"16-scheduled.png", imgWhy:"kartu jadwal — tanggal dan jamnya terbaca tanpa harus membaca teksnya",
  txt:`A note on business.
 
 An instrument bearing my name will be issued today at 14:00 UTC on pump.fun.
@@ -786,11 +789,13 @@ I will post the contract address here and on X at the same moment, and nowhere b
 The register was open before this. It stays open after.`},
 
 {n:"TG-4", utc:"13 Aug · 13:30", wib:"13 Agu · 20:30", role:"T-30 menit",
+ img:null, imgWhy:"sengaja polos. peringatan 30 menit yang pakai gambar terbaca seperti iklan, bukan peringatan",
  txt:`Thirty minutes.
 
 The address will appear here the moment it exists. Not before.`},
 
 {n:"TG-5", utc:"13 Aug · 14:03", wib:"13 Agu · 21:03", role:"★ CA hidup — SEMATKAN juga (TG-1 tetap di bawahnya)",
+ img:"18-live.png", imgWhy:"pesan tersemat kedua — harus langsung terbaca sebagai momen peluncuran",
  txt:`$HEARSE is live.
 
 CA: [TEMPEL CA DI SINI]
@@ -808,6 +813,12 @@ document.getElementById('tglist').innerHTML = TG.map(t=>`<div class="tw">
     <span class="tw-role">${t.role}</span>
   </div>
   <div class="tw-body">${t.txt.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}<button onclick="cpTw(this)">salin</button></div>
+  <div class="tw-foot">
+    ${t.img
+      ? `<span class="asset">📎 assets/${t.img}</span><span>${t.imgWhy||''}</span>`
+      : `<span class="noasset">tanpa gambar — ${t.imgWhy||'teks saja'}</span>`}
+  </div>
+  ${t.img ? `<img src="assets/${t.img}" alt="" style="width:100%;display:block;border-top:1px solid var(--soft)">` : ``}
 </div>`).join('');
 
 /* ══ PRATINJAU ASET ══ */
