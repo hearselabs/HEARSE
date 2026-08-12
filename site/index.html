@@ -969,27 +969,40 @@ const REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
    ═════════════════════════════════════════════════════════ */
 const LAUNCH_UTC = "2026-08-13T14:00:00Z";
 
-/* Kalau token sudah terbit, tempel tautan pump.fun-nya di sini.
-   Biarkan kosong selama belum ada.                          */
-const PUMPFUN_URL = "";
+/* ═════════════════════════════════════════════════════════
+   📡  CONTRACT ADDRESS — TIDAK ditulis di berkas ini.
+   Halaman menjemputnya sendiri dari live.json, berulang kali,
+   sampai ketemu. Begitu terisi, tampilan langsung berganti
+   TANPA pengunjung perlu memuat ulang halaman.
 
-/* ⚙️ CONTRACT ADDRESS — tempel di sini begitu token terbit.
-   Satu tempat ini mengisi baris CA di atas DAN di Particulars. */
-const CONTRACT_ADDRESS = "";
+   Alasannya kecepatan: mengubah HTML berarti menunggu Vercel
+   membangun ulang situs (~40 detik) lalu menunggu cache CDN.
+   Menaruh CA di berkas terpisah memangkas itu jadi hitungan
+   detik — dan orang yang tabnya sudah terbuka sejak tadi
+   melihatnya muncul sendiri.
+   ═════════════════════════════════════════════════════════ */
+let PUMPFUN_URL = "";
+let CONTRACT_ADDRESS = "";
 
-(function contractAddress() {
+/* Dua sumber, dipakai bersamaan, yang tercepat menang:
+   1. raw.githubusercontent — hidup sedetik setelah git push,
+      tidak perlu menunggu Vercel membangun ulang sama sekali
+   2. /live.json di domain sendiri — cadangan kalau GitHub
+      sedang lambat atau diblokir jaringan pengunjung        */
+const LIVE_SOURCES = [
+  "https://raw.githubusercontent.com/hearselabs/HEARSE/main/site/live.json",
+  "/live.json",
+];
+
+(function liveWatch() {
   const val  = document.getElementById("ca-value");
   const btn  = document.getElementById("ca-copy");
   const spec = document.getElementById("spec-ca");
+  const card = document.getElementById("buy-card");
 
-  if (!CONTRACT_ADDRESS) return;        // belum terbit — biarkan tampilan pending
-
-  val.textContent = CONTRACT_ADDRESS;
-  val.classList.remove("pending");
-  if (spec) { spec.textContent = CONTRACT_ADDRESS; spec.classList.remove("pending"); }
-  btn.disabled = false;
-
+  /* Tombol salin dipasang sekali saja, membaca nilai terkini */
   btn.addEventListener("click", async () => {
+    if (!CONTRACT_ADDRESS) return;
     try {
       await navigator.clipboard.writeText(CONTRACT_ADDRESS);
     } catch {
@@ -1007,17 +1020,84 @@ const CONTRACT_ADDRESS = "";
       btn.classList.remove("copied");
     }, 1600);
   });
-})();
 
-/* Kartu "Acquire a share" ikut hidup otomatis begitu PUMPFUN_URL diisi */
-(function buyCard() {
-  if (!PUMPFUN_URL) return;
-  const card = document.getElementById("buy-card");
-  card.href = PUMPFUN_URL;
-  card.target = "_blank";
-  card.classList.remove("pending");
-  document.getElementById("buy-sub").textContent = "pump.fun — $HEARSE";
-  document.getElementById("buy-arrow").textContent = "→";
+  /* Menyalakan seluruh tampilan "sudah terbit". Aman dipanggil
+     berkali-kali — kalau tidak ada yang berubah, tidak berbuat apa-apa. */
+  function apply(ca, url) {
+    if (ca && ca !== CONTRACT_ADDRESS) {
+      CONTRACT_ADDRESS = ca;
+      val.textContent = ca;
+      val.classList.remove("pending");
+      if (spec) { spec.textContent = ca; spec.classList.remove("pending"); }
+      btn.disabled = false;
+    }
+    if (url && url !== PUMPFUN_URL) {
+      PUMPFUN_URL = url;
+      card.href = url;
+      card.target = "_blank";
+      card.rel = "noopener";
+      card.classList.remove("pending");
+      document.getElementById("buy-sub").textContent = "pump.fun — $HEARSE";
+      document.getElementById("buy-arrow").textContent = "→";
+
+      const live = document.getElementById("cd-live");
+      if (live) { live.href = url; live.textContent = "Acquire a share →"; }
+    }
+    return Boolean(CONTRACT_ADDRESS && PUMPFUN_URL);
+  }
+
+  /* Jalur darurat: ?ca=…&url=… di alamat halaman. Kalau git,
+     GitHub, atau Vercel sama-sama bermasalah pada detik peluncuran,
+     tautan inilah yang tetap bisa dibagikan. */
+  const q = new URLSearchParams(location.search);
+  if (q.get("ca")) apply(q.get("ca").trim(), (q.get("url") || "").trim());
+
+  /* Satu percobaan ke satu sumber. Query ?t= dibuat unik tiap kali
+     supaya tidak ada perantara yang menyajikan salinan lama. */
+  async function probe(src) {
+    try {
+      const r = await fetch(src + "?t=" + Date.now(), { cache: "no-store" });
+      if (!r.ok) return null;
+      const j = await r.json();
+      return (j && (j.ca || j.pumpfun)) ? j : null;
+    } catch { return null; }
+  }
+
+  /* Berapa lama lagi sampai jam peluncuran (negatif kalau sudah lewat) */
+  const sisaWaktu = () => new Date(LAUNCH_UTC).getTime() - Date.now();
+  const MENDEKAT  = 15 * 60 * 1000;     // ambang "sudah dekat"
+
+  async function round() {
+    if (CONTRACT_ADDRESS && PUMPFUN_URL) return true;
+
+    /* Jauh dari jam peluncuran cukup tanya domain sendiri. GitHub baru
+       ikut ditanya saat sudah dekat — kalau tidak, satu tab yang dibiarkan
+       terbuka seharian akan menggedornya ribuan kali dan bisa kena batas
+       permintaan justru di saat kita paling membutuhkannya. */
+    const sumber = sisaWaktu() > MENDEKAT ? ["/live.json"] : LIVE_SOURCES;
+
+    const hasil = await Promise.all(sumber.map(probe));
+    let done = false;
+    for (const j of hasil) {
+      if (j) done = apply((j.ca || "").trim(), (j.pumpfun || "").trim()) || done;
+    }
+    return done;
+  }
+
+  /* Jauh dari jam peluncuran, cukup sesekali. Mendekati jam-nya,
+     tiap 2 detik — biar selisihnya tidak sampai terasa.          */
+  const jeda = () => (sisaWaktu() > MENDEKAT ? 30000 : 2000);
+
+  (async function loop() {
+    if (await round()) return;          // sudah terbit — berhenti mengintip
+    setTimeout(loop, jeda());
+  })();
+
+  /* Kembali ke tab yang sudah lama terbuka: periksa saat itu juga,
+     jangan tunggu giliran berikutnya. */
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && !CONTRACT_ADDRESS) round();
+  });
 })();
 
 (function launchCountdown() {
