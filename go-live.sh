@@ -10,8 +10,15 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 CA="${1:-}"
+LATIHAN=""
+if [ "${2:-}" = "--latihan" ] || [ "${1:-}" = "--latihan" ]; then
+  LATIHAN="ya"
+  [ "${1:-}" = "--latihan" ] && CA="${2:-}"
+fi
+
 if [ -z "$CA" ]; then
   echo "Pakai: ./go-live.sh <CONTRACT_ADDRESS>" >&2
+  echo "Latihan (tidak menyentuh situs): ./go-live.sh <CA> --latihan" >&2
   exit 1
 fi
 
@@ -22,6 +29,22 @@ if ! printf '%s' "$CA" | grep -Eq '^[1-9A-HJ-NP-Za-km-z]{32,44}$'; then
 fi
 
 URL="https://pump.fun/coin/${CA}"
+
+if [ -n "$LATIHAN" ]; then
+  echo ""
+  echo "  🧪 MODE LATIHAN — situs sungguhan TIDAK disentuh."
+  echo ""
+  echo "  Alamat lolos pemeriksaan bentuk."
+  echo "  Kalau ini sungguhan, isi berkasnya jadi:"
+  echo ""
+  node -e 'console.log(JSON.stringify({ca:process.argv[1],pumpfun:process.argv[2]},null,2).split("\n").map(l=>"      "+l).join("\n"))' "$CA" "$URL"
+  echo ""
+  echo "  lalu di-push, dan situs berganti dalam ±2 detik."
+  echo ""
+  echo "  Kalau kamu melihat pesan ini, kamu sudah bisa menjalankannya besok."
+  echo "  Untuk sungguhan, jalankan perintah yang sama TANPA --latihan."
+  exit 0
+fi
 
 node -e '
   const fs = require("fs");
