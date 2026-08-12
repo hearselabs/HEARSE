@@ -239,8 +239,8 @@ async function askGroq(facts, attempt, recentCloses = []) {
       const s = String(facts.symbol).toLowerCase().replace(/[^a-z0-9]/g, "");
       const n = String(facts.name).toLowerCase().replace(/[^a-z0-9]/g, "");
       return n && n !== s && !n.startsWith(s) && !s.startsWith(n)
-        ? `Token: ${facts.symbol}, also known as ${facts.name}`
-        : `Token: ${facts.symbol}`;
+        ? `Token: $${facts.symbol}, also known as ${facts.name}`
+        : `Token: $${facts.symbol}`;
     })(),
     `Born: ${clock(facts.bornAt)} UTC`,
     `Died: ${clock(facts.diedAt)} UTC`,
