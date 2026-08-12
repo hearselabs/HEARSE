@@ -11,11 +11,21 @@ name: HEARSE — bury the dead
 
 on:
   schedule:
-    # Tiap 2 jam. Sengaja sering: cron GitHub di runner gratis kerap telat
-    # atau dilewati saat server sibuk, jadi jadwal yang hilang tidak terasa.
+    # Tiap JAM, bukan tiap 2 jam.
+    #
+    # Bukan karena kami butuh sesering itu — 3 pemakaman per jam sudah lebih
+    # dari cukup. Ini soal keandalan: penjadwal GitHub di runner gratis
+    # diam-diam melewatkan sebagian jadwal saat servernya sibuk. Tercatat
+    # nyata di repo ini: jeda 4 jam, lalu 9 jam 24 menit, padahal
+    # jadwalnya 2 jam. Kira-kira separuh jadwal menguap.
+    #
+    # Dengan jadwal per jam, separuh yang hilang masih menyisakan sekitar
+    # satu jalan tiap dua jam — yang memang target sebenarnya. Tidak ada
+    # ruginya: kalau tidak ada yang mati, mesin keluar tanpa menulis apa pun.
+    #
     # Menit 17, bukan 0 — menit 0 adalah menit tersibuk di seluruh GitHub
     # dan jadwal di menit itu paling sering dikorbankan.
-    - cron: "17 */2 * * *"
+    - cron: "17 * * * *"
   # Tombol "Run workflow" manual di tab Actions — untuk uji coba
   workflow_dispatch:
 
