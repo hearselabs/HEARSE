@@ -1,5 +1,61 @@
 [
   {
+    "address": "4UX1MBLZDLATgGMrG4P4HT3JmRJFN9cqPpMwZTJbpump",
+    "symbol": "Cheeksbear",
+    "name": "Cheeksbear",
+    "bornAt": 1787687653000,
+    "diedAt": 1788127377594,
+    "lived": "122 hours 9 minutes",
+    "peakFdv": 15002,
+    "buyers": 1676,
+    "sellers": 1446,
+    "reason": "liquidity removed entirely",
+    "body": "Passed at 22:02, 122 hours 9 minutes after arriving. Recorded 1676 buyers and 1446 sellers in its short life. Cause of death: liquidity removed entirely.",
+    "close": "The register is updated. The plot is filled."
+  },
+  {
+    "address": "GhjfuExUq3AkGksw1CkDYQcTb5tm23Pw1bvnTWBHpump",
+    "symbol": "DMO",
+    "name": "Don't Miss Out",
+    "bornAt": 1787683701000,
+    "diedAt": 1788171606842,
+    "lived": "135 hours 32 minutes",
+    "peakFdv": 15009,
+    "buyers": 1675,
+    "sellers": 1487,
+    "reason": "liquidity fell below survivable levels",
+    "body": "Passed at 10:20, 135 hours 32 minutes after arriving. Recorded 1675 buyers and 1487 sellers in its short life. Cause of death: liquidity fell below survivable levels.",
+    "close": "The register is updated. The plot is filled."
+  },
+  {
+    "address": "9PE5pSNo3qbSWvTg8qazSTv1sNshMkYyPcwembEqpump",
+    "symbol": "WHALES",
+    "name": "Save The Whales",
+    "bornAt": 1787989539000,
+    "diedAt": 1788171606456,
+    "lived": "50 hours 34 minutes",
+    "peakFdv": 64496,
+    "buyers": 13352,
+    "sellers": 11649,
+    "reason": "no buyers remained",
+    "body": "Passed at 10:20, 50 hours 34 minutes after arriving. Recorded 13352 buyers and 11649 sellers in its short life. Cause of death: no buyers remained.",
+    "close": "The register is updated. The plot is filled."
+  },
+  {
+    "address": "8JiwY37eQrz1WzDke37yJNWWsGKiibbufUB5gQGppump",
+    "symbol": "丸太郎",
+    "name": "Marutaro",
+    "bornAt": 1788081054000,
+    "diedAt": 1788170569780,
+    "lived": "24 hours 52 minutes",
+    "peakFdv": 100096,
+    "buyers": 7663,
+    "sellers": 4301,
+    "reason": "liquidity removed entirely",
+    "body": "Passed at 10:02, 24 hours 52 minutes after arriving. Recorded 7663 buyers and 4301 sellers in its short life. Cause of death: liquidity removed entirely.",
+    "close": "The register is updated. The plot is filled."
+  },
+  {
     "address": "J4UuLbqULMPvPGiFkpKsfKrkAH5PSdTJLsJJrnxHpump",
     "symbol": "agents",
     "name": "agents",
@@ -27942,19 +27998,5 @@
     "reason": "liquidity fell below survivable levels",
     "body": "Two hours and twenty-two minutes were all $Tsun required to ascend to $7,847 and attract 178 buyers.",
     "close": "Its demise was preceded by a significant decline in interest."
-  },
-  {
-    "address": "GpBu9gsExwWvEuTxgf8kc9whQtpiXNEz4dkMH7eEpump",
-    "symbol": "TOADEGEN",
-    "name": "TOAD DEGEN",
-    "bornAt": 1786364324000,
-    "diedAt": 1786368180023,
-    "lived": "1 hour 4 minutes",
-    "peakFdv": 172094,
-    "buyers": 5381,
-    "sellers": 4851,
-    "reason": "liquidity removed entirely",
-    "body": "TOADEGEN died after 1 hour 4 minutes, having reached a peak valuation of $172,094.",
-    "close": "Liquidity was its life support."
   }
 ]
